@@ -28,7 +28,7 @@ AgentMD/
 │   ├── agentmd_terra.toml            # Terra汎用Worker
 │   ├── agentmd_sol.toml              # Sol汎用Worker
 │   └── agentmd_astra.toml            # Astra汎用Worker
-├── research/benchmark-evidence.md    # 公開データ約40件・手法・警告・根拠
+├── research/benchmark-evidence.md    # 公開データ約50行・手法・警告・根拠
 ├── README.md
 └── CONTRIBUTING.md
 ```
