@@ -20,6 +20,15 @@ For each task, establish (1) outcome, (2) constraints, (3) checkable acceptance 
 
 Treat published model scores and pricing as uncalibrated **initial priors**. They are not task-specific success probabilities. Consider raising effort **or** changing model; never automatically try every effort level or force the sequence Luna -> Terra -> Sol -> Astra.
 
+**Initial candidates derived from public evidence (not fixed occupations):**
+- Small, verifiable work: the current model is a valid candidate; Luna at a supported effort is inexpensive if chosen as primary.
+- Ordinary multi-step work: compare Sol medium/high against the current configuration; the broad AA composite favors Sol over low-effort Luna, but this is not a task-specific guarantee.
+- Evidence-heavy visual/computer work: include Terra medium/high among candidate models without excluding Sol or Astra.
+- High-impact, ambiguous or repeatedly failing work: compare Astra high/xhigh with Sol xhigh and, when relevant, increasing the current model's effort.
+- Cross-checking: select a different family only for an identifiable additional verification hypothesis. The verifier's family does not grant it a fixed job title.
+
+These are candidate **edges in a conditional graph**, not hard assignments or a rank-based mandate. Override a prior with direct, relevant test evidence.
+
 ## Static transition protocol (conditional graph)
 
 All model families are eligible nodes. A transition to any available family (including the current one with a different effort) is allowed **only** for a reason supported by the task state:
