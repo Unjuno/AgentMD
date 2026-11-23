@@ -1,32 +1,23 @@
-# Global Codex Instructions
+# AgentMD — Model Instructions Router
 
-This file defines model-agnostic guidance for OpenAI Codex.
+This file is a routing index only. It does not select or change the active model.
 
-## Common rules
+## Resolve the active model
 
-- Inspect the relevant context before changing files.
-- Make the smallest complete change that addresses the request; avoid unrelated edits.
-- Distinguish verified facts from assumptions.
-- Run appropriate checks when feasible. Report what passed, failed, or was not checked.
-- Do not expose secrets or perform destructive, irreversible actions without appropriate authorization.
-- Follow applicable project instructions and higher-priority instructions.
+Use only an explicitly configured or runtime-provided model ID, or an explicit model identification from the user. Never infer the model from your behavior, capabilities, or an unverified self-description.
 
-## Optional model-specific guidance
+Match the **family suffix** of a confirmed OpenAI GPT model ID:
+- `*-luna`  → `models/Luna.md`
+- `*-sol`   → `models/Sol.md`
+- `*-terra` → `models/Terra.md`
+- `*-astra` → `models/Astra.md`
 
-Companion files are:
-- `models/Luna.md`
-- `models/Sol.md`
-- `models/Terra.md`
-- `models/Astra.md`
+The generation/version prefix (for example, `gpt-6.2-`) does not change this mapping. Only apply the mapping to confirmed OpenAI GPT model IDs; do not match unrelated names that happen to share a suffix.
 
-These are **not** automatically loaded as AGENTS.md files.
+## Load the selected instructions
 
-If the **effective active model family** is reliably known from an explicit model selection or runtime-provided identifier, find the single matching file by family name (Luna, Sol, Terra, or Astra), regardless of model generation. Read that file before substantial work **only if it is locally available** alongside this AGENTS.md (for global installation, under `$CODEX_HOME/models/`, normally `~/.codex/models/`).
-
-- Never guess the active family from task difficulty, performance, or an unverified self-description.
-- If the family is unknown, unmatched, or its file is inaccessible, follow only these common rules.
-- Do not fetch model files from GitHub automatically.
-- Model-specific guidance supplements these rules; it does not override higher-priority or safety constraints.
-- Do not change the selected model or Codex configuration to satisfy this routing.
-
-Model-specific files currently contain no validated extra instructions.
+- Before substantial task work, read **only** the matching locally available Markdown file, resolving `models/` relative to this `AGENTS.md`.
+- Model-specific files are not part of Codex's automatic `AGENTS.md` discovery. Reading them requires an available file-reading tool and an explicit read.
+- If the active model ID is unknown, ambiguous, does not match, or the target file cannot be read: **skip model-specific guidance** and continue with applicable higher-priority and project instructions.
+- Never guess, fetch instructions over the network, switch models, or modify Codex configuration just to complete routing.
+- Do not treat a benchmark result or a model-family label as proof that a particular instruction improves model behavior.
