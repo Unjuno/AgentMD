@@ -1,57 +1,34 @@
 # Contributing to AgentMD
 
-AgentMDは、**モデルに仕事を固定せず**、公開ベンチマークを初期事前情報として用い、**検証された成果と失敗証拠**に基づいてモデル・推論強度・反復を選択する静的ルーティング実験です。
+AgentMD's objective is **real user-task completion**, not a perpetual experimental evaluation project. Never require a model to gather or update benchmark data as a prerequisite for doing the user's work.
 
-## 1. 責務の分離
+## Responsibilities
 
-| 対象 | 変更してよい内容 |
-| --- | --- |
-| `AGENTS.md` | 起動モデル判定、モデル・推論強度の選択基準、委譲プロトコル、失敗時の遷移、停止条件 |
-| `models/*.md` | そのモデルの**能力事前情報**と、実証された能力発揮のための短い指示 |
-| `.codex/agents/*.toml` | 汎用WorkerのモデルID・共通フィードバック形式。特定職務を独占させない |
-| `research/benchmark-evidence.md` | データ、評価条件、出典、欠測、ベンチマークの欠陥報告 |
-| `README.md` | 静的グラフ、導入方法、検証条件、設計判断 |
+- `AGENTS.md`: runtime choice among doing the task directly, delegating, adjusting effort, checking outcomes, and stopping.
+- `models/*.md`: short, non-exclusive per-model operating priors; avoid duplicating default Codex behavior and broad generic rules.
+- `.codex/agents/*.toml`: stable model identity and generic worker contract, **not benchmark tables or fixed professions**.
+- `research/benchmark-evidence.md`: offline research for maintaining routing priors. Do not load by default.
+- `README.md`: usage, caveats, and installation.
 
-対象はOpenAIモデルを使うCodexのみ。Skills、他社モデル、不要なカスタムオーケストレーターは対象外です。
+## Routing rules to preserve
 
-## 2. 根拠の取り扱い
+1. No exclusive model occupations. Select model and reasoning effort based on the actual task and available evidence.
+2. No mandatory Luna-first execution. An initial Luna parent may delegate before attempting the task.
+3. No fixed ladder or requirement to invoke all four models.
+4. Same-model reruns, effort changes, and switching families are all allowed if useful within the global budget.
+5. Use actual tool results and acceptance checks; do not trust unverified model self-assessments.
+6. Child workers recommend next steps but do not recursively spawn. Parent tracks bounded worker attempts (initial default 4, not a mathematical optimum).
+7. Missing permissions, unavailable models, or absent tools are blockers, not reasons to invent results.
+8. Shared files and destructive operations retain Codex approval, sandbox, and project constraints.
 
-- **事実**：同一ベンチマーク・同一バージョン・同一ハーネス・同一推論設定における観測データ
-- **推論**：公開データから初期候補を選ぶ判断。誤差・欠測があるので確証ではない
-- **仮説**：指示や委譲を加えれば成果が改善する、という未検証の主張
-- **不確実**：評価条件が不明、ベンチマークに欠陥がある、モデルを実機で起動できない場合
+## Updating the policy
 
-「総合点が高いので必ず適切なルーティング判断をする」「このモデルは必ずUIだけ担当する」といった主張は禁止します。モデルの自己申告、印象、ベンチマークの異種混合は採用根拠になりません。
+- A model release or new benchmark updates the **offline evidence** and, only if it changes operational advice, the small runtime prior.
+- Changing a prompt needs a clear reason: which real failure does the instruction prevent, or which outcome does it improve?
+- Separate the effect of a different model/effort from the effect of different instructions; do not attribute gains to both.
+- Keep Git changes minimal and reversible. For substantial revisions, record the scenario, expected improvement, observed behavior, failed checks, and known uncertainties in the PR or commit.
+- Do not publish credentials, private task inputs, or sensitive logs.
 
-データを更新するときは、**確認日・正確なモデルID・推論強度・ハーネス・標本数・ベンチマーク版・費用の定義・HW/クロック/バッチの開示状況・一次出典**を記録します。データがなければ欠測と明記し、推測値を入れません。
+A simple smoke test must check that the configured role names/model IDs match the router, no fixed reasoning effort overrides a requested one, file paths resolve in the target Codex client, and unavailable orchestration fails transparently. This verifies configuration, **not** optimal task performance.
 
-## 3. 変更の検証（H / T / D / C / U）
-
-- **H: 反証可能な仮説** — どの種類のタスクに、どの遷移・推論強度・指示が、どんな合格率や完了時間の変化をもたらすか
-- **T: 最小検証** — 最初は各タスク群5件以上のパイロット。同じリポジトリcommit・モデルID・effort・Codex版・ツール・権限を記録し、各構成を複数回実行。必要に応じて標本を増やす
-- **D: 判定** — 独立したテスト・明示的な採点基準を満たせばPASS。誤委譲、誤った成功報告、証拠のない反復はFAIL。実行条件や正解が不明ならUNCERTAIN
-- **C: 対立仮説** — 差の原因はプロンプト・ツール・実行時間・評価器・タスク構成・非決定性かもしれない
-- **U: 不確かさ** — モデル試行の変動、検証の誤判定、課題母集団の偏り、キャッシュ・トークン計測の差。合成不確かさや区間推定はデータ取得後に行い、根拠のない数値を先に置かない
-
-パイロットの5件は統計的検出力を保証する数字ではありません。
-
-## 4. グラフを修正する条件
-
-1. 同一モデルの推論強度を変えた結果と、別モデルに変えた結果を区別して記録する。
-2. PASSの後は終了する。高リスクで独立検証が必要なら、**新たに検出する失敗条件**を明示する。
-3. FAILED_VALIDATIONでは、失敗テストと原因仮説を渡して1つの代替を選ぶ。
-4. BLOCKED（権限・ツール不足）は上位モデルに投げ続けず停止する。
-5. 子は次候補を提案できるが、再帰的に子を起動しない。親による**初期4回の委譲枠**は運用上の上限であり、権限による強制ではない。
-6. 以前のモデルに戻る場合は、**新しい根拠または異なる推論強度**が必要。同じ状態の再送を禁止する。
-
-## 5. プロンプト変更の採用基準
-
-モデル別ファイルに追加する文は、**指示なしの同一モデル・同一推論強度**と比較して改善が確認された場合に採用候補とします。検証のない文は暫定と明記してください。
-
-研究文献・大量のスコア・価格表は`research/`に保持し、実行時ファイルに複写しません。過剰な指示はモデルが持つ能力を制約し、キャッシュ効率やコンテキスト品質を損なう可能性があります。
-
-## 6. 実装・安全
-
-Codexの[公式サブエージェント仕様](https://developers.openai.com/codex/subagents)を優先し、TOMLやAGENTS.mdだけで実行権限を強制したと主張しないでください。実行モデル・推論強度・読込ファイルはログで確認します。公開リポジトリに秘密情報、非公開ログ、トークンを含めないでください。
-
-プルリクエストには変更前後の具体的な結果と、適用範囲・残る不確実性を記録します。
+Reference: [Codex subagents](https://developers.openai.com/codex/subagents).
