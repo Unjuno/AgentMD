@@ -1,55 +1,47 @@
-# AgentMD — Evidence-Gated Multi-Model Router
+# AgentMD — Runtime Routing Policy
 
-Goal: maximize **independently verified task quality** through OpenAI Codex model/effort selection and bounded cross-model iteration. Cost and latency are secondary tie-breakers. This file is a routing policy, **not a system prompt**, and does not change the parent model.
+## Mission
 
-## Identity and local instructions
+**Do the user's task.** Maximize correct, independently supportable task outcomes with the OpenAI models and tools actually available in this Codex session. Choose between doing work directly, delegating, changing reasoning effort, seeking a separate check, and stopping. Cost, time, and cache efficiency are secondary to meeting the task's acceptance criteria.
 
-- Use only the exact model ID supplied by the runtime, a trusted custom-agent configuration, or an explicit user selection. Never infer your own ID or capability from introspection.
-- Read only your own locally installed guidance if available: `models/Luna.md`, `models/Terra.md`, `models/Sol.md`, or `models/Astra.md`, matched by a confirmed model-family suffix. Under a global installation, look in `$CODEX_HOME/models/` (normally `~/.codex/models/`); in this repo, use `models/`.
-- If identity or the file is unavailable, proceed without model-specific guidance. Do not guess or download it.
-- The benchmark evidence is in `research/benchmark-evidence.md`. **Do not load that report during ordinary work**; only consult it when evaluating/changing routing. Model guidance is a *prior*, never a fixed job assignment.
+This is an operational instruction, **not** a request to collect benchmarks, build evaluation infrastructure, or edit AgentMD unless the user explicitly requests that work.
 
-## Initial selection
+## Identity and context
 
-The user may start the **primary** Codex session with Luna. Being the primary does not imply that Luna has superior routing judgment.
+- Trust only the current runtime/configured model ID; do not infer capability from your own name or subjective confidence.
+- If locally available, read your own `models/{Luna,Terra,Sol,Astra}.md` once, using the confirmed family. Resolve from this checkout's `models/`, or `$CODEX_HOME/models/` for a global installation. If missing, continue without it.
+- The long evidence archive `research/benchmark-evidence.md` is for **maintaining** this routing policy, not routine task execution.
+- Each model may perform **any** task. No family has an exclusive occupation.
 
-For each task, establish (1) outcome, (2) constraints, (3) checkable acceptance evidence, (4) available tools and model/effort choices. Then choose one:
-- **Direct:** complete locally when the outcome is bounded and verifiable.
-- **Delegate:** select a supported model-and-effort pair using observable task requirements plus current evidence. Any family may perform implementation, research, or review. Do **not** reserve a role for any model by name.
-- **Independent check:** use a different model/context only when it tests a distinct failure mode or provides meaningful new evidence. Do not send every task through all models.
+## Small, shared routing priors (not guaranteed task-specific success rates)
 
-Treat published model scores and pricing as uncalibrated **initial priors**. They are not task-specific success probabilities. Consider raising effort **or** changing model; never automatically try every effort level or force the sequence Luna -> Terra -> Sol -> Astra.
+- **Luna:** low published API token cost; a plausible choice for bounded work, but higher effort or other models may solve harder cases better.
+- **Terra:** provider emphasizes visual understanding and computer use; still a general-purpose candidate.
+- **Sol:** strong broad agent/coding results and generally lower task cost than Astra in published coding comparisons; not always superior.
+- **Astra:** high broad benchmark capability and high cost; useful as a candidate for demanding or independent work, not automatically correct.
 
-**Initial candidates derived from public evidence (not fixed occupations):**
-- Small, verifiable work: the current model is a valid candidate; Luna at a supported effort is inexpensive if chosen as primary.
-- Ordinary multi-step work: compare Sol medium/high against the current configuration; the broad AA composite favors Sol over low-effort Luna, but this is not a task-specific guarantee.
-- Evidence-heavy visual/computer work: include Terra medium/high among candidate models without excluding Sol or Astra.
-- High-impact, ambiguous or repeatedly failing work: compare Astra high/xhigh with Sol xhigh and, when relevant, increasing the current model's effort.
-- Cross-checking: select a different family only for an identifiable additional verification hypothesis. The verifier's family does not grant it a fixed job title.
+These are initial hints, not a rank order or fixed assignments. The **task's actual requirements, available tools, and observed failures** take priority. Do not turn benchmark composite scores into claimed probabilities.
 
-These are candidate **edges in a conditional graph**, not hard assignments or a rank-based mandate. Override a prior with direct, relevant test evidence.
+## Operational choice (apply on every user task)
 
-## Static transition protocol (conditional graph)
+1. Determine the requested deliverable, necessary constraints, relevant facts, permitted tools and observable completion checks. Investigate the **task**, not model benchmarks.
+2. Choose the first executable (model, effort, action) among **work directly**, **delegate**, **diagnose**, **independent verification**, and **stop**. Favor the option most likely to yield a valid result within the user's constraints, not the cheapest model by default.
+3. If the current model can complete and check the task, do it. If another available model/effort plausibly gives better quality or a useful independent perspective, **delegate proactively**; failure by the current model is not a prerequisite.
+4. Compare increasing effort with switching models on equal footing. Do not mechanically step through efforts or cycle Luna -> Terra -> Sol -> Astra. No extra agent just to satisfy a model-usage quota.
+5. After an action, use actual changes, tests, outputs, and limitations to decide the next step:
+   - **Verified success:** finish unless consequential risks justify an additional independent check.
+   - **Failed check:** carry forward the exact failure and choose a plausible corrective action (including a retry, changed effort, or another model).
+   - **Unknown cause:** compare targeted diagnosis with a direct attempt or independent check; do not require diagnosis when it does not help.
+   - **Access/tool/input blocker:** report it. Another model does not grant missing permissions.
+6. Reuse a previous model/thread when useful. A repeated attempt may be justified even with unchanged settings, but do not run purposeless loops. As a conservative **prompt-level** limit, use at most four delegated worker attempts per user task unless the user specifies otherwise; track the shared count. A task may require zero.
+7. If the task cannot be completed within available resources or supported capabilities, stop and report what was done and what remains unverified.
 
-All model families are eligible nodes. A transition to any available family (including the current one with a different effort) is allowed **only** for a reason supported by the task state:
+## Delegation
 
-1. **PASS / independently verified:** finish; do not continue just to exercise the graph.
-2. **FAILED_VALIDATION:** retain the failing test, expected behavior, and relevant files. Decide whether an extra effort setting or a different model/context offers a plausible correction; select one alternative.
-3. **UNCERTAIN / high-impact unverified:** obtain an independent check with a distinct hypothesis or verifier, if useful.
-4. **BLOCKED by missing data, tools, access, or permission:** stop and explain the blocker. A more powerful model cannot create unavailable access.
-5. **NO_NEW_EVIDENCE:** stop or ask the user; do not cycle on unchanged hypotheses.
+Configured generic workers: `agentmd_luna`, `agentmd_terra`, `agentmd_sol`, `agentmd_astra`. Their TOML files select **models**, not occupations. When the Codex client allows it, specify a supported reasoning effort when spawning; confirm the resolved value rather than assuming it was applied. If delegation is not available, work directly when feasible; never pretend a subagent ran.
 
-A worker may **recommend** the next model, effort and reason, but must not launch another worker. The **primary** controls spawning, collects outcomes, and updates the task state. Returning to a previously used model is allowed when there is new evidence, and its existing thread may be reused when appropriate.
+Give a worker only the **goal, necessary evidence/context, constraints, allowed changes, and completion check**. For independent verification, give an independent question and avoid anchoring it to an unsupported prior conclusion. Workers do not spawn further workers; they can recommend a next candidate. The primary controls any further delegation and the attempt limit. Parallelize independent work where it materially helps, not conflicting edits to the same files.
 
-For an initial bounded experiment, start with a maximum of **4 delegated worker attempts per user task**, including reruns; never repeat the identical (model, effort, failure evidence) state. This is a **prompt-level safeguard, not a runtime-enforced execution quota**. Respect tighter user or platform limits.
+Require concise returns: `STATUS: PASS | FAILED_VALIDATION | BLOCKED | UNCERTAIN`, `EVIDENCE`, `CHANGES`, `OPEN_RISKS`, optional `NEXT_CANDIDATE` (model, effort, reason). A worker claiming PASS is not equivalent to the completion checks passing.
 
-## Delegation contract
-
-Use the available Codex subagent tool and a configured generic `agentmd_luna`, `agentmd_terra`, `agentmd_sol`, or `agentmd_astra` role if supported. The role fixes the model, **not its task or reasoning effort**; explicitly request a compatible effort at spawn when supported. If the runtime cannot set or confirm it, do not claim that it did.
-
-Pass only: `OBJECTIVE`, `CONSTRAINTS`, `RELEVANT_CONTEXT`, `ACCEPTANCE_CHECKS`, `EVIDENCE_SO_FAR`. Prefer independent context for independent review; reuse a worker's existing thread for genuine continuation when available. Do not forward irrelevant conversation history.
-
-Every worker returns `STATUS: PASS | FAILED_VALIDATION | BLOCKED | UNCERTAIN`, `EVIDENCE`, `CHANGES`, `NEXT_CANDIDATE` (optional: model/effort/reason), and `OPEN_RISKS`.
-Do not confuse the model's claim of success with verified success. If validation is impossible, explicitly report UNCERTAIN.
-
-Follow higher-priority instructions, project instructions, the sandbox and approval controls. Do not force unsupported models or bypass permissions.
+Follow higher-priority instructions, all applicable project instructions, sandbox and approval restrictions.
