@@ -1,11 +1,28 @@
 # Contributing to AgentMD
 
-Maintain a compact, general-purpose whole-task routing policy. The product is the user's completed work, not benchmark collection or routine multi-agent review.
+Maintain one compact, general-purpose policy for completing the user's actual work. Keep the eight-file layout: AGENTS.md, README.md, this file, four generic model-binding TOMLs and the evidence registry. Do not introduce model-specific Markdown, fixed model occupations, skills or an evaluation service as part of ordinary maintenance.
 
-- AGENTS.md contains the shared capability LUT and runtime selection/handoff/termination rules. Model TOMLs specify generic worker identities and a short shared contract. No fixed jobs or model-specific Markdown.
-- Keep dated evidence, sources and limitations in research/benchmark-evidence.md. Record exact model ID, effort, evaluation version, harness, task population, units, date and missing conditions. Separate measurements, workload recommendations, extrapolation and unknowns. Do not mix generations or incompatible metrics.
-- Use sparse observable capability demands and joint model/effort comparison, not an exhaustive task taxonomy. Evaluate the whole route, including handoff, context, duplicated work and rework. Do not claim an optimal conditional ranking from marginal scores.
-- Continue a suitable context; route a coherent necessary work unit when another configuration materially helps. Avoid forced escalation, obligatory initial model, extra reviewers for diversity, and splitting every tool action into a delegation. Preserve ordinary verification and requested/necessary checks.
-- Maintain corrected working state, actual evidence and finite resource guardrails. Respect user constraints, permissions, approvals and sandbox. Treat prompt-level limits as instructions, not hard enforcement.
-- Check model IDs/names, TOML structure, no fixed effort override, LUT provenance, absence of mandatory extra review, context handoff and termination. Validate real improvements against matched single-model and routing baselines only when runtime evidence is available; do not turn ordinary user tasks into experiments.
-- Keep changes reversible and never publish credentials or private task inputs.
+## Policy changes
+
+- Keep shared routing, context and termination rules in AGENTS.md. All four TOMLs use the same short worker contract; model IDs vary, effort is selected for the work. Explain policy changes separately from benchmark refreshes.
+- Compare model and effort jointly using observable demands and relevant evidence. Continue a suitable context making verified progress. A switch needs a supported reason that accounts for handoff and rework. Do not infer self-knowledge, conditional rescue rates or a globally optimal route from aggregate ranks.
+- Delegate coherent outputs with checks, evidence and permitted file/change boundaries. Keep related tool operations together, prevent conflicting writes and preserve ordinary verification. Do not add forced cycles, obligatory first attempts or extra agents solely for review, consensus or diversity.
+- Handoffs preserve facts, sources, checkpoints, hypotheses, refuted assumptions, remaining checks and the shared attempt ledger. Workers do not recursively spawn. A permission or missing-input blocker requires an authorized remedy, not a nominal capability upgrade.
+- The provisional default is three substantive attempts, including the initial attempt, on the same unresolved acceptance condition or blocker. Count local, delegated and parallel attempts together; reserve before launch. Renaming, changing models or proposing a hypothesis cannot reset the count. Only demonstrated resolution establishes a new subgoal. Respect explicit budgets; do not reintroduce a blanket total-attempt cap that stops a larger task despite verified progress. Prompt rules are not runtime enforcement.
+
+## Evidence updates
+
+Record evidence in [research/benchmark-evidence.md](research/benchmark-evidence.md) before changing runtime numbers. Preserve exact model IDs, effort, evaluation version, checked date, task population, harness, metric definitions and cost/time units. State missing HW, clock, batch, repetitions and uncertainty; never fabricate them. Keep source-reported ranges or medians labeled correctly, and distinguish observed latency from derived estimates.
+
+Separate measurements, provider recommendations, design choices and unknowns. Compare like conditions; do not substitute prior generations, extrapolate max-effort results to lower effort, merge dependent benchmark signals as independent evidence, or interpret overlapping intervals as equivalence. API pricing does not measure Codex-plan usage. Pareto comparisons apply only to the measured dimensions and matched conditions; they do not establish global model dominance.
+
+Update a model binding only after checking its client availability. If evidence is unavailable or stale, label the gap and retain eligible alternatives instead of manufacturing a ranking. Keep research outside routine user-task execution.
+
+## Validation and release
+
+Parse all four TOMLs with an actual TOML parser. Check names, exact IDs, matching common contracts, absence of fixed effort, relative links, LUT provenance and consistency between policy and README. Check the runtime instruction byte count while allowing space within Codex's combined discovery limit for project instructions. Validate installation syntax and existing-file protection without changing a real user profile.
+
+Review stopping and handoff behavior against concrete cases: a successful simple task, an unresolved failure shared across workers, a changed model with the same blocker, a demonstrated checkpoint leading to a new requirement, and unavailable permissions. These are design checks, not empirical model-performance results. Use an actual client trace before claiming loading or resolved-setting validation. A comparative performance claim requires matched outcome evidence; ordinary tasks must not become experiments.
+
+Keep changes reversible, preserve user-specific instructions during updates and never publish credentials or private task inputs. Report what changed, what was checked and what remains unverified.
+

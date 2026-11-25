@@ -1,57 +1,104 @@
 # AgentMD
 
-A single global `AGENTS.md` for OpenAI Codex: **adaptive whole-task routing using model × reasoning-effort capability priors**. Complete the user's actual work with suitable models and minimize unnecessary calls, handoff and rework. No fixed model occupations, forced sequence or routine adversarial audit.
+One shared `AGENTS.md` for OpenAI Codex, with a **model × reasoning-effort lookup table and rules for routing necessary work**. Finish the user's task with suitable configurations while accounting for quality, time, cost, context transfer and rework. All four models remain general-purpose.
 
-## Operating policy
+## What it does
 
 ```mermaid
 flowchart TD
-    U[User task and acceptance conditions] --> S[Identify remaining work and capability demands]
-    S --> L[Compare current and eligible model-effort candidates]
-    L -->|Current configuration is suitable| X[Continue in context]
-    L -->|Another configuration materially helps| D[Switch or delegate a coherent work unit]
-    X --> V[Check actual progress and results]
-    D --> V
-    V -->|Requirement remains or state changes| C[Update evidence and remaining work]
-    C --> S
-    V -->|Acceptance conditions satisfied| F[Deliver]
-    L -->|No useful feasible action| B[Report best supported result and limits]
+    W[Remaining work and acceptance checks] --> C[Compare feasible configurations and current progress]
+    C -->|Current configuration is suitable| K[Continue in context]
+    C -->|Evidence supports a useful change| R[Switch or delegate one coherent output]
+    K --> V[Perform work and check results]
+    R --> V
+    V -->|Verified progress with work remaining| W
+    V -->|Unresolved condition within budget| F[Record failure and revise the approach]
+    F --> C
+    V -->|Acceptance satisfied| D[Deliver]
+    C -->|Limit reached or no useful feasible action| B[Report supported result and remaining limits]
 ```
 
-The sparse LUT represents observable capability demands rather than an exhaustive list of task types. Multiple features may apply. Dated broad benchmark/resource data are only comparative priors; relevant task-specific evidence takes precedence. Choose the configuration for necessary work, not a permanent job assigned to a model. A task may use one model throughout, move between configurations, or return to a previous model. Keep related work together; consider total work, handoff and rework, not the cost of one call alone.
+**Continue or switch.** Keep a suitable context that is making verified progress. Consider another model or effort when observable capability requirements, comparable task evidence, or a different supported solving hypothesis justify the change. Compare model and effort together; include handoff and expected rework. Keep the reason in one short working-state note. Model confidence, a phase name, or a small leaderboard difference alone does not justify switching.
 
-Ordinary verification is part of completing a task. Do not add a second agent just for audit, disagreement, consensus or diversity. If additional model-based verification is actually required to satisfy a material acceptance condition or requested by the user, route it like any other necessary work. Correct refuted assumptions during ordinary handoffs.
+**Delegate useful outputs.** Give a worker a coherent objective, acceptance checks, relevant evidence and an explicit file or change boundary. Related operations stay together. Parallel work must be independent enough to justify coordination. Keep ordinary verification; extra agents for consensus, model diversity or routine adversarial audit are not required. A missing permission, tool or input needs an authorized remedy, not simply a stronger model.
 
-The default six substantive attempts is an adjustable shared prompt-level guardrail, not an optimized number or hard runtime quota. Do not count routine tool operations as new attempts.
+**Transfer corrected state.** Preserve verified facts and their sources, the current artifact/checkpoint, hypotheses, refuted assumptions, open checks and the shared attempt ledger. Reuse a thread when that context helps; use a concise fresh handoff when obsolete reasoning would otherwise dominate. A worker's `PASS` label alone does not establish acceptance.
 
-## Files
+**Bound retries without stopping large tasks arbitrarily.** Unless the user specifies a different budget, allow at most **three substantive attempts on the same unresolved acceptance condition or blocker, including the initial attempt**. The primary reserves and counts attempts across local work, children and parallel candidates. Routine reads and checks within an attempt do not consume separate slots. Changing a model, renaming a blocker or proposing another hypothesis does not reset its count. A demonstrated checkpoint that resolves it can establish a genuinely new subgoal. Stop further attempts on an exhausted blocker and report it; continue independent useful work when feasible. This provisional design limit replaces the former six-attempt cap for the entire task. It is neither a measured optimum nor a hard runtime quota.
 
-- [AGENTS.md](AGENTS.md): sole AgentMD runtime instruction; sparse capability LUT, general comparison table, routing and stopping rules.
-- `.codex/agents/agentmd_{luna,terra,sol,astra}.toml`: generic model selectors and short common worker contract; no fixed effort or occupation.
-- [research/benchmark-evidence.md](research/benchmark-evidence.md): dated offline evidence, not routinely loaded by agents.
-- [CONTRIBUTING.md](CONTRIBUTING.md): maintenance rules.
+For example, implementing several independently checkable requirements is not limited to three total work units. Repeatedly trying to fix the same failing requirement is limited, even if each attempt uses another model.
 
-## Install
+## The eight files
 
-Back up existing instructions and same-named agents before copying; merge existing user-specific rules where necessary. From the repository checkout:
+| File | Purpose |
+| --- | --- |
+| [AGENTS.md](AGENTS.md) | Shared runtime policy, compact LUT, handoff and stopping rules |
+| [.codex/agents/agentmd_luna.toml](.codex/agents/agentmd_luna.toml) | `gpt-6-luna` binding |
+| [.codex/agents/agentmd_terra.toml](.codex/agents/agentmd_terra.toml) | `gpt-6.1-terra` binding |
+| [.codex/agents/agentmd_sol.toml](.codex/agents/agentmd_sol.toml) | `gpt-6.2-sol` binding |
+| [.codex/agents/agentmd_astra.toml](.codex/agents/agentmd_astra.toml) | `gpt-6.2-astra` binding |
+| [research/benchmark-evidence.md](research/benchmark-evidence.md) | Dated evidence and limitations; offline maintenance reference |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Rules for maintaining the policy and evidence |
+| [README.md](README.md) | Installation and explanation |
+
+The four TOMLs share a short worker contract and leave effort unfixed. There are no model-specific Markdown policies. README, CONTRIBUTING and the evidence archive are not routine runtime reading requirements; the operational table is in AGENTS.md.
+
+## Install and update
+
+Use a local Codex client that supports standalone custom-agent TOMLs and the selected models. From the repository checkout, this POSIX-shell snippet performs a **first installation**. It stops if existing guidance or same-named agents would conflict, and it does not rewrite `CODEX_HOME`:
 
 ```sh
-export CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
-mkdir -p "$CODEX_HOME/agents"
-cp AGENTS.md "$CODEX_HOME/AGENTS.md"
-cp .codex/agents/*.toml "$CODEX_HOME/agents/"
-# Start with a model actually available to your Codex client, for example:
-codex --model gpt-6-luna
+(
+    set -euC
+    agentmd_target="${CODEX_HOME:-$HOME/.codex}"
+
+    for agentmd_rel in \
+        AGENTS.override.md \
+        AGENTS.md \
+        agents/agentmd_luna.toml \
+        agents/agentmd_terra.toml \
+        agents/agentmd_sol.toml \
+        agents/agentmd_astra.toml
+    do
+        if [ -e "$agentmd_target/$agentmd_rel" ] ||
+           [ -L "$agentmd_target/$agentmd_rel" ]; then
+            printf 'Existing guidance: %s\nBack up and merge before installing.\n' \
+                "$agentmd_target/$agentmd_rel" >&2
+            exit 1
+        fi
+    done
+
+    test -f AGENTS.md
+    for agentmd_family in luna terra sol astra; do
+        test -f ".codex/agents/agentmd_$agentmd_family.toml"
+    done
+
+    mkdir -p "$agentmd_target/agents"
+    cat AGENTS.md > "$agentmd_target/AGENTS.md"
+    for agentmd_family in luna terra sol astra; do
+        cat ".codex/agents/agentmd_$agentmd_family.toml" \
+            > "$agentmd_target/agents/agentmd_$agentmd_family.toml"
+    done
+)
 ```
 
-The global Markdown does not itself change the parent model or grant tools. The generic TOMLs select model IDs; request a supported effort at spawn where possible and check the actual resolved settings. If switching the parent is unavailable, delegate to an available worker when useful. If delegation is unavailable, work directly. Existing model-specific Markdown from older installations is not needed. Separate context does not guarantee separate file-system isolation.
+For an existing installation, save a backup of the affected files, compare them with this revision and merge the routing policy with your existing preferences. Preserve unrelated agent definitions and project rules. Review an existing `AGENTS.override.md` before deciding which guidance should be active; do not delete it merely to make installation pass. Keep a rollback copy. Restart Codex after installing or merging.
 
-## Evidence and limitations
+Start with a model available to your account, for example `codex --model gpt-6-luna`. Starting with Luna does not require it to attempt every work unit first.
 
-The LUT uses archived workload guidance and comparative evaluations as working priors. An infinite range of task states cannot be represented by an exhaustive table. The feature-based policy generalizes to unseen tasks by matching observable demands, current progress and constraints; it does not know calibrated success probabilities or optimal routes. The broad table contains a dated 2026-11-24 snapshot, not a live benchmark feed or a Codex-plan cost estimate. No new performance measurements were made in this revision.
+## Loading and runtime settings
 
-Static configuration consistency and end-to-end runtime behavior are different. Actual model/effort availability, instruction adherence, resource use and improved task quality remain unverified in the target client. The prior cross-model audit policy is superseded.
+[Codex discovers guidance at startup](https://learn.chatgpt.com/docs/agent-configuration/agents-md): global instructions, then project-root-to-current-directory instructions. An applicable `AGENTS.override.md` takes precedence at its level; nearer project instructions take precedence over earlier guidance. The default combined limit is 32 KiB. Leave room for project instructions, and check loaded sources when the client exposes them.
 
-References: [OpenAI model selection](https://developers.openai.com/api/docs/guides/model-selection), [Codex AGENTS.md](https://developers.openai.com/codex/guides/agents-md), [Codex subagents](https://developers.openai.com/codex/subagents), [benchmark registry](research/benchmark-evidence.md).
+[Custom agents](https://learn.chatgpt.com/docs/agent-configuration/subagents) live under the Codex home `agents/` directory or project `.codex/agents/`. Their configured model and effort take precedence over spawn settings. These files set only the model, preserving the effort already resolved from the spawn request, defaults or parent. Request the intended supported effort explicitly and check the resolved configuration. Model availability can differ between clients.
+
+Markdown does not grant tools, enforce budgets or change the parent model by itself. CLI users can choose an active model and supported effort with [`/model`, then inspect `/status`](https://learn.chatgpt.com/docs/developer-commands?surface=cli). Delegate when useful and supported; otherwise complete the best feasible work directly. Separate agent context does not guarantee separate writable files. Workers inherit the parent's permissions, so changing agents cannot bypass a blocker.
+
+## Evidence and completion status
+
+The LUT combines sparse capability guidance, an **AA Intelligence Index v5.0.2 snapshot**, and relevant Arena, FrontierCode, Terminal-Bench, search and science evidence. See the [registry](research/benchmark-evidence.md) for checked dates, exact settings and conditions. The scores describe different outcomes; they are not one common success scale. Missing measurements remain unknown. AA-derived generation-time estimates are not measured whole-task latency, and API costs are not Codex-plan usage.
+
+This is a completed policy/configuration design, not proof of a universally optimal route. Static validation can establish syntax and consistency; successful loading, resolved model/effort, instruction adherence and quality gains require observation in the target client. No new model-performance measurements were made for this revision, and comparative performance remains unproven. Normal work does not trigger benchmark searches or experiments.
 
 Unofficial community project.
+
