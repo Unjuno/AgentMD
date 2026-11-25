@@ -60,7 +60,29 @@ Matched AA framework improves comparability but is not identical to the official
 
 - Direct maxima over these settings include ties: CritPt A high/A max, with A high lower composite cost and derived time. A xhigh exceeds A max on Terminal and FrontierCode; S max peaks on GDP; T max exceeds S max on CritPt. Effort and model rankings are not universal.
 - Composite Pareto candidates (maximize displayed index; minimize displayed USD/task and derived minutes/task): L low, L medium; T low, T medium, T high, T xhigh; S low, S medium, S high, S xhigh, S max; A low, A medium, A high, A xhigh. This is a descriptive frontier of 22 rounded observations, not a statistical or task-specific frontier. Do not remove a configuration from individual task rows on this basis.
-- Use O anchors for bounded work and feasible observed peaks provisionally for demanding quality-first work. Direct checks, constraints, capability fit, other relevant evidence and handoff overhead override provisional candidates. No calibrated success rate or Buddy-pair superiority is claimed.
+- The active runtime uses capability/resource-aware escalation and the proxy frontiers described below, not the earlier highest-score default. Direct checks, constraints, capability fit, matched evidence and incremental total resources override provisional candidates. No calibrated success rate or Buddy-pair superiority is claimed.
+
+### Capability/resource-aware escalation (D), 2026-11-26
+
+Derived from the saved AA component and broad tables, without changing or remeasuring any observation. For each of the eight component metrics and the broad index, compare all 22 configurations. Configuration X proxy-dominates Y when its displayed quality is at least as high, its broad weighted USD/index-task is no greater, and its broad derived minutes/index-task is no greater, with at least one strict improvement. Retain all nondominated configurations. The broad index frontier uses three measurements from the same composite; the eight component frontiers mix component quality with broad resource proxies and **are not actual per-component cost/time Pareto frontiers**. They cannot establish a globally optimal route, calibrated task success, recovery rate, budget guarantee or a unique best configuration.
+
+The textual runtime LUT lists the frontier with each original displayed quality value, sorted by proxy cost solely for readability. It also retains omitted within-family peak configurations (including ties), explicitly separate from the frontier. All model families remain eligible; a configuration omitted from the shortlist can still be suitable with direct evidence, actual runtime restrictions, context reuse, different cost or distinct Buddy contribution. No forced route or sequential ladder is derived. Resource-reference values are transcribed from the broad table, with their original denominator and estimated-time qualification.
+
+| Metric | Proxy frontier count | Omitted family-peak alternatives |
+| --- | ---: | ---: |
+| Briefcase | 16 | 1 |
+| Automation | 13 | 2 |
+| Terminal | 14 | 2 |
+| FrontierCode | 15 | 1 |
+| GDP | 7 | 3 |
+| HLE | 16 | 2 |
+| CritPt | 11 | 2 |
+| Science | 13 | 2 |
+| Broad | 15 | 3 |
+
+The active choice is an escalation decision: continue if adequate; otherwise select a relevant contribution whose incremental total cost is justified by the expected quality/risk or rework benefit. Provider anchors are provisional, not hard assignments. With a useful concurrent contribution, the primary and Buddy both work and then integrate evidence. The Buddy need not have a higher single-agent benchmark score. No pairwise rescue or audit advantage has been measured.
+
+**Static check:** 4,356 ordered pair comparisons (9 metrics × 22 × 22, including self-comparisons) reproduced the nine nondominated sets and established a frontier witness for every omitted dominated candidate. 120 frontier entries and 18 additional family-peak entries across metrics; counts refer to metric/configuration pairs, not distinct models. Verified the 176 component observations and 22 broad observations were preserved, all runtime candidate scores and resource references were transcribed, and all four families remained represented for each metric. This is static consistency, not a runtime experiment.
 
 ## B. FC — Repository changes: FrontierCode 2.0 (B)
 
@@ -152,7 +174,9 @@ Static consistency and executed model behavior are separate claims. This revisio
 
 **LUT tuning (2026-11-26):** retrieved three explicit comparison tables, checked 88 duplicate values, transcribed 176 distinct scores, calculated eight observed peaks and the composite Pareto set. Added L/T none, with runtime eligibility checks. Static source-data and policy validation only; no Codex performance experiment.
 
-**Textual LUT update (2026-11-26, based on 44c6ff7):** the runtime numeric matrices were converted to ordinal candidate preferences. All 176 AA component scores and 22 broad configurations remain unchanged in this registry. Each quality order is descending by the displayed value; exact displayed ties are grouped. Broad cost and derived-time orders are ascending. The 11 orders each cover all 22 measured settings; unsupported none entries are excluded. Runtime effort suffixes n/l/m/h/x/max denote none/low/medium/high/xhigh/max; abbreviation changes notation, not ordering. Ordinal compression intentionally omits numerical gap sizes, absolute proxy magnitudes and any claim of statistical superiority. Use direct evidence, real constraints and matched observations first; never treat a rank list as a retry sequence or use resource ranks to certify a budget. Static generation from the registry and pairwise order validation are not evidence of improved inference, latency, token use or final quality.
+**Superseded ordinal LUT update (2026-11-26, based on 44c6ff7; historical):** the runtime numeric matrices were converted to ordinal candidate preferences. All 176 AA component scores and 22 broad configurations remain unchanged in this registry. Each quality order is descending by the displayed value; exact displayed ties are grouped. Broad cost and derived-time orders are ascending. The 11 orders each cover all 22 measured settings; unsupported none entries are excluded. Runtime effort suffixes n/l/m/h/x/max denote none/low/medium/high/xhigh/max; abbreviation changes notation, not ordering. Ordinal compression intentionally omits numerical gap sizes, absolute proxy magnitudes and any claim of statistical superiority. Use direct evidence, real constraints and matched observations first; never treat a rank list as a retry sequence or use resource ranks to certify a budget. Static generation from the registry and pairwise order validation are not evidence of improved inference, latency, token use or final quality.
+
+**Capability/resource escalation revision:** replaced the ordinal lists with nine proxy-efficient candidate sets and resource references; the old highest-score preference is superseded. The shared three-attempt guardrail, installer and model bindings were not changed. No actual Codex execution, cost reduction or quality gain was measured in this revision.
 
 **Previous Buddy policy update (2b7f0e3):** changed routing prose without changing LUT numbers, worker TOMLs or installer. Static consistency and review of the written rules do not establish that a real primary will do useful work while a Buddy runs. Runtime trace, resolved model/effort, concurrent progress, join/integration and outcome improvement are untested; runtime and performance verdicts remain UNCERTAIN.
 

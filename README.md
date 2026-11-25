@@ -1,14 +1,14 @@
 # AgentMD
 
-One shared `AGENTS.md` for OpenAI Codex, with a **model × reasoning-effort lookup table and event-driven Buddy routing**. Finish the user's task with suitable configurations while accounting for quality, time, cost, context transfer and rework. All four models remain general-purpose.
+One shared `AGENTS.md` for OpenAI Codex, with a **capability/resource-aware escalation LUT and event-driven Buddy routing**. Finish the user's task with suitable configurations while accounting for quality, time, cost, context transfer and rework. All four models remain general-purpose.
 
 ## What it does
 
 ```mermaid
 flowchart TD
-    W[Remaining work and acceptance checks] --> C[Compare current and feasible configurations using LUT]
+    W[Remaining work and acceptance checks] --> C[Compare needed capability, cost and current progress using LUT]
     C -->|Current configuration suitable| K[Work directly]
-    C -->|Another configuration favored| P{Useful parallel work?}
+    C -->|Additional contribution justifies cost| P{Useful parallel work?}
     P -->|Yes| B[Spawn Buddy and continue primary work]
     P -->|No| R[Sequential delegation or supported switch]
     K --> V[Check results]
@@ -22,9 +22,9 @@ flowchart TD
     C -->|Limit reached or no useful feasible action| Z[Report results and remaining limits]
 ```
 
-**Select using precomputed textual preferences.** The shared LUT contains official starting anchors, eight task-specific AA quality orders across all 22 measured model/effort configurations, a broad quality order, two broad resource-proxy orders and other task-specific observations. Suffixes n/l/m/h/x/max denote none/low/medium/high/xhigh/max; for example S.m means Sol medium. Match the acceptance bottleneck, filter unsupported settings and choose a useful candidate without interpreting a numeric matrix. For bounded work use official anchors or validated current progress; for demanding work use the best relevant feasible observed candidate provisionally. A higher displayed rank is not proof of a meaningful gain or an instruction to retry every configuration. Compare model and effort together, including handoff and rework. Exact scores and gap sizes remain in the offline registry; resource proxies do not certify budgets.
+**Escalate by capability and incremental resource cost.** Start from the current configuration and the remaining work. If it is adequate, continue; if an additional capability or independent contribution is justified, choose a suitable model/effort from the shared LUT. Compare raising effort, changing model and adding a Buddy without a fixed ladder. Prefer the lower-overhead adequate configuration; a material quality or risk benefit can justify greater cost. The LUT lists proxy-efficient candidates for eight AA component evaluations and the broad index, with displayed scores, other family peaks and resource references for all 22 settings. It is derived from the saved data, not an ordinal leaderboard or retry sequence. Costs and inference times come from the broad AA evaluation, not the individual component tasks; these mixed-scope frontiers are provisional shortlists, not task-specific optima or budget guarantees. Use actual constraints, matching evaluation evidence and task results first.
 
-**Buddy routing: work together.** When the existing LUT favors another model/effort for part of the task or a useful alternative approach, spawn it and continue your own useful work in parallel. Identify both outputs before launch: for example, the Buddy develops a fix while the primary checks integration and tests; or both independently analyze a consequential design decision. The Buddy can implement, investigate, reason or check, and has no fixed occupation. Do not wait immediately after spawning if useful work is available. Join at a dependency, compare and integrate both outputs against evidence, and update the working context before continuing. No mandatory first failure, permanent pair, extra Buddy LUT or always-on second opinion.
+**Buddy routing: work together.** When the same LUT supports another model/effort for a useful contribution that justifies its additional cost, spawn it and continue your own useful work in parallel. The Buddy need not have a higher score than the primary. Identify both outputs before launch: for example, the Buddy develops a fix while the primary checks integration and tests; or both independently analyze a consequential design decision. The Buddy can implement, investigate, reason or check, and has no fixed occupation. Do not wait immediately after spawning if useful work is available. Join at a dependency, compare and integrate both outputs against evidence, and update the working context before continuing. No mandatory first failure, permanent pair, extra Buddy LUT or always-on second opinion.
 
 Use disjoint write ownership or isolated copies, or keep concurrent investigations read-only. If parallel progress is not useful or safe, work directly or delegate sequentially. A consequential decision with weak external verification can warrant independent collaboration even if the current model reports success. Ordinary checks are still required; model agreement alone is not evidence. A missing permission, tool or input requires an authorized remedy, not simply a stronger model.
 
@@ -38,7 +38,7 @@ For example, implementing several independently checkable requirements is not li
 
 | File | Purpose |
 | --- | --- |
-| [AGENTS.md](AGENTS.md) | Shared runtime policy, compact LUT, Buddy collaboration, handoff and stopping rules |
+| [AGENTS.md](AGENTS.md) | Shared runtime policy, capability/resource-aware escalation LUT, Buddy collaboration, handoff and stopping rules |
 | [.codex/agents/agentmd_luna.toml](.codex/agents/agentmd_luna.toml) | `gpt-6-luna` binding |
 | [.codex/agents/agentmd_terra.toml](.codex/agents/agentmd_terra.toml) | `gpt-6.1-terra` binding |
 | [.codex/agents/agentmd_sol.toml](.codex/agents/agentmd_sol.toml) | `gpt-6.2-sol` binding |
@@ -102,7 +102,7 @@ Markdown does not grant tools, enforce budgets or change the parent model by its
 
 ## Evidence and completion status
 
-The textual LUT is derived from **AA Intelligence Index v5.0.2 and eight component scores for each of 22 model/effort configurations**, plus official capability guidance and relevant Arena, FrontierCode, Terminal-Bench, search and science evidence. The full numeric matrices (176 component observations and 22 broad observations) remain in the registry; the runtime uses precomputed ordinal preferences instead. This is a prompt-format and decision-policy refinement, not measured prompt-performance optimization. See the [registry](research/benchmark-evidence.md) for checked dates, exact settings and conditions. The scores describe different outcomes; they are not one common success scale. Missing measurements remain unknown. AA-derived generation-time estimates are not measured whole-task latency, and API costs are not Codex-plan usage.
+The textual LUT is derived from **AA Intelligence Index v5.0.2 and eight component scores for each of 22 model/effort configurations**, plus provider guidance and the other matched observations in the [evidence registry](research/benchmark-evidence.md). All 176 component observations and 22 broad observations remain there. For each quality metric, maximize displayed quality and minimize broad weighted cost and derived inference time to obtain the proxy frontier; retain omitted family peaks for alternatives. The figures have different evaluation scopes, so this is a decision aid rather than a measured per-task cost-quality frontier. The order by cost is not an execution order. Suffixes n/l/m/h/x/max mean none/low/medium/high/xhigh/max. No model or effort is globally excluded because of proxy dominance.
 
 This is a completed policy/configuration design, not proof of a universally optimal route. Static validation can establish syntax and consistency; successful loading, resolved model/effort, instruction adherence and quality gains require observation in the target client. No new model-performance measurements were made for this revision, and comparative performance remains unproven. Normal work does not trigger benchmark searches or experiments.
 
