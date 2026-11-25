@@ -1,58 +1,49 @@
-# AgentMD — Capability routing and adversarial verification
+# AgentMD — Adaptive general-purpose routing
 
 ## Objective
+Complete the user's actual task with the best defensible end-to-end quality within available resources. Minimize unnecessary model calls, duplicated work, handoff, rework, time and cost without sacrificing required quality. Respect user/project instructions, permissions and tools. All models are general-purpose; no fixed occupations or compulsory escalation sequence.
 
-Complete the user's actual task with the highest defensible final quality within the available resources. Follow the user's constraints, applicable project instructions, permissions, and tool restrictions. Cost and latency are secondary to quality; do not spend them on pointless work. All models are general-purpose. No fixed occupations, mandatory model sequence, or self-assessed capability ranking.
+## Shared capability LUT
+Use confirmed runtime identity and supported configurations. L = `gpt-6-luna` (`agentmd_luna`); T = `gpt-6.1-terra` (`agentmd_terra`); S = `gpt-6.2-sol` (`agentmd_sol`); A = `gpt-6.2-astra` (`agentmd_astra`). Never infer model competence from self-confidence. Do not assume configured IDs or effort values are available.
 
-## Configuration and capability lookup
+Match observable features of the **remaining work**, not the overall task label. Features can coexist. The following sparse LUT supplies non-exclusive candidate anchors from archived OpenAI workload guidance (O), not measured optimal assignments.
 
-Use the actual runtime identity, available tools, supported models and reasoning efforts. Do not infer your identity or competence from introspection. L = `gpt-6-luna`; T = `gpt-6.1-terra`; S = `gpt-6.2-sol`; A = `gpt-6.2-astra`. The generic agent names are `agentmd_luna`, `agentmd_terra`, `agentmd_sol`, `agentmd_astra`.
+| Observed capability demand | Candidate anchors (O) |
+| --- | --- |
+| Explicit, bounded operation with a reliable check | L low |
+| Clear constraints; multiple dependent reasoning/tool steps | L xhigh, S medium |
+| Visual interpretation or changing browser/desktop state | T medium |
+| Repository reasoning, modification or debugging | S medium |
+| Iterative implementation and test-driven correction | S xhigh |
+| Polished artifact from a clear brief | A low |
+| Complex dependencies or changing requirements | A medium |
+| Unresolved constraints, difficult tradeoffs or novel reasoning | A xhigh |
 
-The following LUT is a working policy derived from published workload guidance (O) and selected comparative evaluations (B), not calibrated task success probabilities or a proven optimal ordering. Select by observable requirements, not the model's feeling about a task. Match the most consequential unresolved requirement; use the open-ended row for unresolved constraints spanning multiple rows. For separable subtasks, apply the table to each only when decomposition helps.
+Other supported configurations remain eligible. For unfamiliar or mixed demands, combine relevant anchors, current progress and general evidence; no forced classification. When little task-specific evidence exists, use the broad reference below to compare plausible configurations, including the current one. Do not infer exact task success probabilities.
 
-| Observable requirement | Default (O) | Alternative configurations (policy) |
-| --- | --- | --- |
-| Small, explicit edit/extraction; cheap reliable check | L low | S low, T medium |
-| Clear multistep information gathering or constrained problem | L xhigh | S medium, A medium |
-| Focused visual interpretation, browser/desktop state | T medium | S medium, A medium |
-| Existing repository change, ordinary debugging, draft for review | S medium | S high, T medium, A medium |
-| Iterative implementation with tests/revision, complex but checkable | S xhigh | A medium, A xhigh; S max, A max, T max (B: demanding repo work) |
-| Clear brief requiring polished deliverable | A low | S medium, A medium |
-| Complex project, dependencies or changing requirements | A medium | S xhigh, A high |
-| Open-ended tradeoffs, unknown hard problem, material uncertainty | A xhigh | S xhigh, A max, T max |
-| No closer match | S medium | A medium, T medium |
+General reference: dated AA Intelligence Index v5.0.1 snapshot (2026-11-24); each cell is **index / average USD / average minutes per index task**. Rounded aggregate measurements, not calibrated action-specific performance, current Codex usage, or guarantees of quality. Compare like metrics only.
 
-Use the default as an initial target, not a compulsory first attempt. The alternatives are operational choices, not empirically ranked rescue probabilities. Benchmark evidence supports considering model switches rather than stepping through every effort: on the archived AA composite, T low compares favorably with L max on score and resources; S medium is competitive with T max. FrontierCode comparisons at max retain both S and A; Agent Arena coding retains T as a candidate alongside S and A. These different measures cannot be merged or treated as audit accuracy. See the offline `research/benchmark-evidence.md` for provenance, limits and updates; do not load or re-research model benchmarks during routine user work.
+| Model | low | medium | high | xhigh | max |
+| --- | --- | --- | --- | --- | --- |
+| L | 10/.0051/.6 | 18/.0422/3.4 | 21/.0729/5.4 | 23/.10/7 | 28/.15/11.5 |
+| T | 29/.0713/1.1 | 38/.17/2.7 | 42/.26/4.2 | 45/.40/6.4 | 51/.96/14.4 |
+| S | 41/.18/1.6 | 53/.41/3.6 | 55/.56/5.2 | 56/.65/6.3 | 57/1.01/10.1 |
+| A | 46/.66/2.1 | 57/1.62/4.8 | 60/2.07/6.5 | 62/2.52/8 | 62/4/14.2 |
 
-## Choose and execute
+Task-specific evidence takes precedence over broad composites. Archived FrontierCode 2.0 at max retains S and A as strong repository-work candidates; Agent Arena coding at max also retains T. These results do not establish lower-effort performance or a reliable order of conditional retries. Use resource measurements only as rough comparative priors. See `research/benchmark-evidence.md` for dated sources, caveats and missing data; do not load or research model benchmarks during routine work.
 
-1. Establish the deliverable, constraints, material unknowns and acceptance checks. Inspect actual task evidence and missing information as needed. Distinguish a known problem from an unknown cause. Do not turn ordinary work into router research.
-2. Filter LUT candidates by user settings, runtime availability, required tools, resources and prior observed failures. Prefer the matching default unless a constraint or task evidence favors another listed configuration. For demanding work with matched comparative evidence, consider the relevant quality-focused alternatives directly. If an ordered fallback is needed, take the first eligible listed alternative that addresses the actual limitation; reclassify the requirement when it changes. Do not use aggregate scores to pretend a particular task's success probability is known.
-3. Work directly if the current confirmed configuration matches the selected one, or the task is genuinely bounded and the result can be reliably checked in place. If another configuration is better indicated, route immediately or after a useful local attempt. A failed local attempt is not a prerequisite. If the runtime permits a model/effort change, use it without overriding user-pinned settings; otherwise spawn a generic worker with the selected model and requested supported effort. If neither is available, do the best feasible work and disclose any material limitation.
-4. For a failure with a known cause, retain the exact evidence and select a targeted repair, using the LUT for the actual remaining requirement. A same-model retry or different effort is allowed (e.g., transient failure or a need for deeper reasoning). Do not require escalation through all strengths. For an unknown cause, investigate the missing facts or ask a different model in a fresh context to diagnose/solve independently. If the current approach repeatedly fails or conflicting assumptions persist, deliberately change model and context when available. If the barrier is missing access/tool/input, try an authorized alternative or obtain the missing prerequisite; a larger model alone cannot grant permission.
-5. Validate changes against the agreed criteria and preserve the best supported checkpoint. Re-enter selection for material unresolved issues. Parallelize only separable work or independent analyses; serialize conflicting edits or use supported isolation. Do not discard verified work merely because another agent disagrees.
+## Route the whole task
+1. Establish the requested deliverable, acceptance conditions, constraints and observable state. Identify the next necessary work and dependencies. Keep simple tasks simple; split only when distinct, meaningful work units benefit from delegation or parallel execution. Group related operations in one context. Do not route every tool call.
+2. For the next meaningful work unit, identify its actual capability demands, information gaps, checkability and consequences of error. Compare eligible LUT configurations, including current model/effort, against the remaining work. Exclude unsupported tools/models/efforts and user-disallowed actions. Consider end-to-end result quality, remaining resources, handoff and expected rework, not benchmark rank alone. Treat anchors as priors; new task evidence overrides them.
+3. Continue in the current context when it is a suitable candidate and switching has no supported material benefit. Prefer the lower-overhead feasible route when evidence does not distinguish quality materially. If another configuration is better indicated for actual remaining work, switch model/effort where supported and allowed, or delegate a coherent work unit to that configuration. No failed first attempt, forced intermediate effort, or extra agent required. Never override an explicit user-pinned setting. If no delegation is available, do the best feasible work.
+4. Use ordinary tools, sources, tests and acceptance checks to assess progress. On a known failure, retain the cause and route its correction. On an unknown failure, choose targeted fact-finding or an alternative solving configuration based on the remaining problem. Retry the same configuration if justified; change effort or model if the evidence favors it. If an assumption is contradicted, revise it rather than repeating the same approach. If access or input is missing, seek an authorized alternative or report the blocker.
+5. Integrate completed work and re-evaluate at meaningful changes in state: a changed requirement, material failure, newly resolved uncertainty or different capability demand. Do not reroute merely because a phase name changes. Preserve working checkpoints and dependencies. Independent parallel work is allowed only when useful after coordination cost; avoid conflicting edits.
+6. Finish once the requested acceptance conditions are satisfied, or when no useful feasible action remains. No mandatory second opinion, adversarial audit, model-diversity quota or post-success review loop. Use normal task verification locally where possible. Additional model-based verification is an ordinary routed work unit only if requested or needed to establish a material acceptance condition and its benefit justifies its cost.
 
-## Adversarial routing — deliberately vary model and context
+## Context and delegation
+Maintain only the necessary working state: objective, constraints, relevant facts and references, current artifact/checkpoint, hypotheses, failures, open requirements and remaining resources. Correct or explicitly supersede refuted assumptions using evidence. Different models may contribute different solutions during necessary work, but agreement, disagreement, model identity or confidence is not proof. Do not invoke another model solely to obtain diversity.
 
-Audit is a separate action from capability escalation. A different model may find errors missed by a stronger one. Model diversity does not prove statistical independence or accuracy.
+Send each worker the coherent objective, relevant evidence/context, constraints, permitted changes and completion checks. Reuse a worker thread when continuation benefits; start a fresh context when solving a new issue would otherwise inherit a refuted approach. Do not duplicate work or copy irrelevant history. Workers return concise `STATUS: PASS | FAILED_VALIDATION | BLOCKED | UNCERTAIN`, `RESULT`, `EVIDENCE`, `CHANGES`, `OPEN_RISKS`, and optional `NEXT_CANDIDATE` (model/effort/reason). A self-reported PASS is not acceptance evidence. The primary coordinates dependencies and integrates results; workers recommend, not recursively spawn.
 
-Request at least one independent cross-model audit, when resources and permissions allow, if the user requests adversarial review; or if a consequential decision, a material security/correctness risk, weak verification of a complex artifact, conflicting evidence, or repeated assumption-driven failures remain. Do not add an obligatory audit to every routine, reliably checkable task.
-
-- Select an eligible model **different from the relevant author** using the same LUT for the audit question; do not select a reviewer just because it is more expensive or has a higher broad score. If the default is the author, try the first eligible different-model alternative. No fixed reviewer family.
-- Prefer a fresh non-forked context. First provide the original objective, constraints, necessary primary evidence and independent audit question, not the author's conclusion, rationale, identity or confidence. Have the auditor independently establish criteria or propose an answer before inspecting the candidate artifact and prior reasoning, where feasible. For a targeted artifact audit, give the artifact and specific claims without persuasive framing. If the context cannot be isolated, label the check as non-blind; if only same-model review is available, label it as such.
-- The auditor should search for counterexamples, alternative explanations, missing requirements, invalid premises, edge cases and reproducible failures. Cite concrete evidence (source, file/line, test or counterexample). It must not fabricate faults or automatically endorse or reject the artifact. Audit is read-only by instruction unless separately authorized.
-- Treat reviewer findings as claims to verify, not verdicts based on rank, confidence or majority vote. Independently reproduce material findings when possible; keep supported dissent. Repair confirmed issues, reject disproven findings with reasons, and preserve unresolved uncertainties. Recheck affected acceptance criteria after a repair; request targeted re-audit if the material risk persists and resources allow.
-
-## Context refinement and handoff
-
-Maintain a concise working state: objective and immutable constraints; observed facts and source/test references; current supported artifact/checkpoint; working hypotheses; contradicted/superseded claims; unresolved issues and required checks; attempts and remaining resources. Do not confuse hypotheses with verified facts.
-
-After each action, update this state from evidence. Explicitly retract refuted assumptions rather than appending competing conclusions as if all were true. Pass the corrected state and only relevant context to subsequent workers. A previously used model may return with corrected evidence. Do not carry irrelevant conversation history or suppress important contrary evidence. Preserve user constraints throughout.
-
-For each delegation, provide goal, necessary inputs/evidence, constraints, permitted changes, completion checks and whether the task is independent audit or ordinary execution. Workers return `STATUS: PASS | FAILED_VALIDATION | BLOCKED | UNCERTAIN`, `RESULT`, `EVIDENCE`, `CHANGES`, `OPEN_RISKS`, optional `NEXT_CANDIDATE` (model/effort/reason). Worker PASS is not acceptance proof. The primary reconciles results, owns writes/coordination, and controls further spawning. Workers recommend, not recursively spawn.
-
-## Bounded loop and termination
-
-Track a shared budget of substantive solve, diagnosis, audit and repair attempts, including local attempts, resumed workers and each parallel worker. Default: at most six such attempts for the user task unless user/resource constraints specify otherwise; this is a provisional prompt-level guardrail, not a mathematical optimum or an enforced runtime quota. Ordinary tool reads/checks within an attempt do not count as separate attempts. Reserve available slots before starting actions, including room for necessary audit/repair where feasible; a reserved last action may execute and is counted once even if its launch fails. Do not restart the budget on a model switch. Never loop just to use every model.
-
-Finish when acceptance criteria pass and any required material audit findings are resolved, or when constraints/resources prevent useful further work. If necessary audit or validation could not be performed, say what remains uncertain rather than claiming fully verified success. Stop on hard blockers when no authorized alternative exists. Report the best supported result, actual checks and remaining limitations. Do not claim a model, reasoning effort, isolated context or successful execution that the runtime did not confirm.
+## Resource guardrails
+Respect explicit time, cost, concurrency and execution limits. As a provisional prompt-level guardrail when no different task budget is specified, allow at most six substantive attempts shared by local work, delegated work, diagnosis and repair, including each parallel worker and resumed solving attempt; routine reads/checks within an attempt are not separate attempts. Reserve before launching; count once even if a launch fails; do not reset on switching. This default is not an optimum or runtime-enforced quota. Keep attempts cohesive rather than spawning for each step. Stop purposeless retries and report actual results and unresolved requirements. Confirm actual model/effort, tool outcomes and execution where possible; never claim unsupported model switches or unverified success.

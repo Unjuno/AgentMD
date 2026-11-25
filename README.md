@@ -1,58 +1,57 @@
 # AgentMD
 
-A single global `AGENTS.md` for OpenAI Codex: **capability lookup + intentional cross-model adversarial verification + evidence-based context refinement**. The goal is the user's actual completed task, not benchmark collection or mandatory multi-agent discussion.
+A single global `AGENTS.md` for OpenAI Codex: **adaptive whole-task routing using model × reasoning-effort capability priors**. Complete the user's actual work with suitable models and minimize unnecessary calls, handoff and rework. No fixed model occupations, forced sequence or routine adversarial audit.
 
 ## Operating policy
 
 ```mermaid
 flowchart TD
-    U[User task] --> L[Match observable requirements to LUT]
-    L --> X[Work directly or delegate model and effort]
-    X --> V[Validate actual results]
-    V -->|Unresolved problem| R[Repair, diagnose, change model or effort]
-    R --> C[Update evidence and working context]
-    C --> L
-    V -->|Material audit warranted| A[Different model, fresh context where feasible]
-    A --> E[Verify findings against evidence]
-    E -->|Confirmed issue| C
-    E -->|Checks and findings resolved| D[Deliver]
-    V -->|Accepted and no audit needed| D
-    L -->|No useful feasible action| B[Report best result and limits]
-    E -->|Unresolved within budget| B
+    U[User task and acceptance conditions] --> S[Identify remaining work and capability demands]
+    S --> L[Compare current and eligible model-effort candidates]
+    L -->|Current configuration is suitable| X[Continue in context]
+    L -->|Another configuration materially helps| D[Switch or delegate a coherent work unit]
+    X --> V[Check actual progress and results]
+    D --> V
+    V -->|Requirement remains or state changes| C[Update evidence and remaining work]
+    C --> S
+    V -->|Acceptance conditions satisfied| F[Deliver]
+    L -->|No useful feasible action| B[Report best supported result and limits]
 ```
 
-All models are general-purpose. Choose model and reasoning effort together using the short LUT in [AGENTS.md](AGENTS.md), based on published workload guidance and benchmark evidence. Change models to improve capability **or** deliberately expose different errors. An auditor can be a lower-ranked model; disagreement or consensus is not proof. Verify counterexamples, remove refuted assumptions from the handoff, and retain independently supported work.
+The sparse LUT represents observable capability demands rather than an exhaustive list of task types. Multiple features may apply. Dated broad benchmark/resource data are only comparative priors; relevant task-specific evidence takes precedence. Choose the configuration for necessary work, not a permanent job assigned to a model. A task may use one model throughout, move between configurations, or return to a previous model. Keep related work together; consider total work, handoff and rework, not the cost of one call alone.
 
-The default six substantive attempts is a shared prompt-level guardrail including local work, delegation, audit and repair. It is adjustable, not a proven optimum or a hard runtime quota. Routine tasks may complete in a single attempt.
+Ordinary verification is part of completing a task. Do not add a second agent just for audit, disagreement, consensus or diversity. If additional model-based verification is actually required to satisfy a material acceptance condition or requested by the user, route it like any other necessary work. Correct refuted assumptions during ordinary handoffs.
+
+The default six substantive attempts is an adjustable shared prompt-level guardrail, not an optimized number or hard runtime quota. Do not count routine tool operations as new attempts.
 
 ## Files
 
-- `AGENTS.md`: the sole AgentMD runtime instruction and LUT.
-- `.codex/agents/agentmd_{luna,terra,sol,astra}.toml`: generic model selectors with a short common worker contract; no fixed effort or job.
-- [research/benchmark-evidence.md](research/benchmark-evidence.md): offline evidence, methodology and limitations; not read during ordinary execution.
+- [AGENTS.md](AGENTS.md): sole AgentMD runtime instruction; sparse capability LUT, general comparison table, routing and stopping rules.
+- `.codex/agents/agentmd_{luna,terra,sol,astra}.toml`: generic model selectors and short common worker contract; no fixed effort or occupation.
+- [research/benchmark-evidence.md](research/benchmark-evidence.md): dated offline evidence, not routinely loaded by agents.
 - [CONTRIBUTING.md](CONTRIBUTING.md): maintenance rules.
 
 ## Install
 
-Back up existing global instructions and same-named agent definitions before copying; merge user-specific rules rather than unintentionally overwriting them. From the checkout:
+Back up existing instructions and same-named agents before copying; merge existing user-specific rules where necessary. From the repository checkout:
 
 ```sh
 export CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
 mkdir -p "$CODEX_HOME/agents"
 cp AGENTS.md "$CODEX_HOME/AGENTS.md"
 cp .codex/agents/*.toml "$CODEX_HOME/agents/"
-# Start with any supported model; for example:
+# Start with a model actually available to your Codex client, for example:
 codex --model gpt-6-luna
 ```
 
-Model-specific Markdown files are no longer needed. If a previous installation contains them, the new instructions do not reference them. The global Markdown does not itself change the parent model. The generic TOMLs pin model identity; effort may be provided at spawn where supported. Actual model access, tool capabilities and effort resolution depend on the client and account. If switching the primary model is unavailable, use a supported subagent; do not pretend to switch. Fresh context and separate file-system isolation are not equivalent.
+The global Markdown does not itself change the parent model or grant tools. The generic TOMLs select model IDs; request a supported effort at spawn where possible and check the actual resolved settings. If switching the parent is unavailable, delegate to an available worker when useful. If delegation is unavailable, work directly. Existing model-specific Markdown from older installations is not needed. Separate context does not guarantee separate file-system isolation.
 
-## Evidence and limits
+## Evidence and limitations
 
-The LUT combines official workload/effort recommendations with comparative benchmark observations as **working priors**, not calibrated success rates. No single score establishes every workload's best model; conditional rescue and audit accuracy for these four models are not established. Different models can share mistakes; multi-agent agreement is not verification. Cross-model audit is triggered by material risk and evidence needs, not a mandatory four-model cycle.
+The LUT uses archived workload guidance and comparative evaluations as working priors. An infinite range of task states cannot be represented by an exhaustive table. The feature-based policy generalizes to unseen tasks by matching observable demands, current progress and constraints; it does not know calibrated success probabilities or optimal routes. The broad table contains a dated 2026-11-24 snapshot, not a live benchmark feed or a Codex-plan cost estimate. No new performance measurements were made in this revision.
 
-Status: configuration authored and available for static checking. End-to-end Codex model selection, context independence, enforcement of the attempt limit and quality improvements have **not** been demonstrated in the target runtime. Inspect actual logs and task acceptance checks before making claims.
+Static configuration consistency and end-to-end runtime behavior are different. Actual model/effort availability, instruction adherence, resource use and improved task quality remain unverified in the target client. The prior cross-model audit policy is superseded.
 
-Sources: [OpenAI model selection](https://developers.openai.com/api/docs/guides/model-selection), [Codex AGENTS.md](https://developers.openai.com/codex/guides/agents-md), [Codex subagents](https://developers.openai.com/codex/subagents), [benchmark registry](research/benchmark-evidence.md).
+References: [OpenAI model selection](https://developers.openai.com/api/docs/guides/model-selection), [Codex AGENTS.md](https://developers.openai.com/codex/guides/agents-md), [Codex subagents](https://developers.openai.com/codex/subagents), [benchmark registry](research/benchmark-evidence.md).
 
 Unofficial community project.

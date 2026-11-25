@@ -133,7 +133,7 @@ The [OpenAI caching guide](https://developers.openai.com/api/docs/guides/prompt-
 
 **Provenance policy:** If numbers or model names change, update this file with the checked date and evidence link before updating short runtime guidance. No unverified number belongs in a model's operating prompt.
 
-## H. Runtime policy update — 2026-11-25
+## H. Historical runtime policy update — 2026-11-25
 
 The single AGENTS.md uses these source classes:
 
@@ -142,10 +142,16 @@ The single AGENTS.md uses these source classes:
 - **B — coding:** Section B preserves the recorded FrontierCode 2.0 snapshot (max effort only). On the [Agent Arena coding index](https://arena.ai/leaderboard/agent/code?projection=output-tokens), dated 2026-11-22, A max, T max and S max appeared at ranks 6, 9 and 11 among 69 models (1,064,228 sessions in aggregate, not per model). The index includes multiple signals of agent work. This is a different measure from mergeability or a pass rate; no inference of statistical superiority or conditional rescue performance is made. Keep these alternatives eligible; do not generalize max results to lower effort settings.
 - **Feasibility:** [OpenAI deployment checklist](https://developers.openai.com/api/docs/guides/deployment-checklist) lists low/medium/high/xhigh/max for the four API models; none is also supported by Luna and Terra. [Codex subagents](https://developers.openai.com/codex/subagents) describes model/effort settings, pinned configuration precedence and spawning. API support is not proof of availability in any user's Codex client. No runtime invocation is asserted here.
 
-### Independent adversarial audit
+### Independent adversarial audit (historical research; not a runtime default)
 
 - Du et al., *Improving Factuality and Reasoning in Language Models through Multiagent Debate*, ICML 2024 ([paper and code](https://composable-models.github.io/llm_debate/), [arXiv:2305.14325](https://arxiv.org/abs/2305.14325)): reports gains from multiple reasoning and critique paths on evaluated tasks.
 - Zhang et al., *If Multi-Agent Debate is the Answer, What is the Question?*, [arXiv:2502.08788](https://arxiv.org/abs/2502.08788): finds that debate did not consistently beat simpler baselines and reports benefits from heterogeneous model outputs in tested settings.
 - Batra et al., *Who Convinced Whom? Tracing How LLMs Change Their Minds in Multi-Agent Systems*, [arXiv:2610.35930](https://arxiv.org/abs/2610.35930) (preprint): reports cases where increased agreement accompanies more shared errors.
 
 These are method-level motivations, not measured audit efficacy for the AgentMD model combinations. Prefer independent initial analysis and verifiable counterexamples over repeated persuasive debate; update context only by evidence, not consensus. Distinct model families and fresh contexts do not establish independence. The actual conditional rescue rates, false-audit rates, shared failure correlations, and best sequence remain unknown.
+
+## I. Whole-task adaptive routing revision — 2026-11-25
+
+This revision supersedes mandatory cross-model audit and fixed fallback ordering. It does not add new measurements. The operational LUT uses the archived workload guidance in H as non-exclusive capability anchors, and all 20 rows of the single dated v5.0.1 snapshot in A as broad quality/resource references. The rounded values are copied from that snapshot; no mixed-version interpolation, success-probability conversion, or current plan-cost claim is made. The latest official documentation fetch available during this revision describes older model generations, so it is not an independent revalidation of the exact GPT-6-family IDs or the archived workload recommendations. Actual runtime support must be checked. Sections B and H retain task-specific max-effort candidate evidence without extrapolating to unmeasured strengths.
+
+A task is represented by changing observable demands, not one immutable class. The policy compares coherent work units against current model/effort, relevant anchors, task evidence, constraints and switching/rework overhead. If no supported material benefit exists, continue the current suitable context. Model diversity may emerge from necessary work; it is not a reason to spawn a worker. Additional model-based verification is optional/requested or required for an acceptance condition and justified by its contribution, never an automatic adversarial audit. The six-attempt guardrail is retained from the preceding policy as a provisional, adjustable instruction. Conditional rescue rates, audit benefits, unseen-task fit and globally optimal paths remain unmeasured.

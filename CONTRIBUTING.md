@@ -1,11 +1,11 @@
 # Contributing to AgentMD
 
-Maintain a small, operational, general-purpose Codex policy. The user's task is the product; research supports it, rather than replacing it.
+Maintain a compact, general-purpose whole-task routing policy. The product is the user's completed work, not benchmark collection or routine multi-agent review.
 
-- Runtime capability and routing rules belong in AGENTS.md. Model-specific TOMLs only select models and enforce the shared worker contract by instruction. Do not reintroduce model-specific jobs or redundant model instruction files.
-- Keep long evidence and sources in research/benchmark-evidence.md. Record exact model ID, effort, version, harness, task population, units and date. Do not mix historical generations or incompatible metrics. Distinguish measured results, provider recommendations, policy assumptions and unknowns.
-- Update LUT defaults and alternatives only with a documented rationale. A candidate list is not a measured ordering of conditional rescue rates. Compare model and effort jointly; do not require a fixed starting model or monotone escalation.
-- Preserve deliberate different-model audit and fresh context where possible. Treat all findings as claims subject to checks; retain contrary evidence and explicitly supersede refuted assumptions. Do not accept majority opinion as evidence.
-- Keep a shared finite budget across local work, all workers, audits and repairs. Respect user constraints, approvals, file scope and sandbox. Do not claim prompt-level rules are hard enforcement.
-- For changes, check matching agent names/IDs, valid TOML, optional effort resolution, no references to removed model Markdown files, and consistency of LUT, handoff, audit and stop rules. Real quality claims need representative task comparisons under matched conditions, independent acceptance checks and uncertainty reporting; these are maintenance checks, not a prerequisite for ordinary user work.
-- Record limitations, never publish credentials or private task data. Keep changes reversible.
+- AGENTS.md contains the shared capability LUT and runtime selection/handoff/termination rules. Model TOMLs specify generic worker identities and a short shared contract. No fixed jobs or model-specific Markdown.
+- Keep dated evidence, sources and limitations in research/benchmark-evidence.md. Record exact model ID, effort, evaluation version, harness, task population, units, date and missing conditions. Separate measurements, workload recommendations, extrapolation and unknowns. Do not mix generations or incompatible metrics.
+- Use sparse observable capability demands and joint model/effort comparison, not an exhaustive task taxonomy. Evaluate the whole route, including handoff, context, duplicated work and rework. Do not claim an optimal conditional ranking from marginal scores.
+- Continue a suitable context; route a coherent necessary work unit when another configuration materially helps. Avoid forced escalation, obligatory initial model, extra reviewers for diversity, and splitting every tool action into a delegation. Preserve ordinary verification and requested/necessary checks.
+- Maintain corrected working state, actual evidence and finite resource guardrails. Respect user constraints, permissions, approvals and sandbox. Treat prompt-level limits as instructions, not hard enforcement.
+- Check model IDs/names, TOML structure, no fixed effort override, LUT provenance, absence of mandatory extra review, context handoff and termination. Validate real improvements against matched single-model and routing baselines only when runtime evidence is available; do not turn ordinary user tasks into experiments.
+- Keep changes reversible and never publish credentials or private task inputs.
