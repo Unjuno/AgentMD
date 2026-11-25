@@ -1,44 +1,84 @@
 # AgentMD
 
-One shared `AGENTS.md` for OpenAI Codex, with a **capability/resource-aware escalation LUT and event-driven Buddy routing**. Finish the user's task with suitable configurations while accounting for quality, time, cost, context transfer and rework. All four models remain general-purpose.
+One shared `AGENTS.md` for OpenAI Codex: **task-aware escalation using model × reasoning effort, with selective Buddy collaboration**. Public benchmarks supply bounded evidence; the current task, acceptance checks and incremental resources determine the next action. All four models remain general-purpose.
 
-## What it does
+## Strategy and logical baseline
 
-```mermaid
-flowchart TD
-    W[Remaining work and acceptance checks] --> C[Compare needed capability, cost and current progress using LUT]
-    C -->|Current configuration suitable| K[Work directly]
-    C -->|Additional contribution justifies cost| P{Useful parallel work?}
-    P -->|Yes| B[Spawn Buddy and continue primary work]
-    P -->|No| R[Sequential delegation or supported switch]
-    K --> V[Check results]
-    B --> J[Join and integrate both results]
-    J --> V
-    R --> V
-    V -->|Verified progress with work remaining| W
-    V -->|Unresolved condition within budget| F[Record failure and revise approach]
-    F --> C
-    V -->|Acceptance satisfied| D[Deliver]
-    C -->|Limit reached or no useful feasible action| Z[Report results and remaining limits]
-```
+The objective is to complete the user's actual task at its required quality within applicable constraints. Preserve useful progress. Spend on a different configuration or an additional agent when a concrete contribution justifies the transfer, execution, checking and integration work. Neither balanced model use, a larger model nor more reasoning is an objective in itself.
 
-**Escalate by capability and incremental resource cost.** Start from the current configuration and the remaining work. If it is adequate, continue; if an additional capability or independent contribution is justified, choose a suitable model/effort from the shared LUT. Compare raising effort, changing model and adding a Buddy without a fixed ladder. Prefer the lower-overhead adequate configuration; a material quality or risk benefit can justify greater cost. The LUT lists proxy-efficient candidates for eight AA component evaluations and the broad index, with displayed scores, other family peaks and resource references for all 22 settings. It is derived from the saved data, not an ordinal leaderboard or retry sequence. Costs and inference times come from the broad AA evaluation, not the individual component tasks; these mixed-scope frontiers are provisional shortlists, not task-specific optima or budget guarantees. Use actual constraints, matching evaluation evidence and task results first.
+The **logical baseline** is one current configuration completing the same task with the same tools, permissions and acceptance checks, without an unnecessary extra agent. This is a comparison rule, not a measured experiment and not a requirement to make the cheapest model fail first. A known capability gap can justify immediate delegation.
 
-**Buddy routing: work together.** When the same LUT supports another model/effort for a useful contribution that justifies its additional cost, spawn it and continue your own useful work in parallel. The Buddy need not have a higher score than the primary. Identify both outputs before launch: for example, the Buddy develops a fix while the primary checks integration and tests; or both independently analyze a consequential design decision. The Buddy can implement, investigate, reason or check, and has no fixed occupation. Do not wait immediately after spawning if useful work is available. Join at a dependency, compare and integrate both outputs against evidence, and update the working context before continuing. No mandatory first failure, permanent pair, extra Buddy LUT or always-on second opinion.
+| Decision input | Meaning | Unit | Definition / limits | Type |
+| --- | --- | --- | --- | --- |
+| Acceptance | What the deliverable must satisfy | Not a physical quantity | User requirements and task-grounded checks; retain material unknowns | Conditions / observations |
+| Configuration | Available model and reasoning effort | Not a physical quantity | Exact runtime-supported settings and tools | Categorical pair |
+| Remaining resources | Cost and elapsed time of the next action through integration | USD, s, or explicitly labeled unavailable | Include current work, workers, transfer, tools, checks and rework; do not add USD to seconds | Separate nonnegative estimates |
+| State | Work already done and what remains unresolved | Not a physical quantity | Artifact identity, sources, assumptions, checks and active workers | Structured record |
+| Recovery allowance | Additional recovery or duplicate solving that may start | 1 (count) | A finite task-scoped design guard, reserved centrally; not a monetary budget | Nonnegative integer |
 
-Use disjoint write ownership or isolated copies, or keep concurrent investigations read-only. If parallel progress is not useful or safe, work directly or delegate sequentially. A consequential decision with weak external verification can warrant independent collaboration even if the current model reports success. Ordinary checks are still required; model agreement alone is not evidence. A missing permission, tool or input requires an authorized remedy, not simply a stronger model.
+Choose using explicit quality requirements, permissions, budget, deadline and user priorities. If two actions trade cheaper cost for longer latency, there is no unique optimum without an applicable preference. Keep an adequate progressing configuration in an unresolved comparison. If it is inadequate, take a defensible bounded next step and check its output. Preserve usable context; switching back to a nominally cheaper model is justified only when future savings exceed transfer/integration overhead.
 
-**Transfer corrected state.** Preserve verified facts and their sources, the current artifact/checkpoint, hypotheses, refuted assumptions, open checks and the shared attempt ledger. Reuse a thread when that context helps; use a concise fresh handoff when obsolete reasoning would otherwise dominate. A worker's `PASS` label alone does not establish acceptance.
+## What the evidence can establish
 
-**Bound retries without stopping large tasks arbitrarily.** Unless the user specifies a different budget, allow at most **three substantive attempts on the same unresolved acceptance condition or blocker, including the initial attempt**. The primary reserves and counts attempts across local work, children and parallel candidates. If both Buddy and primary make independent solving attempts on the same condition, both count; distinct independently checkable subgoals have separate counts. Routine reads and checks within an attempt do not consume separate slots. Changing a model, renaming a blocker or proposing another hypothesis does not reset its count. A demonstrated checkpoint that resolves it can establish a genuinely new subgoal. Stop further attempts on an exhausted blocker and report it; continue independent useful work when feasible. This provisional design limit replaces the former six-attempt cap for the entire task. It is neither a measured optimum nor a hard runtime quota.
+The shared textual LUT now preserves **all 176 AA component values across all 22 measured model/effort configurations**, with separate historical broad resource references. It does not prefilter configurations using mixed-scope Pareto membership. Every candidate remains subject to actual runtime support, task fit and constraints.
 
-For example, implementing several independently checkable requirements is not limited to three total work units. Repeatedly trying to fix the same failing requirement is limited, even if each attempt uses another model.
+A score is an observation under an evaluation's conditions. It is not a probability that the model will solve the current task, rescue a previous failure or detect its own error. Provider workload examples are starting guidance, not permanent occupations. Effort and model selection must be considered together; there is no mandatory family cycle or effort ladder.
+
+**Why benchmark averages cannot determine a unique escalation graph:** consider 100 equally weighted hypothetical tasks and two models, X and Y.
+
+| Hypothetical world | Both succeed | X only | Y only | Neither | X succeeds | Y succeeds | Y solves tasks X failed |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Shared failures | 70 | 10 | 0 | 20 | 80 | 70 | 0 of 20 |
+| Complementary coverage | 50 | 30 | 20 | 0 | 80 | 70 | 20 of 20 |
+
+Both worlds have the same single-model averages. The benefit of invoking Y after X fails is different. Therefore averages alone do not identify rescue value, the best sequence or the best Buddy. These numbers are a constructive example, not measurements of Luna, Terra, Sol or Astra. Alternating models blindly also does not ensure improvement.
+
+The same limitation applies to resources: an aggregate cost from one task population cannot establish cost dominance for another task. Earlier proxy-frontier calculations remain in the evidence archive as **superseded derivations**, not active routing rules. Full proof assumptions, counterexamples and review outcomes are recorded in the [logical baseline and audit](research/benchmark-evidence.md#j-logical-baseline-and-repeated-audit-d).
+
+## Execution rules
+
+| Situation | Required response |
+| --- | --- |
+| Current approach is suitable and progressing | Continue and perform proportionate acceptance checks |
+| A known correctable cause | Correct that cause; do not upgrade merely because a check failed |
+| Unknown cause or missing facts | Diagnose or retrieve relevant evidence; do not blindly repeat a solve |
+| Missing model, tool, input or authorization | Use an authorized feasible remedy; a model change cannot create permission |
+| Capability gap or valuable additional contribution | Compare current execution, effort, model and Buddy using the same LUT |
+| Useful parallel contributions justify their overhead | Spawn Buddy and keep doing defined useful primary work |
+| Parallel work is unsafe or has no useful parent contribution | Work directly or delegate sequentially |
+| Results agree but an essential condition is unverified | Preserve uncertainty; agreement is not acceptance |
+| Changed artifact invalidates a prior check | Check the affected integrated result before claiming acceptance |
+| Acceptance established or further recovery disallowed | Deliver evidence and remaining limits; continue independent eligible work |
+
+### Buddy means working together
+
+Define each agent's result, baseline artifact/revision, acceptance checks and ownership. The Buddy need not outrank the primary. It may implement, investigate, reason or check. Independent analysis can be useful at a consequential decision before failure, but a different model by itself does not justify an extra call.
+
+The primary works while the Buddy runs, unless a real dependency prevents useful safe progress. Coordinate shared mutable state as well as file paths; tests and generated artifacts can interfere even when source paths differ. Join relevant results, integrate by evidence and check the **actual integrated artifact**. Safely cancel or discard obsolete results and account for any already-applied edits. Do not manufacture busywork or wait for an irrelevant worker.
+
+Workers do not recursively spawn. The primary owns orchestration, resource reservations and final acceptance. Fresh context is not proof of independent errors, and read-only instructions are not an enforced sandbox.
+
+### Recovery and stopping
+
+Before the first recovery or duplicate solve, the primary records a **finite task-scoped recovery allowance** based on declared scope, consequences and available resources. There is no fixed universal three-attempt rule. An allowance is a disclosed operational choice; it is not inferred from benchmark scores and is not claimed optimal.
+
+Count additional local, delegated and parallel recovery/duplicate attempts once, reserving before launch. A parent already doing its initial solve plus one duplicate Buddy consumes one additional slot; two new recovery solves consume two. Ordinary first-pass work on genuinely separate requirements and necessary non-repeated checks do not use recovery slots. Renaming an unresolved requirement, changing models, starting a new thread or inventing another hypothesis does not reset the task ledger.
+
+The parent explicitly authorizes first-pass scope and marks assigned solves INITIAL or RECOVERY/DUPLICATE. An attempt is one stated approach through its acceptance checkpoint. A new correction after a failed checkpoint or a replacement approach starts a new attempt; routine tool actions do not. Workers report classified starts so initial work cannot be double-charged or unauthorized local recovery hidden.
+
+Before retrying failed setup, declare a finite task-scoped setup-retry allowance. Initial setup is outside that retry count, but its failures/resources remain recorded. A setup retry consumes its reserved slot when dispatched regardless of outcome. Release a solving reservation only after confirming it never started and cannot later start under that dispatch (definitive rejection or effective pre-start cancellation); timeout/aborted replies can hide running work. Retain ambiguous reservations and reconcile status or safely cancel before replacement. A started solve remains consumed after interruption. Log explicit user scope/budget revisions instead of silently replenishing allowances.
+
+At exhaustion, stop counted recovery, preserve results, continue eligible independent work and disclose unresolved requirements. **A finite guard can stop useful work before completion.** It bounds counted actions if followed; it does not prove completion or bound all elapsed time, spend or ordinary work. Hard budgets require exposed runtime controls and usage data. No repeated searches or checks without new relevant evidence or a changed action.
+
+### Acceptance and worker status
+
+`PASS` means the stated acceptance conditions have evidence from checks actually performed on the identified result. `FAILED_VALIDATION` records a failed required check, `BLOCKED` an external obstacle, and `UNCERTAIN` missing or inconclusive essential verification. Report every applicable condition and skipped check; one summary label cannot erase another failure. The primary checks evidence and scope rather than trusting a label.
 
 ## The eight files
 
 | File | Purpose |
 | --- | --- |
-| [AGENTS.md](AGENTS.md) | Shared runtime policy, capability/resource-aware escalation LUT, Buddy collaboration, handoff and stopping rules |
+| [AGENTS.md](AGENTS.md) | Shared runtime policy, complete textual evidence LUT, escalation, Buddy and stopping rules |
 | [.codex/agents/agentmd_luna.toml](.codex/agents/agentmd_luna.toml) | `gpt-6-luna` binding |
 | [.codex/agents/agentmd_terra.toml](.codex/agents/agentmd_terra.toml) | `gpt-6.1-terra` binding |
 | [.codex/agents/agentmd_sol.toml](.codex/agents/agentmd_sol.toml) | `gpt-6.2-sol` binding |
@@ -100,11 +140,12 @@ Start with a model available to your account, for example `codex --model gpt-6-l
 
 Markdown does not grant tools, enforce budgets or change the parent model by itself. CLI users can choose an active model and supported effort with [`/model`, then inspect `/status`](https://learn.chatgpt.com/docs/developer-commands?surface=cli). Delegate when useful and supported; otherwise complete the best feasible work directly. Separate agent context does not guarantee separate writable files. Workers inherit the parent's permissions, so changing agents cannot bypass a blocker.
 
-## Evidence and completion status
+## Evidence and validation status
 
-The textual LUT is derived from **AA Intelligence Index v5.0.2 and eight component scores for each of 22 model/effort configurations**, plus provider guidance and the other matched observations in the [evidence registry](research/benchmark-evidence.md). All 176 component observations and 22 broad observations remain there. For each quality metric, maximize displayed quality and minimize broad weighted cost and derived inference time to obtain the proxy frontier; retain omitted family peaks for alternatives. The figures have different evaluation scopes, so this is a decision aid rather than a measured per-task cost-quality frontier. The order by cost is not an execution order. Suffixes n/l/m/h/x/max mean none/low/medium/high/xhigh/max. No model or effort is globally excluded because of proxy dominance.
+Evidence classes are published observations (B), provider guidance (O), design choices (D), and unknowns. The [registry](research/benchmark-evidence.md) preserves source versions, dates, settings, units, published protocols and missing run metadata. AA resource values are historical weighted costs and derived inference times, not live prices or task-specific cost/latency. Normal work does not trigger benchmark collection.
 
-This is a completed policy/configuration design, not proof of a universally optimal route. Static validation can establish syntax and consistency; successful loading, resolved model/effort, instruction adherence and quality gains require observation in the target client. No new model-performance measurements were made for this revision, and comparative performance remains unproven. Normal work does not trigger benchmark searches or experiments.
+This revision removes unsupported candidate pruning, clarifies the logical baseline, separates recovery from setup failures, and strengthens artifact-aware integration and status semantics. Repeated audits seek counterexamples and regressions; they cannot prove the absence of all defects. Static checks, observed runtime behavior and measured outcome gains are separate claims. No model-performance improvement or actual Codex execution is claimed by editing these files.
+
+The relevant disciplines are decision theory (objective and tradeoffs), statistics (marginal versus conditional evidence), and distributed systems (reservations, mutable state and integration). Their practical role here is to make decisions and evidence traceable, without adding a service, separate policy per model or a compulsory experiment.
 
 Unofficial community project.
-

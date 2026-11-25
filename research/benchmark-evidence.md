@@ -1,6 +1,6 @@
 # AgentMD — Active evidence registry
 
-**Checked:** 2026-11-26 JST. This is an offline maintenance reference, not routine agent context. Earlier snapshots and superseded policies remain in Git history. No new model-performance experiment was run for the benchmark snapshot. The Buddy policy update on 2026-11-26 changes no measurements.
+**Checked:** 2026-11-26 JST. This is an offline maintenance reference, not routine agent context. Earlier snapshots and superseded policies remain in Git history. No new model-performance experiment was run for the benchmark snapshot. The strategy audit on 2026-11-26 preserves the numeric snapshot, replaces the active proxy-frontier policy and records the limits of the logical baseline.
 
 | Alias | Exact model ID |
 | --- | --- |
@@ -54,19 +54,34 @@ Each model cell: **none / low / medium / high / xhigh / max**. Briefcase is Elo;
 | CritPt | CritPt v2 Hard Subset; physics reasoning |
 | Science | Terminal-Bench-Science 0.1; scientific research workflows |
 
-Matched AA framework improves comparability but is not identical to the official Terminal-Bench or Cognition FrontierCode setup. These pages do not establish per-setting sampling intervals, paired outcomes, exact repetitions, HW/clocks/batch. Observed differences are descriptive, not established significance. Components and composite are dependent. Do not infer task-specific cost from weighted composite cost.
+Matched AA framework improves comparability but is not identical to the official Terminal-Bench or Cognition FrontierCode setup. Per-setting sampling intervals, paired outcomes, exact run compliance, HW/clocks/batch were not verified. Observed differences are descriptive, not established significance. Components and composite are dependent. Do not infer task-specific cost from weighted composite cost.
 
-### Derived comparison (D)
+**Published protocol, rechecked 2026-11-26:** [AA methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking) declares the following task counts/repeats. These are protocol statements, not independently observed compliance for every model/effort run.
+
+| Evaluation | Tasks/questions | Repeats |
+| --- | ---: | ---: |
+| Briefcase | 91 | 1 |
+| Automation | 657 | 1 |
+| GDP.pdf | 100 | 5 |
+| FrontierCode-AA | 132 | 3 |
+| Terminal-Bench | 66 | 3 |
+| Terminal-Bench-Science | 70 | 3 |
+| CritPt hard subset | 40 | 5 |
+| HLE-Diamond | 1,000 | 1 |
+
+**Source recheck, 2026-11-26:** the three comparison pages above reproduced all 176 component values, 88 overlapping observations and all 22 broad indices/USD values. Thirteen derived minute estimates differed from the saved snapshot, including A max 14.2 to 14.7, T max 14.0 to 14.4 and L max 10.6 to 10.5. These are rolling speed-derived values, not evidence of incorrect old transcription. The active LUT retains the internally consistent older resource snapshot and labels it historical; no selected time was silently refreshed.
+
+### Historical derived comparison (D), superseded for runtime selection
 
 - Direct maxima over these settings include ties: CritPt A high/A max, with A high lower composite cost and derived time. A xhigh exceeds A max on Terminal and FrontierCode; S max peaks on GDP; T max exceeds S max on CritPt. Effort and model rankings are not universal.
 - Composite Pareto candidates (maximize displayed index; minimize displayed USD/task and derived minutes/task): L low, L medium; T low, T medium, T high, T xhigh; S low, S medium, S high, S xhigh, S max; A low, A medium, A high, A xhigh. This is a descriptive frontier of 22 rounded observations, not a statistical or task-specific frontier. Do not remove a configuration from individual task rows on this basis.
-- The active runtime uses capability/resource-aware escalation and the proxy frontiers described below, not the earlier highest-score default. Direct checks, constraints, capability fit, matched evidence and incremental total resources override provisional candidates. No calibrated success rate or Buddy-pair superiority is claimed.
+- The active runtime now preserves all 22 measured configurations and their component vectors. The proxy-frontier selection below is retained only as a superseded derivation. Neither frontier membership nor the highest score authorizes routing or exclusion.
 
-### Capability/resource-aware escalation (D), 2026-11-26
+### Superseded proxy-frontier policy (D), 2026-11-26
 
 Derived from the saved AA component and broad tables, without changing or remeasuring any observation. For each of the eight component metrics and the broad index, compare all 22 configurations. Configuration X proxy-dominates Y when its displayed quality is at least as high, its broad weighted USD/index-task is no greater, and its broad derived minutes/index-task is no greater, with at least one strict improvement. Retain all nondominated configurations. The broad index frontier uses three measurements from the same composite; the eight component frontiers mix component quality with broad resource proxies and **are not actual per-component cost/time Pareto frontiers**. They cannot establish a globally optimal route, calibrated task success, recovery rate, budget guarantee or a unique best configuration.
 
-The textual runtime LUT lists the frontier with each original displayed quality value, sorted by proxy cost solely for readability. It also retains omitted within-family peak configurations (including ties), explicitly separate from the frontier. All model families remain eligible; a configuration omitted from the shortlist can still be suitable with direct evidence, actual runtime restrictions, context reuse, different cost or distinct Buddy contribution. No forced route or sequential ladder is derived. Resource-reference values are transcribed from the broad table, with their original denominator and estimated-time qualification.
+At commit 3b7da7e, the textual runtime LUT listed the frontier with each original displayed quality value, sorted by proxy cost solely for readability. It also retained omitted within-family peak configurations (including ties), explicitly separate from the frontier. All model families remain eligible; a configuration omitted from the shortlist can still be suitable with direct evidence, actual runtime restrictions, context reuse, different cost or distinct Buddy contribution. No forced route or sequential ladder is derived. Resource-reference values are transcribed from the broad table, with their original denominator and estimated-time qualification.
 
 | Metric | Proxy frontier count | Omitted family-peak alternatives |
 | --- | ---: | ---: |
@@ -80,9 +95,9 @@ The textual runtime LUT lists the frontier with each original displayed quality 
 | Science | 13 | 2 |
 | Broad | 15 | 3 |
 
-The active choice is an escalation decision: continue if adequate; otherwise select a relevant contribution whose incremental total cost is justified by the expected quality/risk or rework benefit. Provider anchors are provisional, not hard assignments. With a useful concurrent contribution, the primary and Buddy both work and then integrate evidence. The Buddy need not have a higher single-agent benchmark score. No pairwise rescue or audit advantage has been measured.
+The historical policy also described an escalation decision: continue if adequate; otherwise select a relevant contribution whose incremental total cost is justified by an expected quality/risk or rework benefit. Provider anchors are provisional, not hard assignments. With a useful concurrent contribution, the primary and Buddy both work and then integrate evidence. The Buddy need not have a higher single-agent benchmark score. No pairwise rescue or audit advantage has been measured.
 
-**Static check:** 4,356 ordered pair comparisons (9 metrics × 22 × 22, including self-comparisons) reproduced the nine nondominated sets and established a frontier witness for every omitted dominated candidate. 120 frontier entries and 18 additional family-peak entries across metrics; counts refer to metric/configuration pairs, not distinct models. Verified the 176 component observations and 22 broad observations were preserved, all runtime candidate scores and resource references were transcribed, and all four families remained represented for each metric. This is static consistency, not a runtime experiment.
+**Historical static check of 3b7da7e:** 4,356 ordered pair comparisons (9 metrics × 22 × 22, including self-comparisons) reproduced the nine nondominated sets and established a frontier witness for every omitted dominated candidate. 120 frontier entries and 18 additional family-peak entries across metrics; counts refer to metric/configuration pairs, not distinct models. Verified the 176 component observations and 22 broad observations were preserved, all runtime candidate scores and resource references were transcribed, and all four families remained represented for each metric. This is static consistency, not a runtime experiment.
 
 ## B. FC — Repository changes: FrontierCode 2.0 (B)
 
@@ -147,15 +162,21 @@ The uncertainty coverage level and whether duration is a mean or median were not
 
 ## G. Provider guidance and operational interpretation
 
-**O:** [OpenAI model selection](https://developers.openai.com/api/docs/guides/model-selection), checked 2026-11-26, provides workload and effort starting points. The original eight O anchors are provider workload recommendations; the ordinary Sol medium fallback also follows general provider guidance. None is a measured optimal assignment. They do not establish self-assessment accuracy or a benefit from AgentMD itself. Check actual runtime support separately.
+**O:** [OpenAI model selection](https://developers.openai.com/api/docs/guides/model-selection), rechecked 2026-11-26, supplies illustrative workload/effort starting points. The runtime now narrows L xhigh to updates across apps, prioritization and clearly constrained problems. S medium covers existing-codebase fixes/features or drafts for review; S xhigh covers multistep testing/revision. The earlier combined "clear dependent steps" paraphrase was broader than the Luna example. Provider examples are not measured optimal assignments, fixed occupations or evidence of self-assessment accuracy. The general Sol starting suggestion does not override a satisfactory current configuration. Actual client support must be checked separately.
 
-**D:** Match the remaining work to relevant observations, current progress, acceptance evidence and resource constraints. Compare model and effort jointly. Preserve a suitable context unless switching has a concrete justification. Benchmark evidence may support candidate selection; it cannot supply a calibrated probability for every task or a uniquely optimal routing graph. No model has a permanent occupation. Missing data are not zero performance. Max-effort observations must not be transferred to other efforts.
+**D — baseline and next action:** compare against the current model/effort completing the same work with the same tools, permissions and checks. It is a logical comparator, not a measured control run or compulsory failed first attempt. Use task facts, capability fit and available actions. Explicit quality requirements, limits and preferences take priority; compare remaining monetary cost and elapsed time separately. Include primary/worker execution, transfer, waiting, checks and integration. Do not invent calibrated adequacy thresholds, conditional rescue probabilities or utility weights. A nominally cheaper return model may cost more after transfer.
 
-**D:** The recovery allowance is at most three substantive attempts, including the initial attempt, for the same unresolved acceptance condition or blocker. Local work, workers and parallel attempts share its ledger. A validated checkpoint can retire that blocker before a genuinely new subgoal begins; relabeling, changing models or proposing another hypothesis cannot reset it. The previous six-attempt cap over the entire task is superseded. Three is a provisional prompt-level guardrail, not an empirically optimal or runtime-enforced number. Explicit user budgets take priority; productive new subgoals have no arbitrary task-wide attempt count.
+**D — recovery:** before recovery/duplicate solving, declare a finite task-scoped recovery allowance selected for scope, consequences and user/runtime constraints. No universal three-attempt default remains. Reserve centrally and count additional local, worker and parallel recovery/duplicate attempts when started. Ordinary first-pass work on distinct requirements and necessary checks are not recovery slots. A single additional Buddy alongside an initial attempt costs one slot; two new recovery solves cost two. Changing model, thread, hypothesis, blocker or label does not replenish the allowance. Explicit user scope/budget changes must be recorded.
 
-**D — Buddy routing (2026-11-26):** Use the existing capability LUT to choose a suitable alternative model/effort for actual work. When useful parallel progress exists, the primary continues its own work while the Buddy executes a bounded complementary subtask or independent approach. Join at genuine dependencies, compare outputs against evidence and update the working context. Do not add a separate Buddy ranking, fixed pair, mandatory review or all-task second agent. Direct and sequential work remain valid. Distinct solving attempts on the same condition share its allowance.
+The parent marks each solve INITIAL or RECOVERY/DUPLICATE and authorizes first-pass scope separately from reserved recovery. One stated approach ends at its planned acceptance checkpoint. A new correction after failure or replacement approach starts a new attempt; routine tool actions do not. Workers report classified starts.
 
-**UNKNOWN:** Conditional rescue rates, task-level success calibration, correlation of model errors, optimal model pairs/effort/sequence/stopping thresholds, and gains attributable to these instructions. Different models and fresh contexts may diversify approaches but do not establish statistical independence or guarantee error correction. Buddy is a design choice, not a measured benefit or a claim of pairwise superiority.
+Before retrying failed setup, declare a separate finite task-scoped setup-retry allowance. Initial setup is not a retry, but its failures and costs remain recorded. A retry consumes a slot when dispatched, independent of outcome. A failed launch before solving is not evidence of solving failure. Release a solving reservation only after confirming it never started and cannot later start under that dispatch (definitive rejection or effective pre-start cancellation); an ambiguous timeout/aborted reply retains its reservation pending reconciliation or safe cancellation before replacement. Started solves remain consumed after interruption. At exhaustion, stop counted recovery, report what remains, and continue eligible independent work. This deliberately may leave useful work unfinished; it is neither optimal stopping nor a proof of bounded task spend/time. Repeated unproductive checks/searches are disallowed even though routine checks are not recovery slots.
+
+**D — Buddy:** use the same LUT to select a contribution that justifies overhead. Define both primary and Buddy outputs, baseline/revision, acceptance checks and ownership, including shared mutable state. The primary continues useful safe work, joins relevant outputs and checks the integrated artifact; stale checks must be rerun where affected. Superseded work may be safely canceled/discarded with incurred work and edits accounted for. Buddy need not outrank the primary, and no extra auditor or diversity-only call is required. Workers cannot recursively spawn.
+
+**D — acceptance:** an identified result supports PASS only to the extent its stated acceptance conditions are covered by checks actually performed. Report failed required checks, external blockers and material missing verification. Another model's agreement cannot turn an unverified requirement into proven success. Status labels summarize evidence; they do not replace it.
+
+**UNKNOWN:** conditional rescue rates, calibrated task success, joint model error structure, best pair/effort/route/stopping threshold and any gain from AgentMD. Different models and fresh contexts may produce different approaches, but neither proves independence or improvement. Benchmark evidence guides candidate consideration, not an identified optimal graph.
 
 ## H. Coverage gaps and maintenance
 
@@ -170,23 +191,200 @@ Static consistency and executed model behavior are separate claims. This revisio
 
 **Previous revision (a72ab65), executed static and installation checks, 2026-11-26 JST:** eight files; four TOMLs parsed with Python `tomllib`; exact IDs and common worker contract matched; no fixed effort; ten relative Markdown links resolved; all twenty AA configurations matched between the runtime and registry; `AGENTS.md` measured 8,144 UTF-8 bytes, below 8 KiB. The POSIX installer passed `sh -n` and seven isolated filesystem scenarios: clean installation, repeated installation, existing guidance, existing override, an existing worker, a dangling guidance symlink, and missing source files. Existing-content scenarios preserved their files without a partial installation. The target path alone was redirected to temporary directories for these checks; no user profile was installed or altered.
 
-**Previous revision's policy walkthrough, not model execution:** a checked success ends the task; multiple successful independent stages are not capped at three total; three attempts on one unresolved condition exhaust its allowance across model changes; parallel attempts reserve the same allowance; a new hypothesis cannot reset it; missing access is a blocker rather than evidence for a stronger model. These are checks of the written rules, not observations of model compliance.
+**Superseded policy walkthrough at a72ab65, not model execution:** a checked success ends the task; multiple successful independent stages are not capped at three total; three attempts on one unresolved condition exhaust its allowance across model changes; parallel attempts reserve the same allowance; a new hypothesis cannot reset it; missing access is a blocker rather than evidence for a stronger model. These are checks of the written rules, not observations of model compliance.
 
 **LUT tuning (2026-11-26):** retrieved three explicit comparison tables, checked 88 duplicate values, transcribed 176 distinct scores, calculated eight observed peaks and the composite Pareto set. Added L/T none, with runtime eligibility checks. Static source-data and policy validation only; no Codex performance experiment.
 
 **Superseded ordinal LUT update (2026-11-26, based on 44c6ff7; historical):** the runtime numeric matrices were converted to ordinal candidate preferences. All 176 AA component scores and 22 broad configurations remain unchanged in this registry. Each quality order is descending by the displayed value; exact displayed ties are grouped. Broad cost and derived-time orders are ascending. The 11 orders each cover all 22 measured settings; unsupported none entries are excluded. Runtime effort suffixes n/l/m/h/x/max denote none/low/medium/high/xhigh/max; abbreviation changes notation, not ordering. Ordinal compression intentionally omits numerical gap sizes, absolute proxy magnitudes and any claim of statistical superiority. Use direct evidence, real constraints and matched observations first; never treat a rank list as a retry sequence or use resource ranks to certify a budget. Static generation from the registry and pairwise order validation are not evidence of improved inference, latency, token use or final quality.
 
-**Capability/resource escalation revision:** replaced the ordinal lists with nine proxy-efficient candidate sets and resource references; the old highest-score preference is superseded. The shared three-attempt guardrail, installer and model bindings were not changed. No actual Codex execution, cost reduction or quality gain was measured in this revision.
+**Superseded capability/resource escalation revision at 3b7da7e:** replaced the ordinal lists with nine proxy-efficient candidate sets and resource references; the old highest-score preference is superseded. That revision did not change the then-current three-attempt guardrail, installer or model bindings. The later logical-baseline revision supersedes the guardrail. No actual Codex execution, cost reduction or quality gain was measured in this revision.
 
 **Previous Buddy policy update (2b7f0e3):** changed routing prose without changing LUT numbers, worker TOMLs or installer. Static consistency and review of the written rules do not establish that a real primary will do useful work while a Buddy runs. Runtime trace, resolved model/effort, concurrent progress, join/integration and outcome improvement are untested; runtime and performance verdicts remain UNCERTAIN.
 
 | Item | Definition or current status |
 | --- | --- |
-| H — falsifiable claim | In a supported Codex client, the policy can select available settings, preserve instructions and handoff state, stop failed recovery within its shared allowance, and deliver evidence-backed results. Quality gains over a single model are a separate, untested claim. |
-| T — minimum check | Static: parse four TOMLs; check eight-file structure, exact IDs, common contract, links, numeric transcription and consistent recovery rules. Runtime: when available, record actual client/version, resolved model/effort, loaded instructions, one necessary handoff, actual primary work between Buddy spawn and join, both outputs and their integration, acceptance evidence and stop reason; do not run benchmark experiments during ordinary work. |
+| H — falsifiable claim | In a supported Codex client, the policy can select available settings, preserve instructions and handoff state, account for recovery/setup within declared shared allowances, and deliver evidence-backed results. Quality gains over a single model are a separate, untested claim. |
+| T — minimum check | Static: parse four TOMLs; check eight-file structure, exact IDs, common contract, links, numeric transcription, artifact-aware acceptance and consistent recovery/setup rules. Runtime: when available, record actual client/version, resolved model/effort, loaded instructions, one necessary handoff, actual primary work between Buddy spawn and join, both outputs and their integration, acceptance evidence and stop reason; do not run benchmark experiments during ordinary work. |
 | D — verdict | Static PASS only for checks actually executed. Runtime PASS only for observed requirements; FAIL for wrong settings, false success or broken bounds; UNCERTAIN if execution or acceptance evidence is missing. Current runtime verdict: UNCERTAIN, not executed for this revision. |
 | C — alternative explanations | Apparent improvements may come from tools, context, effort, task mix, verifier behavior, harness changes or random variation rather than routing. |
 | U — uncertainty | Task selection, model variance, judge error, cache state, resource contention and unknown client support remain material. No combined uncertainty or coverage factor has been estimated; do not invent one. |
 
 No runtime result is inferred from successful Markdown, TOML or shell checks.
 
+
+## J. Logical baseline and repeated audit (D)
+
+This section distinguishes a defensible policy from an identified optimum. It is a maintenance explanation, not extra runtime reading. The requested revision audits the strategy itself; it does not require routine user tasks to perform multiple audits.
+
+### J.1. The preserved strategy
+
+Use one shared policy and model/effort evidence table. Continue adequate task progress. At a capability gap, consequential uncertainty, failed check or useful parallel opportunity, choose a feasible next action with an explicit contribution and acceptable remaining resources. Buddy means useful work by both primary and worker, followed by evidence-based integration. The primary owns completion and allocation. Model identity is not a permanent job or a universal capability rank.
+
+The logical baseline is current single-configuration execution with the same task and acceptance checks. The revision's claim is that its rules expose unsupported inferences and account for relevant costs; it does not claim that routing empirically beats this baseline.
+
+### J.2. Why a unique optimal graph is not identified
+
+A routing optimum would require an objective defining quality/error tradeoffs, available actions, context-dependent outcomes, conditional recovery, actual costs/latency and the reliability of acceptance checks. The saved public means do not supply all of these. Missing information cannot be manufactured by calling an agent more confident or by repeating a prose audit.
+
+**Constructive counterexample — marginal averages:** let X and Y be hypothetical models evaluated on 100 equally weighted tasks with exact binary success. X and Y are categorical model labels, not numerical variables.
+
+| World | Both succeed | Only X | Only Y | Neither | X total successes | Y total successes | Y recovery among X failures |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Shared failures | 70 | 10 | 0 | 20 | 80 | 70 | 0 of 20 |
+| Complementary coverage | 50 | 30 | 20 | 0 | 80 | 70 | 20 of 20 |
+
+Each row partitions all 100 tasks. Adding the both-success and X-only cells gives 80 in either world; adding both-success and Y-only gives 70. X fails on 20 tasks in either world. Y succeeds on none of those in the first world and all of them in the second. Thus identical marginal observations admit opposite conditional rescue values. Any rule using only these marginals sees identical inputs and cannot identify the correct rescue value in both worlds. With a positive extra-call cost and a sufficiently valuable successful resolution, the preferred escalation action differs too.
+
+An equal random choice between X and Y, independent of task, succeeds on 75% of tasks in expectation in either construction: half the probability mass receives the 80% option and half the 70% option. It is below X's 80%. Blind alternation is therefore not a general improvement theorem. This does not disprove informed selection or useful collaboration.
+
+**Mixed-population counterexample:** a hypothetical X can have component score 90 and broad average cost/time USD 0.20 / 2 min, while Y has 88 and USD 0.30 / 3 min. X appears dominant in that mixed vector. On the actual target task X could cost USD 8 / 20 min and Y USD 0.50 / 3 min. The actual resources reverse. All values can be true because the resource populations differ. Even matched one-shot averages do not identify conditional behavior after a particular failure.
+
+**Switching counterexample:** hypothetical remaining work costs USD 0.02 on the current model, or USD 0.01 plus USD 0.10 transfer/integration on another. Switching consumes USD 0.11, so a lower per-work model cost does not establish lower next-action cost. Returning to a cheaper model has the same issue.
+
+**Verification counterexample:** two agents can agree because both inherited the same incorrect assumption. A test encoding that assumption can also pass. Agreement and test pass are limited observations; the check must address the actual acceptance condition, and material unchecked assumptions remain unknown.
+
+All examples are constructed, not new benchmark measurements. Counts/probabilities are dimensionless; USD comparisons use one currency/denominator and minutes compare elapsed time only. No USD-plus-minute utility is asserted.
+
+### J.3. A limited accounting invariant
+
+The task-scoped recovery guard is a policy choice. Its finite count can be proved only under fixed scope/allocation and faithful central reservation. It is not a proof that Markdown enforces a runtime limit.
+
+| Symbol | Meaning (日本語) | SI unit | Definition | Domain / assumptions | Type |
+| --- | --- | --- | --- | --- | --- |
+| B | 固定した回復・重複実行の総枠 | 1 (count) | Declared recovery allowance | Nonnegative integer; unchanged during this proof | Integer scalar |
+| A | 開始確認済み実行数 | 1 (count) | Confirmed started counted solves | Nonnegative integer; never refunded after start | Integer scalar |
+| Q | 予約済み・開始未確認枠 | 1 (count) | Reservations not yet moved to A, including ambiguous launches that may have started | Nonnegative integer; each refers to at most one solve | Integer scalar |
+| R | 未予約の残枠 | 1 (count) | B minus A minus Q | Nonnegative integer; reservations cannot exceed it | Integer scalar |
+| N | 実際に開始した実行の累計 | 1 (count) | Actual started recovery/duplicate solves, whether their start is known yet or not | Nonnegative integer; may be unobservable | Integer scalar |
+
+The invariant and bound are:
+
+$$
+A+Q+R=B,\qquad A,Q,R\geq0,\qquad N\leq A+Q\leq B.
+$$
+
+1. Initially there are no counted starts or reservations, and all B slots are in R.
+2. A permitted reservation transfers one slot from R to Q. Dispatch at most one solve under that reservation; do not dispatch again under the same unresolved reservation.
+3. If execution starts but its response is delayed or lost, its slot stays in Q. Every such actual start is still covered by a reservation, so N cannot exceed A plus Q.
+4. Confirmation of start moves its slot from Q to A. No capacity is returned. Actual starts remain covered by A plus Q.
+5. A reservation can move from Q to R only after confirming that its solve never started and cannot subsequently start under that dispatch, such as a confirmed rejection or effective pre-start cancellation. An ambiguous timeout cannot justify a refund.
+6. A completed or interrupted started solve stays in A. Parallel work reserves each solve separately. These transitions preserve the sum and nonnegativity, and every actual counted start remains covered.
+7. Therefore N is at most A plus Q, and A plus Q is at most B because R is nonnegative.
+
+All terms have the same dimensionless count unit. A separately declared finite setup-retry allowance uses the same reserve-before-dispatch discipline; a dispatched retry is consumed whether it succeeds or fails. The initial setup request is outside the retry count, while its failures and resources are still recorded. User-authorized scope/budget revisions begin a recorded revised allocation, so this fixed-allocation proof does not bound all future revisions.
+
+This proof assumes one solve per reservation/dispatch, confirmed refunds, faithful central accounting and no hidden extra starts. It does not cover uncounted ordinary work, elapsed duration, monetary spend, runtime enforcement or task success. Any finite count can stop a useful next correction; no finite universal count guarantees completion of all tasks.
+
+**ERROR CHECK:** the four joint-outcome cells in each hypothetical world are nonnegative and sum to 100; the marginals match; the accounting proof never refunds started or ambiguously started work. No independence of model errors, calibrated utility, optimal count or real-model performance is assumed.
+
+### J.4. Relation to published routing research
+
+[FrugalGPT, Chen et al., arXiv:2305.05176](https://arxiv.org/abs/2305.05176) studies learned LLM cascades and reports outcomes for its evaluated models/tasks. [RouteLLM, Ong et al., arXiv:2406.18665](https://arxiv.org/abs/2406.18665) trains routing from preference data and evaluates cost/quality tradeoffs. These primary papers support studying selection under a defined objective and data; they do not validate this four-family Buddy policy, its lookup table or its retry allocation. No numerical gain from either paper is transferred to AgentMD.
+
+Decision theory supplies the objective and action comparison; statistics separates marginals from conditional/joint evidence; distributed systems supplies artifact identity, centralized reservation and integration discipline. None supplies missing empirical model outcomes by itself.
+
+### J.5. Issue ledger and audit protocol
+
+| Defect found at 3b7da7e | Repair in this revision | Required recheck |
+| --- | --- | --- |
+| Mixed component quality/broad resources narrowed candidate sets | Full 22-setting vectors; old frontiers historical only | All 176 values and 22 broad entries preserved; no active frontier exclusion |
+| Cost and latency tradeoff unspecified | Explicit user priorities and separate remaining resources | Cheaper/slower and switching-overhead cases |
+| Marginal averages could appear to determine rescue or averaging benefit | Constructive counterexamples and unknown conditional outcomes | Same marginals, different rescue; blind alternation |
+| Automatic return to a cheap model could erase savings | Account for future transfer/integration | Small remaining-work example |
+| Three initial-inclusive attempts treated as a general budget | Task-scoped finite recovery allowance; no universal number | Distinct first-pass work, shared recovery, no silent reset |
+| Failed launch could consume all solving allowance | Separate setup-retry accounting; refund only confirmed unused solve reservations | Unavailable model, successful retry and interrupted started solve |
+| Lost launch response could hide a running worker | Keep ambiguous reservation; reconcile/cancel before replacement | Delayed-start and timeout oversubscription cases |
+| Initial worker authorization could conflict with zero recovery slots | Explicit INITIAL/RECOVERY classification and checkpoint boundary | First-pass worker, new fix after a failed checkpoint |
+| Disjoint files could still produce stale integration checks | Artifact/revision identity and shared-state coordination | Actual integrated artifact rechecked |
+| PASS and model agreement could overstate acceptance | Evidence-scoped statuses; missing essential check stays uncertain | Failure/unknown coexist with a summary status |
+| Mandatory join could wait for superseded work | Safely cancel/discard irrelevant work, account for edits | Completed useful branch with obsolete worker |
+| Repeated audit could be mistaken for correctness/performance proof | Distinct scoped passes and explicit residual uncertainty | No runtime or performance claims from static checks |
+
+Audit sequence: first locate counterexamples and source-scope defects; then review revised decisions, ownership and accounting; finally recheck the fixes for regressions and verify the released content. Newly found material issues require a repair and another targeted pass. Stop the scoped review after the actionable issues are resolved and the follow-up exposes no new material finding. Repeated agreement is not a proof that no defect exists.
+
+**Release audit outcome (2026-11-26 JST):**
+
+| Pass | Scope | Findings and resolution |
+| --- | --- | --- |
+| 1 | Independent logic, primary-source and execution-policy reviews of 3b7da7e | Identified mixed-scope pruning, undefined cost/time tradeoffs, non-identified conditional rescue, arbitrary attempt semantics, stale integration checks and overstated status. Revised the policy and documented counterexamples. |
+| 2 | Re-review of the working revision | Caught a generator selecting the alias table instead of broad data; repaired table scoping/shape validation and independently rechecked all numeric entries. Clarified initial-worker authorization, attempt boundaries, separate setup retries and ambiguous launches. |
+| 3 | Targeted logic/accounting/evidence regression review | Confirmed the repaired strategy and data within scope. Found the shortened refund wording could admit a queued-but-not-yet-started job; synchronized the full never-started-and-cannot-later-start condition with the proof. |
+| Final targeted check | Release contents, refund condition and reproducible static/reference checks | Confirmed the final wording matches the proof; no unresolved material finding remains in the enumerated audit scope. This is not an assertion that every possible defect is absent. |
+
+Separate reviewer contexts were used; their agreement is not statistical independence, a cross-model experiment or proof of correctness. Newly introduced drafting defects were fixed before publication.
+
+Executed checks: eight-file layout; four TOMLs parsed with Python `tomllib`, exact bindings, common contract and no fixed effort; 11 relative file links resolved; all 176 component observations and 22 broad entries matched both registry and baseline; no missing/undefined runtime values. The first-install shell block is byte-identical to baseline, passes `sh -n`, and passed seven isolated scenarios: clean, repeated, existing guidance, existing override, existing worker, dangling guidance symlink and missing source. No actual user profile was changed.
+
+The mathematical reference calculation checked the constructed marginal/switching examples and explored 781 states with 4,102 permitted transitions for allowances zero through four, including delayed or unknown starts. It explicitly demonstrates that refunding a possibly started job can oversubscribe a one-slot allowance. This explores a deliberately small reference accounting model; the general bound is the proof in J.3, not an extrapolation from finite enumeration.
+
+The runtime instruction file is 12,624 UTF-8 bytes in this revision; staying below Codex's default combined limit does not establish model compliance or prompt efficiency. Actual Codex loading, resolved settings, concurrent Buddy behavior, total spend/time and comparative model performance remain **UNCERTAIN / unmeasured**. No new model-performance experiment was run.
+
+### J.6. Reproduce the small reference calculation
+
+This dependency-free Python calculation checks only the hypothetical example and the declared reservation transitions. It does not read model outputs or execute Codex.
+
+Reference-code variable table (the formal budget symbols are defined in J.3):
+
+| Identifier | Meaning (日本語) | SI unit | Definition | Domain / assumption | Type |
+| --- | --- | --- | --- | --- | --- |
+| worlds | 仮想的な同時成功・失敗の件数 | 1 (count per cell) | Two partitions in J.2 | Four nonnegative cells per world, totaling 100 | List of integer tuples |
+| both, x_only, y_only, neither | 両者成功・片方成功・両者失敗の件数 | 1 (count) | One partition's cells | Integers from 0 to 100 | Integer scalars |
+| rescue | X失敗時にYが成功する割合 | 1 | Y-only count divided by X-failure count | Positive failure denominator; each value from 0 to 1 | List of exact rational probabilities |
+| edges | 許可した予約状態遷移 | Not a physical quantity | Successor states for each token state | F/R/U/X/A; refunds require the stated confirmation | Categorical mapping |
+| budget | 固定した実行枠 | 1 (count) | B in J.3 | Integers 0 through 4 in this finite check | Integer scalar |
+| start, state, successor | 各枠の初期・現在・次の状態 | Not a physical quantity | One token state per slot | Tuples of length budget | Categorical vectors |
+| seen, pending | 発見済み・未処理の状態 | Not a physical quantity | Visited set and traversal queue | Finite collections of state tuples | Set / deque |
+| states, transitions | 検査した状態・遷移の件数 | 1 (count) | Cumulative enumeration counters | Nonnegative integers | Integer scalars |
+| confirmed, reserved, free | 開始確認済み・予約中・空き枠 | 1 (count) | A, Q, R in J.3 | Nonnegative integers summing to budget | Integer scalars |
+| actual, next_actual | 現在・次状態の実際の開始件数 | 1 (count) | N in current/successor state | Nonnegative; may be unobservable outside this reference model | Integer scalars |
+| position | 変更する枠の位置 | 1 (index) | Tuple index | Integer from 0 to budget minus one, when nonempty | Integer scalar |
+| token, next_token | 枠の現在・次状態 | Not a physical quantity | State codes explained in the code | F/R/U/X/A | Categorical scalars |
+
+
+```python
+from collections import deque
+from fractions import Fraction
+
+# Two exact hypothetical joint distributions over 100 equally weighted tasks.
+worlds = [(70, 10, 0, 20), (50, 30, 20, 0)]
+rescue = []
+for both, x_only, y_only, neither in worlds:
+    assert both + x_only + y_only + neither == 100
+    assert both + x_only == 80 and both + y_only == 70
+    rescue.append(Fraction(y_only, y_only + neither))
+assert rescue == [0, 1]
+assert Fraction(1, 2) * Fraction(80, 100) + Fraction(1, 2) * Fraction(70, 100) == Fraction(75, 100)
+assert Fraction("0.01") + Fraction("0.10") > Fraction("0.02")
+
+# F: free; R: reserved; U: dispatched, ambiguous, actually not started;
+# X: dispatched, ambiguous, actually started; A: confirmed started/consumed.
+# U->F requires confirmed non-start AND prevention of any later start.
+# A reserved slot permits at most one dispatch; a started slot is never freed.
+edges = {"F": "R", "R": "FUA", "U": "XF", "X": "A", "A": ""}
+states = transitions = 0
+for budget in range(5):
+    start = ("F",) * budget
+    seen, pending = {start}, deque([start])
+    while pending:
+        state = pending.popleft()
+        confirmed = state.count("A")
+        reserved = sum(state.count(s) for s in "RUX")
+        free = state.count("F")
+        actual = state.count("A") + state.count("X")
+        assert confirmed + reserved + free == budget
+        assert actual <= confirmed + reserved <= budget
+        states += 1
+        for position, token in enumerate(state):
+            for next_token in edges[token]:
+                successor = state[:position] + (next_token,) + state[position + 1:]
+                next_actual = successor.count("A") + successor.count("X")
+                assert actual <= next_actual <= budget
+                transitions += 1
+                if successor not in seen:
+                    seen.add(successor)
+                    pending.append(successor)
+assert (states, transitions) == (781, 4102)
+print(states, transitions)
+```
+
+The state symbols are categorical reservation states, not model IDs or SI measurements. `budget`, counts and positions are nonnegative integers with count unit 1; `state` is a finite tuple and `edges` maps categorical states to permitted successors. In proof notation, `confirmed` is A, `reserved` is Q, `free` is R, `actual` is N, and `budget` is B. This reference model exposes actual start states for checking; the real primary may not observe them and must retain ambiguous reservations.
