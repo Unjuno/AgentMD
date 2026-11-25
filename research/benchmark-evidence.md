@@ -15,16 +15,52 @@
 
 [Provider table](https://artificialanalysis.ai/providers/openai/), checked above; Standard only. Cells: **index / weighted USD per evaluation task / estimated minutes per evaluation task**.
 
-| Model | low | medium | high | xhigh | max |
-| --- | --- | --- | --- | --- | --- |
-| L | 10/.0051/.6 | 18/.0422/3.1 | 21/.0729/4.9 | 23/.10/6.4 | 28/.15/10.6 |
-| T | 29/.0713/1.1 | 38/.17/2.7 | 43/.26/4.2 | 45/.40/6.4 | 51/.96/14.0 |
-| S | 41/.18/1.6 | 52/.41/3.5 | 55/.56/5.2 | 56/.65/6.2 | 57/1.01/10.0 |
-| A | 46/.66/2.0 | 57/1.62/4.6 | 60/2.07/6.2 | 62/2.52/8.1 | 62/4.00/14.2 |
+| Model | none | low | medium | high | xhigh | max |
+| --- | --- | --- | --- | --- | --- | --- |
+| L | 9/.0714/1.7 | 10/.0051/.6 | 18/.0422/3.1 | 21/.0729/4.9 | 23/.10/6.4 | 28/.15/10.6 |
+| T | 30/.23/2.4 | 29/.0713/1.1 | 38/.17/2.7 | 43/.26/4.2 | 45/.40/6.4 | 51/.96/14.0 |
+| S | — | 41/.18/1.6 | 52/.41/3.5 | 55/.56/5.2 | 56/.65/6.2 | 57/1.01/10.0 |
+| A | — | 46/.66/2.0 | 57/1.62/4.6 | 60/2.07/6.2 | 62/2.52/8.1 | 62/4.00/14.2 |
 
 Time derives from output tokens and speed (rolling five days), not task wall-clock duration. Rounded values lack row uncertainty and HW/clock/batch details; costs are not Codex-plan charges.
 
 [Methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking): nine evaluations span knowledge work, coding, science and general knowledge. The suite is primarily text-based and English-language. The composite and its component benchmarks are dependent evidence, not independent confirmations. One index point is not a calibrated change in task success probability. Rounded ties do not establish equivalence.
+
+## A.1. Matched AA component observations (B), 2026-11-26
+
+Sources: [Astra vs Sol](https://artificialanalysis.ai/models/comparisons/gpt-6-2-astra-vs-gpt-6-2-sol), [Sol vs Terra](https://artificialanalysis.ai/models/comparisons/gpt-6-2-sol-vs-gpt-6-1-terra), [Terra vs Luna](https://artificialanalysis.ai/models/comparisons/gpt-6-1-terra-vs-gpt-6-luna), [AA methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking). All three display v5.0.2. Columns are sorted by index: remap by explicit model/effort headers. The 88 overlapping observations (five Sol and six Terra settings across eight metrics) agreed; duplicates are not independent trials.
+
+Each model cell: **none / low / medium / high / xhigh / max**. Briefcase is Elo; other rows are displayed percentages. Eight of the nine index components have a complete retrieved table over 22 configurations (176 distinct scores); comparable AA-Omniscience values were not retrieved and are not imputed. The [API catalog](https://developers.openai.com/api/docs/models) and [deployment checklist](https://developers.openai.com/api/docs/guides/deployment-checklist) list none for L/T but not S/A. The two added non-reasoning broad entries are from the AA provider table; Codex support is unverified. Prior composite times are retained from the provider snapshot rather than mixing rolling estimates across pages.
+
+| AA metric | L | T | S | A | Observed peak |
+| --- | --- | --- | --- | --- | --- |
+| Briefcase | 905/742/1096/1184/1234/1335 | 1224/1033/1190/1266/1330/1399 | —/1229/1494/1541/1579/1612 | —/1039/1407/1570/1593/1643 | A max |
+| Automation | 9.1/12.0/40.5/47.8/47.8/53.2 | 51.0/56.2/57.8/58.5/59.9/60.2 | —/63.2/70.3/69.9/70.6/71.3 | —/68.6/72.8/76.0/76.1/77.2 | A max |
+| Terminal | 1.5/0.0/2.5/5.1/8.1/12.6 | 26.3/15.2/31.8/42.9/46.5/56.6 | —/37.9/53.5/58.1/55.1/60.1 | —/51.0/59.1/62.1/66.2/64.6 | A xhigh |
+| FrontierCode | 1.6/2.2/12.8/18.6/18.4/25.2 | 33.4/24.5/34.5/37.5/36.9/42.1 | —/31.4/41.4/40.2/42.8/44.4 | —/32.7/46.6/47.1/49.0/45.4 | A xhigh |
+| GDP | 5.8/9.0/13.8/18.2/18.6/22.8 | 23.2/25.6/28.4/28.0/26.6/28.6 | —/28.6/29.2/28.8/28.4/30.0 | —/28.0/28.4/28.6/28.0/29.8 | S max |
+| HLE | 6.3/10.2/15.1/15.6/18.9/22.2 | 14.5/24.9/31.3/35.4/42.3/47.3 | —/34.5/50.7/58.3/61.8/64.0 | —/47.7/56.0/65.9/67.3/72.2 | A max |
+| CritPt | 5.0/9.5/27.5/31.0/37.0/42.5 | 33.5/50.5/56.5/61.5/60.5/68.0 | —/58.0/64.0/61.5/62.5/62.5 | —/61.0/67.5/71.5/70.5/71.5 | A high, A max |
+| Science | 1.0/1.0/1.4/2.9/5.2/8.6 | 24.3/7.6/24.8/33.3/41.9/57.6 | —/37.1/60.5/67.6/66.7/67.6 | —/51.0/74.8/75.2/78.6/78.1 | A xhigh |
+
+| Row | Evaluation scope |
+| --- | --- |
+| Briefcase | AA-Briefcase v1.1; agentic knowledge work, Elo |
+| Automation | AutomationBench-AA; SaaS workflow achievement, partial credit |
+| Terminal | Terminal-Bench 4.1 in AA setup |
+| FrontierCode | FrontierCode-AA 2.0; repository change quality |
+| GDP | GDP.pdf; professional document reasoning, all-pass |
+| HLE | HLE-Diamond; difficult knowledge and reasoning |
+| CritPt | CritPt v2 Hard Subset; physics reasoning |
+| Science | Terminal-Bench-Science 0.1; scientific research workflows |
+
+Matched AA framework improves comparability but is not identical to the official Terminal-Bench or Cognition FrontierCode setup. These pages do not establish per-setting sampling intervals, paired outcomes, exact repetitions, HW/clocks/batch. Observed differences are descriptive, not established significance. Components and composite are dependent. Do not infer task-specific cost from weighted composite cost.
+
+### Derived comparison (D)
+
+- Direct maxima over these settings include ties: CritPt A high/A max, with A high lower composite cost and derived time. A xhigh exceeds A max on Terminal and FrontierCode; S max peaks on GDP; T max exceeds S max on CritPt. Effort and model rankings are not universal.
+- Composite Pareto candidates (maximize displayed index; minimize displayed USD/task and derived minutes/task): L low, L medium; T low, T medium, T high, T xhigh; S low, S medium, S high, S xhigh, S max; A low, A medium, A high, A xhigh. This is a descriptive frontier of 22 rounded observations, not a statistical or task-specific frontier. Do not remove a configuration from individual task rows on this basis.
+- Use O anchors for bounded work and feasible observed peaks provisionally for demanding quality-first work. Direct checks, constraints, capability fit, other relevant evidence and handoff overhead override provisional candidates. No calibrated success rate or Buddy-pair superiority is claimed.
 
 ## B. FC — Repository changes: FrontierCode 2.0 (B)
 
@@ -89,7 +125,7 @@ The uncertainty coverage level and whether duration is a mean or median were not
 
 ## G. Provider guidance and operational interpretation
 
-**O:** [OpenAI model selection](https://developers.openai.com/api/docs/guides/model-selection), checked 2026-11-26, provides workload and effort starting points. The eight non-exclusive O anchors in `AGENTS.md` are provider recommendations, not measured optimal assignments. They do not establish self-assessment accuracy or a benefit from AgentMD itself. Check actual runtime support separately.
+**O:** [OpenAI model selection](https://developers.openai.com/api/docs/guides/model-selection), checked 2026-11-26, provides workload and effort starting points. The original eight O anchors are provider workload recommendations; the ordinary Sol medium fallback also follows general provider guidance. None is a measured optimal assignment. They do not establish self-assessment accuracy or a benefit from AgentMD itself. Check actual runtime support separately.
 
 **D:** Match the remaining work to relevant observations, current progress, acceptance evidence and resource constraints. Compare model and effort jointly. Preserve a suitable context unless switching has a concrete justification. Benchmark evidence may support candidate selection; it cannot supply a calibrated probability for every task or a uniquely optimal routing graph. No model has a permanent occupation. Missing data are not zero performance. Max-effort observations must not be transferred to other efforts.
 
@@ -101,7 +137,7 @@ The uncertainty coverage level and whether duration is a mean or median were not
 
 ## H. Coverage gaps and maintenance
 
-- This registry is sufficient to supply initial priors, not complete capability coverage. It lacks matched four-model effort sweeps for visual interaction, long-context degradation, multilingual work, broad creative work and most real task combinations.
+- This registry is sufficient to supply initial priors, not complete capability coverage. Eight retrieved AA component rows cover multiple demands across all four families. Matched effort sweeps for visual interaction, long-context degradation, multilingual/creative work, AA-Omniscience and most real task combinations remain unavailable.
 - Arena preference boards, LiveBench, SWE-bench variants, OSWorld and tool-use suites are possible future sources. They remain outside the active numeric LUT until exact model IDs, effort, versions and comparable conditions are checked. Do not import snippets or older generations as substitutes.
 - Costs, durations, indices, preference ratings and task pass rates have different units and populations. Do not average them into a new score without a defined objective and defensible normalization. Check units before comparisons; seconds and minutes are time, USD/task and suite USD are different denominators.
 - Update this registry and the compact runtime LUT together when a model, effort, source version or verified result changes. Preserve checked dates and unknowns. Do not fetch leaderboards during routine user work. Historical snapshots remain available through Git.
@@ -114,7 +150,9 @@ Static consistency and executed model behavior are separate claims. This revisio
 
 **Previous revision's policy walkthrough, not model execution:** a checked success ends the task; multiple successful independent stages are not capped at three total; three attempts on one unresolved condition exhaust its allowance across model changes; parallel attempts reserve the same allowance; a new hypothesis cannot reset it; missing access is a blocker rather than evidence for a stronger model. These are checks of the written rules, not observations of model compliance.
 
-**Buddy policy update:** this revision changes routing prose, not the LUT numbers, worker TOMLs or installer. Static consistency and review of the written rules do not establish that a real primary will do useful work while a Buddy runs. Runtime trace, resolved model/effort, concurrent progress, join/integration and outcome improvement are untested; runtime and performance verdicts remain UNCERTAIN.
+**LUT tuning (2026-11-26):** retrieved three explicit comparison tables, checked 88 duplicate values, transcribed 176 distinct scores, calculated eight observed peaks and the composite Pareto set. Added L/T none, with runtime eligibility checks. Static source-data and policy validation only; no Codex performance experiment.
+
+**Previous Buddy policy update (2b7f0e3):** changed routing prose without changing LUT numbers, worker TOMLs or installer. Static consistency and review of the written rules do not establish that a real primary will do useful work while a Buddy runs. Runtime trace, resolved model/effort, concurrent progress, join/integration and outcome improvement are untested; runtime and performance verdicts remain UNCERTAIN.
 
 | Item | Definition or current status |
 | --- | --- |
