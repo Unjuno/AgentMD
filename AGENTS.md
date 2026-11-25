@@ -2,7 +2,7 @@
 
 ## Objective
 
-Complete the user's task with defensible quality within available resources, including verification, handoff and rework. All models are general-purpose. Respect user/project instructions, permissions and tools. Use ordinary verification; no agents solely for diversity, consensus or routine adversarial review.
+Complete the user's task with defensible quality within available resources. All models are general-purpose. Respect user/project instructions, permissions and tools. Use ordinary verification and optional, event-driven Buddy collaboration.
 
 ## Runtime and shared lookup table
 
@@ -42,36 +42,42 @@ Prefer task-similar evidence to composites; other feasible candidates remain eli
 
 Evidence tags refer to `research/benchmark-evidence.md` in the AgentMD repository, not the user's working directory. It is not a runtime dependency; do not research benchmarks during ordinary work. Missing evidence means unknown, not zero. Do not extrapolate max to other efforts, average incompatible metrics, count overlapping suites independently, or infer conditional retry rankings. Dominance on one benchmark does not exclude other uses. Cache hits and actual cost require runtime evidence.
 
-## Select necessary work
+## Choose work and route
 
-Establish deliverables, acceptance conditions, constraints and unresolved dependencies. Keep simple tasks together. Delegate a coherent unit with a useful output/check, relevant context and clear change ownership, not individual tool calls or a model sequence.
-
-Compare current and eligible configurations jointly by model and effort, considering demands, error consequences, checks, resources and handoff. No first failure or intermediate effort is required. For unfamiliar work, use O and AA as uncertain priors and choose a useful next action without invented probabilities or universal rankings.
+Establish deliverables, acceptance checks, constraints and unresolved dependencies. Compare the current and eligible model/effort configurations using the shared LUT, actual requirements, progress and evidence, error consequences, resources and handoff overhead. Keep a suitable context making progress. Choose a coherent output, not individual tool calls. No initial failure, fixed model hierarchy or intermediate effort is required.
 
 | Observed state | Decision |
 | --- | --- |
-| Current approach makes validated progress and meets the demand | Continue; a phase name or small leaderboard gap is not a reason to switch. |
-| Missing fact, input, access or working tool | Obtain the specific evidence through an authorized route or report the blocker. More reasoning does not supply missing access. |
-| Failure has a supported cause | Make a targeted correction and check it. Keep the current configuration unless the correction calls for a different capability. |
-| Failure cause remains unclear | Use a focused diagnostic; if it cannot resolve the issue, choose a materially different approach/configuration supported by the LUT or observed failure. |
-| Remaining work has a capability mismatch or relevant evidence favors an alternative | Switch where the runtime supports it, or delegate a coherent unit, when the expected contribution justifies handoff. |
-| Acceptance is established | Finish; do not start a model-review loop. |
+| Current approach meets the demand | Continue directly. |
+| Relevant LUT evidence favors another configuration for remaining work | Delegate promptly or switch where supported; use Buddy when useful parallel work exists. |
+| Consequential unresolved decision or weakly verifiable assumption | Consider an independent Buddy approach before committing, even if the current model reports confidence or success. |
+| Missing input, fact, access or working tool | Obtain it through authorized means or report the blocker. |
+| Supported failure cause | Correct it and check; reassess the configuration if the demand changes. |
+| Unclear failure cause | Diagnose or choose a materially different approach/configuration supported by the LUT or observed failure. |
+| Acceptance established | Finish after integrating required outstanding work; do not add routine reviews. |
 
-Before a nontrivial switch, note the observed need, selected model/effort with supporting evidence, and expected output/check. Greater intelligence alone is insufficient. Prefer lower overhead when relevant quality is not materially distinguished. Raise effort for a stated reasoning need; change model when evidence or capabilities better address it.
+Before nontrivial routing, identify the observed need, model/effort, supporting LUT row or task evidence, and expected output/check. For unfamiliar work use O and AA as uncertain priors, not invented probabilities. Compare effort changes with model changes; prefer lower overhead when relevant quality is not materially distinguished. If routing is unavailable, do the best feasible work and report material limits.
 
-Reassess on changed requirements, material failure, resolved uncertainty or changed capability demand. Preserve validated work; parallelize useful independent units without conflicting edits. If routing is unavailable, do the best feasible work and state material limitations. Never claim an unobserved switch.
+## Buddy routing — work together, not merely delegate
+
+When the LUT favors another available model for a useful part or approach, and you can make useful progress concurrently, **spawn that model at the selected supported effort and keep working yourself**. Do not require a failed first attempt. The primary stays an active contributor; Buddy is neither a permanent pair nor an audit-only role.
+
+- Define both outputs before launch: the Buddy's bounded task/check and your own useful parallel work toward the same deliverable. Complementary subtasks or independent solutions/diagnoses are valid.
+- Share the goal, necessary facts/artifacts, constraints and checks. For independent judgment, share raw evidence without anchoring the Buddy to your conclusion. Assign disjoint writable paths, read-only checks or isolated copies; never make conflicting concurrent edits.
+- Continue your own research, reasoning, implementation or tests while the Buddy runs. Do not immediately wait or duplicate work merely to stay busy. Wait only at a genuine dependency/join or when no safe useful work remains. Use ordinary sequential delegation if parallel progress is infeasible.
+- Collect and compare both outputs before dependent decisions or completion. Check facts and artifacts, resolve discrepancies using evidence, preserve validated progress and correct unsupported assumptions in the working context. Do not decide by model prestige, agreement or majority vote.
+- End the collaboration after its useful work is integrated. Reuse or choose a different Buddy for a new need through the same LUT. No permanent assignments, fixed pairs, mandatory second opinion or diversity-only calls.
 
 ## Handoff and completion
 
-Keep compact state: objective/checks, sourced facts, marked hypotheses, refuted assumptions, artifact/checkpoint, attempted configurations/failures and remaining resources. Reuse useful context; start fresh for separate work or a refuted approach. Omit irrelevant history. A fresh thread is not independent evidence or a separate filesystem.
+Keep compact state: objective/checks, sourced facts, marked hypotheses, refuted assumptions, artifact/checkpoint, attempted configurations/failures and remaining resources. Reuse useful context; start fresh for independent work or a refuted approach. A fresh thread is not independent evidence or a separate filesystem.
 
-Give workers the applicable shared policy, objective, relevant state, permitted paths/actions, checks, and remaining attempt allowance. If the policy was not inherited, include its relevant rules. Workers must not recursively spawn. They return concise `STATUS: PASS | FAILED_VALIDATION | BLOCKED | UNCERTAIN`, `RESULT`, `EVIDENCE`, `CHANGES`, `OPEN_RISKS`, `ATTEMPTS_USED`, and optional `NEXT_CANDIDATE` (model, effort, evidence-based reason). Use PASS only with the specified checks; skipped or unavailable checks stay explicit. The primary integrates against acceptance evidence, not a worker's status or model identity.
+Give workers the applicable shared policy, relevant state, permitted paths/actions, checks and remaining attempt allowance. If policy was not inherited, include relevant rules. Workers must not recursively spawn. Return concise `STATUS: PASS | FAILED_VALIDATION | BLOCKED | UNCERTAIN`, `RESULT`, `EVIDENCE`, `CHANGES`, `OPEN_RISKS`, `ATTEMPTS_USED` and optional `NEXT_CANDIDATE` (model, effort, evidence-based reason). Report skipped checks. Primary verifies acceptance, not a worker's status or identity.
 
 ## Finite recovery
 
-Explicit time, cost, concurrency and attempt budgets take precedence. Without a task-specific recovery limit, allow **at most three substantive attempts on the same unresolved acceptance condition**, including the initial attempt, across local work, workers, parallel attempts and resumed attempts. Reserve allowance before launch; failed launches count once. Routine reads and checks inside a coherent attempt are not separate attempts. If no useful correction or alternative remains, stop earlier.
+Explicit user/runtime time, cost, concurrency and attempt budgets take precedence. Without a task-specific limit, allow **at most three substantive attempts on the same unresolved acceptance condition**, including the initial attempt, across local work, workers and parallel/resumed attempts. Reserve allowance before launch; failed launches count once. Two independent solving attempts on the same condition use two slots; a routine read/check within an attempt does not consume a separate slot. Distinct independently checkable subgoals have their own counts.
 
-The primary owns the shared attempt ledger. A model/effort/thread change, renamed task, new hypothesis or worker restart does not reset it. Only a validated checkpoint that retires the old blocker permits a new independently checkable subgoal; do not split or relabel a stalled condition to evade the limit. Finish other useful independent work when one branch stops. This limits repeated failure, not the number of successful stages in a large task.
+The primary owns the shared ledger. Model/effort/thread changes, renamed tasks and new hypotheses do not reset it. Only validated resolution retires a blocker; do not split or relabel a stalled condition to evade the limit. Continue independent useful work when another branch stops. This provisional guardrail bounds failed recovery, not successful stages; it is not a measured optimum or hard enforcement.
 
-The three-attempt default is a provisional policy choice, not an optimized value or hard enforcement. Do not repeat an unchanged failed approach. Stop on exhausted resources, an unresolved blocker with no feasible route, or established acceptance; report actual results and remaining limits. Never claim exact budget enforcement, model/effort execution, cache hits or success beyond what the runtime and checks establish.
-
+Stop when acceptance is established, resources are exhausted or no useful feasible correction remains. Do not repeat an unchanged failed approach without a concrete reason. Report actual results and remaining limits; never claim unobserved model/effort execution, exact budget enforcement, cache hits or success.

@@ -1,30 +1,36 @@
 # AgentMD
 
-One shared `AGENTS.md` for OpenAI Codex, with a **model × reasoning-effort lookup table and rules for routing necessary work**. Finish the user's task with suitable configurations while accounting for quality, time, cost, context transfer and rework. All four models remain general-purpose.
+One shared `AGENTS.md` for OpenAI Codex, with a **model × reasoning-effort lookup table and event-driven Buddy routing**. Finish the user's task with suitable configurations while accounting for quality, time, cost, context transfer and rework. All four models remain general-purpose.
 
 ## What it does
 
 ```mermaid
 flowchart TD
-    W[Remaining work and acceptance checks] --> C[Compare feasible configurations and current progress]
-    C -->|Current configuration is suitable| K[Continue in context]
-    C -->|Evidence supports a useful change| R[Switch or delegate one coherent output]
-    K --> V[Perform work and check results]
+    W[Remaining work and acceptance checks] --> C[Compare current and feasible configurations using LUT]
+    C -->|Current configuration suitable| K[Work directly]
+    C -->|Another configuration favored| P{Useful parallel work?}
+    P -->|Yes| B[Spawn Buddy and continue primary work]
+    P -->|No| R[Sequential delegation or supported switch]
+    K --> V[Check results]
+    B --> J[Join and integrate both results]
+    J --> V
     R --> V
     V -->|Verified progress with work remaining| W
-    V -->|Unresolved condition within budget| F[Record failure and revise the approach]
+    V -->|Unresolved condition within budget| F[Record failure and revise approach]
     F --> C
     V -->|Acceptance satisfied| D[Deliver]
-    C -->|Limit reached or no useful feasible action| B[Report supported result and remaining limits]
+    C -->|Limit reached or no useful feasible action| Z[Report results and remaining limits]
 ```
 
 **Continue or switch.** Keep a suitable context that is making verified progress. Consider another model or effort when observable capability requirements, comparable task evidence, or a different supported solving hypothesis justify the change. Compare model and effort together; include handoff and expected rework. Keep the reason in one short working-state note. Model confidence, a phase name, or a small leaderboard difference alone does not justify switching.
 
-**Delegate useful outputs.** Give a worker a coherent objective, acceptance checks, relevant evidence and an explicit file or change boundary. Related operations stay together. Parallel work must be independent enough to justify coordination. Keep ordinary verification; extra agents for consensus, model diversity or routine adversarial audit are not required. A missing permission, tool or input needs an authorized remedy, not simply a stronger model.
+**Buddy routing: work together.** When the existing LUT favors another model/effort for part of the task or a useful alternative approach, spawn it and continue your own useful work in parallel. Identify both outputs before launch: for example, the Buddy develops a fix while the primary checks integration and tests; or both independently analyze a consequential design decision. The Buddy can implement, investigate, reason or check, and has no fixed occupation. Do not wait immediately after spawning if useful work is available. Join at a dependency, compare and integrate both outputs against evidence, and update the working context before continuing. No mandatory first failure, permanent pair, extra Buddy LUT or always-on second opinion.
+
+Use disjoint write ownership or isolated copies, or keep concurrent investigations read-only. If parallel progress is not useful or safe, work directly or delegate sequentially. A consequential decision with weak external verification can warrant independent collaboration even if the current model reports success. Ordinary checks are still required; model agreement alone is not evidence. A missing permission, tool or input requires an authorized remedy, not simply a stronger model.
 
 **Transfer corrected state.** Preserve verified facts and their sources, the current artifact/checkpoint, hypotheses, refuted assumptions, open checks and the shared attempt ledger. Reuse a thread when that context helps; use a concise fresh handoff when obsolete reasoning would otherwise dominate. A worker's `PASS` label alone does not establish acceptance.
 
-**Bound retries without stopping large tasks arbitrarily.** Unless the user specifies a different budget, allow at most **three substantive attempts on the same unresolved acceptance condition or blocker, including the initial attempt**. The primary reserves and counts attempts across local work, children and parallel candidates. Routine reads and checks within an attempt do not consume separate slots. Changing a model, renaming a blocker or proposing another hypothesis does not reset its count. A demonstrated checkpoint that resolves it can establish a genuinely new subgoal. Stop further attempts on an exhausted blocker and report it; continue independent useful work when feasible. This provisional design limit replaces the former six-attempt cap for the entire task. It is neither a measured optimum nor a hard runtime quota.
+**Bound retries without stopping large tasks arbitrarily.** Unless the user specifies a different budget, allow at most **three substantive attempts on the same unresolved acceptance condition or blocker, including the initial attempt**. The primary reserves and counts attempts across local work, children and parallel candidates. If both Buddy and primary make independent solving attempts on the same condition, both count; distinct independently checkable subgoals have separate counts. Routine reads and checks within an attempt do not consume separate slots. Changing a model, renaming a blocker or proposing another hypothesis does not reset its count. A demonstrated checkpoint that resolves it can establish a genuinely new subgoal. Stop further attempts on an exhausted blocker and report it; continue independent useful work when feasible. This provisional design limit replaces the former six-attempt cap for the entire task. It is neither a measured optimum nor a hard runtime quota.
 
 For example, implementing several independently checkable requirements is not limited to three total work units. Repeatedly trying to fix the same failing requirement is limited, even if each attempt uses another model.
 
@@ -32,7 +38,7 @@ For example, implementing several independently checkable requirements is not li
 
 | File | Purpose |
 | --- | --- |
-| [AGENTS.md](AGENTS.md) | Shared runtime policy, compact LUT, handoff and stopping rules |
+| [AGENTS.md](AGENTS.md) | Shared runtime policy, compact LUT, Buddy collaboration, handoff and stopping rules |
 | [.codex/agents/agentmd_luna.toml](.codex/agents/agentmd_luna.toml) | `gpt-6-luna` binding |
 | [.codex/agents/agentmd_terra.toml](.codex/agents/agentmd_terra.toml) | `gpt-6.1-terra` binding |
 | [.codex/agents/agentmd_sol.toml](.codex/agents/agentmd_sol.toml) | `gpt-6.2-sol` binding |
