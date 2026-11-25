@@ -22,7 +22,7 @@ flowchart TD
     C -->|Limit reached or no useful feasible action| Z[Report results and remaining limits]
 ```
 
-**Select using measured demands.** The shared LUT covers 22 model/effort configurations, eight AA component-quality rows, a broad index and other task-specific observations. Match the acceptance bottleneck and filter unsupported settings. For bounded work use official anchors or validated current progress; for demanding work prefer the relevant feasible observed quality peak provisionally, not as a proven optimum. Compare effort changes with model changes, including handoff and rework. Composite resource estimates are proxies; do not average incompatible metrics or interpret them as success probabilities.
+**Select using precomputed textual preferences.** The shared LUT contains official starting anchors, eight task-specific AA quality orders across all 22 measured model/effort configurations, a broad quality order, two broad resource-proxy orders and other task-specific observations. Match the acceptance bottleneck, filter unsupported settings and choose a useful candidate without interpreting a numeric matrix. For bounded work use official anchors or validated current progress; for demanding work use the best relevant feasible observed candidate provisionally. A higher displayed rank is not proof of a meaningful gain or an instruction to retry every configuration. Compare model and effort together, including handoff and rework. Exact scores and gap sizes remain in the offline registry; resource proxies do not certify budgets.
 
 **Buddy routing: work together.** When the existing LUT favors another model/effort for part of the task or a useful alternative approach, spawn it and continue your own useful work in parallel. Identify both outputs before launch: for example, the Buddy develops a fix while the primary checks integration and tests; or both independently analyze a consequential design decision. The Buddy can implement, investigate, reason or check, and has no fixed occupation. Do not wait immediately after spawning if useful work is available. Join at a dependency, compare and integrate both outputs against evidence, and update the working context before continuing. No mandatory first failure, permanent pair, extra Buddy LUT or always-on second opinion.
 
@@ -47,7 +47,7 @@ For example, implementing several independently checkable requirements is not li
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Rules for maintaining the policy and evidence |
 | [README.md](README.md) | Installation and explanation |
 
-The four TOMLs share a short worker contract and leave effort unfixed. There are no model-specific Markdown policies. README, CONTRIBUTING and the evidence archive are not routine runtime reading requirements; the operational table is in AGENTS.md.
+The four TOMLs share a short worker contract and leave effort unfixed. There are no model-specific Markdown policies. README, CONTRIBUTING and the evidence archive are not routine runtime reading requirements; the operational textual LUT is in AGENTS.md.
 
 ## Install and update
 
@@ -102,7 +102,7 @@ Markdown does not grant tools, enforce budgets or change the parent model by its
 
 ## Evidence and completion status
 
-The LUT combines sparse capability guidance, an **AA Intelligence Index v5.0.2 and eight component scores for each of 22 model/effort configurations**, plus relevant Arena, FrontierCode, Terminal-Bench, search and science evidence. See the [registry](research/benchmark-evidence.md) for checked dates, exact settings and conditions. The scores describe different outcomes; they are not one common success scale. Missing measurements remain unknown. AA-derived generation-time estimates are not measured whole-task latency, and API costs are not Codex-plan usage.
+The textual LUT is derived from **AA Intelligence Index v5.0.2 and eight component scores for each of 22 model/effort configurations**, plus official capability guidance and relevant Arena, FrontierCode, Terminal-Bench, search and science evidence. The full numeric matrices (176 component observations and 22 broad observations) remain in the registry; the runtime uses precomputed ordinal preferences instead. This is a prompt-format and decision-policy refinement, not measured prompt-performance optimization. See the [registry](research/benchmark-evidence.md) for checked dates, exact settings and conditions. The scores describe different outcomes; they are not one common success scale. Missing measurements remain unknown. AA-derived generation-time estimates are not measured whole-task latency, and API costs are not Codex-plan usage.
 
 This is a completed policy/configuration design, not proof of a universally optimal route. Static validation can establish syntax and consistency; successful loading, resolved model/effort, instruction adherence and quality gains require observation in the target client. No new model-performance measurements were made for this revision, and comparative performance remains unproven. Normal work does not trigger benchmark searches or experiments.
 
