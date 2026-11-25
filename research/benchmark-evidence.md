@@ -37,7 +37,7 @@ Only the current target models are routed: `gpt-6-luna`, `gpt-6.1-terra`, `gpt-6
 - Changing effort sometimes causes a larger observed difference than changing the model; e.g. the index for Luna low versus Luna max differs greatly.
 - Cost and quality are not strictly ordered: Sol max and Astra medium both round to **57** on this broad index, but cost and runtime differ.
 - These are pooled benchmark results, not calibrated success probabilities for a particular user task. Do not treat a composite score as probability of succeeding, nor do you infer the *conditional* best model for a particular task from this single table.
-- For evidence-based delegation, identify task-specific results and verified failure before overruling the current model.
+- For evidence-based delegation, use relevant task evidence and compare eligible model/effort candidates. Failure is not a prerequisite for routing.
 
 ## B. Real-repository coding: Cognition FrontierCode 2.0
 
@@ -132,3 +132,20 @@ The [OpenAI caching guide](https://developers.openai.com/api/docs/guides/prompt-
 - **U:** Main uncertainty sources are task distribution, sampling, verifier reliability, non-deterministic outputs, cache state, and wall-clock load. Estimate combined uncertainty and confidence intervals after data are collected; do not invent them now.
 
 **Provenance policy:** If numbers or model names change, update this file with the checked date and evidence link before updating short runtime guidance. No unverified number belongs in a model's operating prompt.
+
+## H. Runtime policy update — 2026-11-25
+
+The single AGENTS.md uses these source classes:
+
+- **O — workload guidance, not an optimum:** [OpenAI model selection](https://developers.openai.com/api/docs/guides/model-selection), retrieved 2026-11-25. It presents L low for small edits/extraction, L xhigh for clearly constrained multi-step problems, T medium for visual/desktop work, S medium for repo changes/drafts, S xhigh for iterative work, A low for polished work from a brief, A medium for complex projects, and A xhigh for open-ended tradeoffs. The alternative ordering is a policy design choice, not an empirical conditional ranking. The default six substantive attempts is an adjustable guardrail, not an optimized parameter.
+- **B — composite (historical and rechecked):** Section A retains its dated v5.0.1 snapshot, rather than silently mixing versions. On the 2026-11-25 [AA provider page](https://artificialanalysis.ai/providers/openai), standard rows displayed L max 28 / $0.15 / 10.6 min, T low 29 / $0.0713 / 1.1 min, T max 51 / $0.96 / 14.0 min, S medium 52 / $0.41 / 3.5 min. Some values have changed since A. They are rounded composite index and average USD/min per index task, not calibrated probabilities, audited statistical differences, or Codex-plan costs. No HW, clock or batch conditions confirmed.
+- **B — coding:** Section B preserves the recorded FrontierCode 2.0 snapshot (max effort only). On the [Agent Arena coding index](https://arena.ai/leaderboard/agent/code?projection=output-tokens), dated 2026-11-22, A max, T max and S max appeared at ranks 6, 9 and 11 among 69 models (1,064,228 sessions in aggregate, not per model). The index includes multiple signals of agent work. This is a different measure from mergeability or a pass rate; no inference of statistical superiority or conditional rescue performance is made. Keep these alternatives eligible; do not generalize max results to lower effort settings.
+- **Feasibility:** [OpenAI deployment checklist](https://developers.openai.com/api/docs/guides/deployment-checklist) lists low/medium/high/xhigh/max for the four API models; none is also supported by Luna and Terra. [Codex subagents](https://developers.openai.com/codex/subagents) describes model/effort settings, pinned configuration precedence and spawning. API support is not proof of availability in any user's Codex client. No runtime invocation is asserted here.
+
+### Independent adversarial audit
+
+- Du et al., *Improving Factuality and Reasoning in Language Models through Multiagent Debate*, ICML 2024 ([paper and code](https://composable-models.github.io/llm_debate/), [arXiv:2305.14325](https://arxiv.org/abs/2305.14325)): reports gains from multiple reasoning and critique paths on evaluated tasks.
+- Zhang et al., *If Multi-Agent Debate is the Answer, What is the Question?*, [arXiv:2502.08788](https://arxiv.org/abs/2502.08788): finds that debate did not consistently beat simpler baselines and reports benefits from heterogeneous model outputs in tested settings.
+- Batra et al., *Who Convinced Whom? Tracing How LLMs Change Their Minds in Multi-Agent Systems*, [arXiv:2610.35930](https://arxiv.org/abs/2610.35930) (preprint): reports cases where increased agreement accompanies more shared errors.
+
+These are method-level motivations, not measured audit efficacy for the AgentMD model combinations. Prefer independent initial analysis and verifiable counterexamples over repeated persuasive debate; update context only by evidence, not consensus. Distinct model families and fresh contexts do not establish independence. The actual conditional rescue rates, false-audit rates, shared failure correlations, and best sequence remain unknown.

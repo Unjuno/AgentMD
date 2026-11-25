@@ -1,86 +1,58 @@
 # AgentMD
 
-**Purpose:** use OpenAI Codex to **complete ordinary user tasks** with the best available model/reasoning-effort combination and optional subagents. This is an operational routing policy, **not** a benchmark-collection workflow or agent prompt generator.
+A single global `AGENTS.md` for OpenAI Codex: **capability lookup + intentional cross-model adversarial verification + evidence-based context refinement**. The goal is the user's actual completed task, not benchmark collection or mandatory multi-agent discussion.
 
-> Status (2026-11-25): configuration authored on GitHub; a full end-to-end Codex CLI run has **not** yet been verified. A natural-language AGENTS.md cannot guarantee routing, exact effort selection, hard quotas, or model availability.
-
-## Normal task flow
+## Operating policy
 
 ```mermaid
 flowchart TD
-    A["User task"] --> B["Confirm task goal, constraints, and checks"]
-    B --> C{"Choose useful next action"}
-    C -->|"Current model can complete"| D["Work directly"]
-    C -->|"Other model/effort helps"| E["Spawn available generic worker"]
-    C -->|"Missing information"| F["Targeted task investigation"]
-    F --> C
-    D --> G["Examine actual results"]
-    E --> G
-    G -->|"Verified success"| H["Deliver"]
-    G -->|"Failed / uncertain"| I{"Resources remain and a useful next action exists?"}
-    I -->|"Yes"| C
-    I -->|"No"| J["Report evidence and remaining limits"]
+    U[User task] --> L[Match observable requirements to LUT]
+    L --> X[Work directly or delegate model and effort]
+    X --> V[Validate actual results]
+    V -->|Unresolved problem| R[Repair, diagnose, change model or effort]
+    R --> C[Update evidence and working context]
+    C --> L
+    V -->|Material audit warranted| A[Different model, fresh context where feasible]
+    A --> E[Verify findings against evidence]
+    E -->|Confirmed issue| C
+    E -->|Checks and findings resolved| D[Deliver]
+    V -->|Accepted and no audit needed| D
+    L -->|No useful feasible action| B[Report best result and limits]
+    E -->|Unresolved within budget| B
 ```
 
-The parent session may start on **Luna**, but that does **not** require Luna to attempt every task first. It can act directly or choose a different model and effort immediately. A different model need not be "higher" in a global ranking: the choice depends on what the task requires and what the previous attempt established.
+All models are general-purpose. Choose model and reasoning effort together using the short LUT in [AGENTS.md](AGENTS.md), based on published workload guidance and benchmark evidence. Change models to improve capability **or** deliberately expose different errors. An auditor can be a lower-ranked model; disagreement or consensus is not proof. Verify counterexamples, remove refuted assumptions from the handoff, and retain independently supported work.
 
-**No exclusive jobs for model families.** Each can research, implement, debug, verify, or review. Another model/context is useful only when its expected contribution is meaningful. Do not force a four-model cycle or a mechanical low→medium→high effort sweep.
+The default six substantive attempts is a shared prompt-level guardrail including local work, delegation, audit and repair. It is adjustable, not a proven optimum or a hard runtime quota. Routine tasks may complete in a single attempt.
 
-## Responsibility map
+## Files
 
-| File | Purpose |
-| --- | --- |
-| [AGENTS.md](AGENTS.md) | **Runtime** decision policy: do / delegate / verify / retry / stop |
-| [models/](models/) | Small per-model working priors and execution guidance |
-| [.codex/agents/](.codex/agents/) | Four generic model-configured Codex workers (no fixed reasoning effort) |
-| [research/benchmark-evidence.md](research/benchmark-evidence.md) | **Offline maintenance**: evidence and source references; **not read for routine tasks** |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Policy change and validation rules |
+- `AGENTS.md`: the sole AgentMD runtime instruction and LUT.
+- `.codex/agents/agentmd_{luna,terra,sol,astra}.toml`: generic model selectors with a short common worker contract; no fixed effort or job.
+- [research/benchmark-evidence.md](research/benchmark-evidence.md): offline evidence, methodology and limitations; not read during ordinary execution.
+- [CONTRIBUTING.md](CONTRIBUTING.md): maintenance rules.
 
-The model/effort must actually be supported by the user's Codex client. Role TOMLs fix the selected **model ID**, while reasoning effort is left to the spawn or inherited/default setting. Exact applied effort must be checked in the runtime. A default/global model selection itself remains controlled by Codex configuration, not AGENTS.md.
+## Install
 
-## Lightweight routing priors
-
-These are **non-exclusive candidate hints**, not calibrated probabilities or mandatory occupations.
-
-- **Luna:** low published token cost; suitable to consider for bounded work. Higher effort can change capability.
-- **Terra:** provider highlights visual reasoning/computer-use aptitude, but it may do any task.
-- **Sol:** strong published agent/coding performance with a favorable cost relationship on some published suites.
-- **Astra:** strong published broad high-effort capability; high cost and no guarantee of task-specific superiority.
-
-Model and effort must be compared together. Current results, task constraints, and actual tool availability override these priors. Original scores and their limitations remain in the evidence archive; individual work should **not** spend time searching benchmarks again.
-
-## Feedback and bounded iteration
-
-- Parent owns delegation and the global count; workers return concise **STATUS, EVIDENCE, CHANGES, OPEN_RISKS**, and optional **NEXT_CANDIDATE**.
-- A successful claim is not a validated success. Use the task's acceptance criteria and available independent checks.
-- On failure, compare direct repair, retrying the same model/effort, changing effort, changing model, and gathering missing task evidence. Nothing requires exploring all options.
-- Independent reviews should investigate a clear additional failure mode. Don't run subagents for trivial independent-free work.
-- Use at most **four delegated worker attempts per user task** as the initial *prompt-level* safety cap unless the user instructs otherwise. This is not a Codex-enforced quota and not a theoretically optimal number.
-- Continue only if resources and a useful next action remain; report unknown outcomes as unknown rather than manufacturing a PASS.
-
-## Install for local Codex
-
-Codex reads the global AGENTS.md from `~/.codex/` (or `CODEX_HOME`) and can discover custom agent TOMLs in its configured agents directory. Back up any existing files first. From this repository checkout, with no same-named files already present or after reviewing the replacements:
+Back up existing global instructions and same-named agent definitions before copying; merge user-specific rules rather than unintentionally overwriting them. From the checkout:
 
 ```sh
 export CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
-mkdir -p "$CODEX_HOME/models" "$CODEX_HOME/agents"
+mkdir -p "$CODEX_HOME/agents"
 cp AGENTS.md "$CODEX_HOME/AGENTS.md"
-cp models/*.md "$CODEX_HOME/models/"
 cp .codex/agents/*.toml "$CODEX_HOME/agents/"
-# Choose a supported initial model in your Codex client, for example:
+# Start with any supported model; for example:
 codex --model gpt-6-luna
 ```
 
-The files on GitHub do not auto-sync to local Codex. The ordinary `models/*.md` are read only when the routing instructions cause Codex to use a file-reading tool; they are not automatically injected as AGENTS.md files.
+Model-specific Markdown files are no longer needed. If a previous installation contains them, the new instructions do not reference them. The global Markdown does not itself change the parent model. The generic TOMLs pin model identity; effort may be provided at spawn where supported. Actual model access, tool capabilities and effort resolution depend on the client and account. If switching the primary model is unavailable, use a supported subagent; do not pretend to switch. Fresh context and separate file-system isolation are not equivalent.
 
-## What has not been verified
+## Evidence and limits
 
-- Spawning Luna, Terra, Sol and Astra workers in the **user's** Codex environment at the selected effort.
-- The parent obeying delegation limits, worker reports and model selection in a full task.
-- Improvement in verified task quality relative to direct single-model execution.
-- Cache hit rate, task completion time, and plan-specific resource consumption.
+The LUT combines official workload/effort recommendations with comparative benchmark observations as **working priors**, not calibrated success rates. No single score establishes every workload's best model; conditional rescue and audit accuracy for these four models are not established. Different models can share mistakes; multi-agent agreement is not verification. Cross-model audit is triggered by material risk and evidence needs, not a mandatory four-model cycle.
 
-Sources: [Codex AGENTS.md](https://developers.openai.com/codex/guides/agents-md) · [Codex subagents](https://developers.openai.com/codex/subagents) · [OpenAI prompt guidance](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra).
+Status: configuration authored and available for static checking. End-to-end Codex model selection, context independence, enforcement of the attempt limit and quality improvements have **not** been demonstrated in the target runtime. Inspect actual logs and task acceptance checks before making claims.
 
-This is a community-maintained project, not an official OpenAI repository.
+Sources: [OpenAI model selection](https://developers.openai.com/api/docs/guides/model-selection), [Codex AGENTS.md](https://developers.openai.com/codex/guides/agents-md), [Codex subagents](https://developers.openai.com/codex/subagents), [benchmark registry](research/benchmark-evidence.md).
+
+Unofficial community project.
