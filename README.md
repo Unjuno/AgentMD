@@ -1,6 +1,6 @@
 # AgentMD
 
-One shared `AGENTS.md` for OpenAI Codex: **task-aware escalation using model × reasoning effort, with selective Buddy collaboration**. Public benchmarks supply bounded evidence; the current task, acceptance checks and incremental resources determine the next action. All four models remain general-purpose.
+One shared `AGENTS.md` for OpenAI Codex: **task-aware escalation using model × reasoning effort, with Buddy overlap at justified model transitions**. Public benchmarks supply bounded evidence; the current task, acceptance checks and incremental resources determine the next action. All four models remain general-purpose.
 
 ## Strategy and logical baseline
 
@@ -44,25 +44,27 @@ The same limitation applies to resources: an aggregate cost from one task popula
 | Unknown cause or missing facts | Diagnose or retrieve relevant evidence; do not blindly repeat a solve |
 | Missing model, tool, input or authorization | Use an authorized feasible remedy; a model change cannot create permission |
 | Capability gap or valuable additional contribution | Compare current execution, effort, model and Buddy using the same LUT |
-| Useful parallel contributions justify their overhead | Spawn Buddy and keep doing defined useful primary work |
-| Parallel work is unsafe or has no useful parent contribution | Work directly or delegate sequentially |
+| A change of work lead is justified and safe overlap is worthwhile | Run the incumbent and LUT-selected candidate on the same problem; compare their tested results |
+| Parallel overlap or reciprocal exchange is unavailable or unsafe | Work directly or transfer sequentially; disclose the limitation |
 | Results agree but an essential condition is unverified | Preserve uncertainty; agreement is not acceptance |
 | Changed artifact invalidates a prior check | Check the affected integrated result before claiming acceptance |
 | Acceptance established or further recovery disallowed | Deliver evidence and remaining limits; continue independent eligible work |
 
-### Buddy means working together
+### Buddy: overlap, compare, transfer
 
-Define each agent's result, baseline artifact/revision, acceptance checks and ownership. The Buddy need not outrank the primary. It may implement, investigate, reason or check. Independent analysis can be useful at a consequential decision before failure, but a different model by itself does not justify an extra call.
+Buddy is the transition between model/effort configurations, not a rule to subdivide every task. Continue with one work lead while it is adequate. When escalation is justified, use the same LUT to select a candidate; temporarily run both the incumbent and candidate on the same unresolved problem at a bounded checkpoint.
 
-The primary works while the Buddy runs, unless a real dependency prevents useful safe progress. Coordinate shared mutable state as well as file paths; tests and generated artifacts can interfere even when source paths differ. Join relevant results, integrate by evidence and check the **actual integrated artifact**. Safely cancel or discard obsolete results and account for any already-applied edits. Before final verification, confirm that any worker capable of modifying the delivered artifact has stopped writing, or isolate its remaining writes. A cancellation request alone is not confirmation. Do not manufacture busywork or wait for an irrelevant worker.
+Both work, test their hypotheses or gather evidence, then exchange the actual results and examine each other's assumptions and checks. Relay the exchange through the primary when needed. Select or combine the approach supported by the evidence; the participant suited to continue it takes the work lead. If the incumbent remains adequate without a demonstrated material improvement, keep it. If neither is adequate, correct the cause within the remaining allowance or report the unresolved condition. No requirement to declare a winner, repeat the entire task, or conduct another review after sufficient results.
 
-Workers do not recursively spawn. The primary owns orchestration, resource reservations and final acceptance. Fresh context is not proof of independent errors, and read-only instructions are not an enforced sandbox.
+Continue the selected participant's existing context and retire the other from active solving. The next justified transition starts from that lead, not a fixed model sequence. The primary still owns orchestration, permissions, resource reservations and final acceptance, even if a delegated worker is the lead. Workers request the next transition through the primary. A change of lead is not an automatic switch of the primary runtime model. If continuing a worker, reciprocal exchange or parallel work is unavailable, use the best feasible direct/sequential path and disclose the limit.
+
+Isolate competing writes and shared mutable state, transfer ownership explicitly, and confirm competing writers have stopped or cannot modify the delivered artifact before final verification. Check the actual selected/integrated artifact. Cancel/discard superseded work safely and account for incurred resources. Model agreement and fresh context are not proof; tests must address the actual requirements.
 
 ### Recovery and stopping
 
 Before the first recovery or duplicate solve, the primary records a **finite task-scoped recovery allowance** based on declared scope, consequences and available resources. There is no fixed universal three-attempt rule. An allowance is a disclosed operational choice; it is not inferred from benchmark scores and is not claimed optimal.
 
-Count additional local, delegated and parallel recovery/duplicate attempts once, reserving before launch. A parent already doing its initial solve plus one duplicate Buddy consumes one additional slot; two new recovery solves consume two. Ordinary first-pass work on genuinely separate requirements and necessary non-repeated checks do not use recovery slots. Renaming an unresolved requirement, changing models, starting a new thread or inventing another hypothesis does not reset the task ledger.
+Count additional local, delegated and parallel recovery/duplicate attempts once, reserving before launch. An overlapping candidate solving the same unresolved requirement consumes one additional slot; a previously authorized incumbent continuation or continuation of the selected approach does not consume another unless it starts a new attempt. Two new recovery solves consume two. Ordinary first-pass work on genuinely separate requirements and necessary non-repeated checks do not use recovery slots. Renaming an unresolved requirement, changing models, starting a new thread or inventing another hypothesis does not reset the task ledger.
 
 The parent explicitly authorizes first-pass scope and marks assigned solves INITIAL or RECOVERY/DUPLICATE. An attempt is one stated approach through its acceptance checkpoint. A new correction after a failed checkpoint or a replacement approach starts a new attempt; routine tool actions do not. Workers report classified starts so initial work cannot be double-charged or unauthorized local recovery hidden.
 
@@ -144,7 +146,7 @@ Markdown does not grant tools, enforce budgets or change the parent model by its
 
 Evidence classes are published observations (B), provider guidance (O), design choices (D), and unknowns. The [registry](research/benchmark-evidence.md) preserves source versions, dates, settings, units, published protocols and missing run metadata. AA resource values are historical weighted costs and derived inference times, not live prices or task-specific cost/latency. Normal work does not trigger benchmark collection.
 
-This revision removes unsupported candidate pruning, clarifies the logical baseline, separates recovery from setup failures, and strengthens artifact-aware integration and status semantics. Repeated audits seek counterexamples and regressions; they cannot prove the absence of all defects. Static checks, observed runtime behavior and measured outcome gains are separate claims. No model-performance improvement or actual Codex execution is claimed by editing these files.
+The current revision implements the overlap-and-transfer decision policy in shared instructions. Earlier audits and safety tuning are preserved in the registry. Static checks, observed runtime behavior and measured outcome gains are separate claims. No actual Codex execution or model-performance improvement is claimed by editing these files.
 
 The relevant disciplines are decision theory (objective and tradeoffs), statistics (marginal versus conditional evidence), and distributed systems (reservations, mutable state and integration). Their practical role here is to make decisions and evidence traceable, without adding a service, separate policy per model or a compulsory experiment.
 
