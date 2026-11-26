@@ -20,7 +20,7 @@ Choose using explicit quality requirements, permissions, budget, deadline and us
 
 ## What the evidence can establish
 
-The shared textual LUT now preserves **all 176 AA component values across all 22 measured model/effort configurations**, with separate historical broad resource references. It does not prefilter configurations using mixed-scope Pareto membership. Every candidate remains subject to actual runtime support, task fit and constraints.
+The shared textual LUT now preserves **all 176 AA component values across all 22 measured model/effort configurations**, with separate dated broad resource references. The refresh distinguishes unsupported API settings (U) from missing observations (—), adds standard API token rates and keeps AA-AnalystAgent/AA-3D as separate partial-coverage evidence. See the [active numeric snapshot](research/benchmark-evidence.md#lut-quantitative-refresh--2026-11-26-jst). It does not prefilter configurations using mixed-scope Pareto membership. Every candidate remains subject to actual runtime support, task fit and constraints.
 
 A score is an observation under an evaluation's conditions. It is not a probability that the model will solve the current task, rescue a previous failure or detect its own error. Provider workload examples are starting guidance, not permanent occupations. Effort and model selection must be considered together; there is no mandatory family cycle or effort ladder.
 

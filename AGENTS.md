@@ -16,7 +16,7 @@ Establish the deliverable, acceptance conditions, material unknowns and applicab
 ## Shared textual LUT
 
 L = `gpt-6-luna` (`agentmd_luna`); T = `gpt-6.1-terra` (`agentmd_terra`); S = `gpt-6.2-sol` (`agentmd_sol`); A = `gpt-6.2-astra` (`agentmd_astra`).
-Effort n/l/m/h/x/max = none/low/medium/high/xhigh/max. Filter by actual model, effort, tool and context support. Request settings explicitly; the four custom files bind model only. Verify resolved settings when exposed; never claim unavailable telemetry.
+Effort n/l/m/h/x/max = none/low/medium/high/xhigh/max. `U` = unsupported by the documented standard API; `—` = not measured/retrieved, never zero. L/T support all six; S/A reject none (O, 2026-11-26). Filter by actual model, effort, tool and context support. Request settings explicitly; the four custom files bind model only. Verify resolved settings when exposed; never claim unavailable telemetry.
 
 Provider examples (O; provisional starting points, not exclusive roles or measured optima):
 - L.l: small edits/field extraction with a clear result. L.x: finding updates across apps, prioritization and clearly constrained problems.
@@ -24,31 +24,35 @@ Provider examples (O; provisional starting points, not exclusive roles or measur
 - A.l: polished work from a clear brief. A.m: complex projects with changing information. A.x: open problems requiring tradeoffs and assumption checks.
 These examples never require switching away from satisfactory current work.
 
-AA v5.0.2 snapshot, 2026-11-26 JST (B). Each vector is in **n/l/m/h/x/max** order; `—` means no observation, never zero. All 22 measured configurations remain represented. Values are displayed percentages except Briefcase Elo and the broad index. Consult the relevant row, not every row; this is evidence, not an execution order.
+AA v5.0.2 snapshot, refreshed 2026-11-26 JST (B). Each vector is in **n/l/m/h/x/max** order. All 22 measured configurations remain represented. Values are displayed percentages except Briefcase Elo and the broad index. Consult the relevant row, not every row; this is evidence, not an execution order.
 
-- Briefcase (agentic knowledge work; Elo): L 905/742/1096/1184/1234/1335; T 1224/1033/1190/1266/1330/1399; S —/1229/1494/1541/1579/1612; A —/1039/1407/1570/1593/1643.
-- Automation (SaaS workflow achievement): L 9.1/12.0/40.5/47.8/47.8/53.2; T 51.0/56.2/57.8/58.5/59.9/60.2; S —/63.2/70.3/69.9/70.6/71.3; A —/68.6/72.8/76.0/76.1/77.2.
-- Terminal (terminal tasks in AA setup): L 1.5/0.0/2.5/5.1/8.1/12.6; T 26.3/15.2/31.8/42.9/46.5/56.6; S —/37.9/53.5/58.1/55.1/60.1; A —/51.0/59.1/62.1/66.2/64.6.
-- FrontierCode (repository changes in AA setup): L 1.6/2.2/12.8/18.6/18.4/25.2; T 33.4/24.5/34.5/37.5/36.9/42.1; S —/31.4/41.4/40.2/42.8/44.4; A —/32.7/46.6/47.1/49.0/45.4.
-- GDP (professional PDF reasoning; all-pass): L 5.8/9.0/13.8/18.2/18.6/22.8; T 23.2/25.6/28.4/28.0/26.6/28.6; S —/28.6/29.2/28.8/28.4/30.0; A —/28.0/28.4/28.6/28.0/29.8.
-- HLE (difficult knowledge/reasoning): L 6.3/10.2/15.1/15.6/18.9/22.2; T 14.5/24.9/31.3/35.4/42.3/47.3; S —/34.5/50.7/58.3/61.8/64.0; A —/47.7/56.0/65.9/67.3/72.2.
-- CritPt (hard physics): L 5.0/9.5/27.5/31.0/37.0/42.5; T 33.5/50.5/56.5/61.5/60.5/68.0; S —/58.0/64.0/61.5/62.5/62.5; A —/61.0/67.5/71.5/70.5/71.5.
-- Science (scientific research workflows): L 1.0/1.0/1.4/2.9/5.2/8.6; T 24.3/7.6/24.8/33.3/41.9/57.6; S —/37.1/60.5/67.6/66.7/67.6; A —/51.0/74.8/75.2/78.6/78.1.
+- Briefcase (agentic knowledge work; Elo): L 905/742/1096/1184/1234/1335; T 1224/1033/1190/1266/1330/1399; S U/1229/1494/1541/1579/1612; A U/1039/1406/1569/1593/1642.
+- Automation (SaaS workflow achievement): L 9.1/12.0/40.5/47.8/47.8/53.2; T 51.0/56.2/57.8/58.5/59.9/60.2; S U/63.2/70.3/69.9/70.6/71.3; A U/68.6/72.8/76.0/76.1/77.2.
+- Terminal (terminal tasks in AA setup): L 1.5/0.0/2.5/5.1/8.1/12.6; T 26.3/15.2/31.8/42.9/46.5/56.6; S U/37.9/53.5/58.1/55.1/60.1; A U/51.0/59.1/62.1/66.2/64.6.
+- FrontierCode (repository changes in AA setup): L 1.6/2.2/12.8/18.6/18.4/25.2; T 33.4/24.5/34.5/37.5/36.9/42.1; S U/31.4/41.4/40.2/42.8/44.4; A U/32.7/46.6/47.1/49.0/45.4.
+- GDP (professional PDF reasoning; all-pass): L 5.8/9.0/13.8/18.2/18.6/22.8; T 23.2/25.6/28.4/28.0/26.6/28.6; S U/28.6/29.2/28.8/28.4/30.0; A U/28.0/28.4/28.6/28.0/29.8.
+- HLE (difficult knowledge/reasoning): L 6.3/10.2/15.1/15.6/18.9/22.2; T 14.5/24.9/31.3/35.4/42.3/47.3; S U/34.5/50.7/58.3/61.8/64.0; A U/47.7/56.0/65.9/67.3/72.2.
+- CritPt (hard physics): L 5.0/9.5/27.5/31.0/37.0/42.5; T 33.5/50.5/56.5/61.5/60.5/68.0; S U/58.0/64.0/61.5/62.5/62.5; A U/61.0/67.5/71.5/70.5/71.5.
+- Science (scientific research workflows): L 1.0/1.0/1.4/2.9/5.2/8.6; T 24.3/7.6/24.8/33.3/41.9/57.6; S U/37.1/60.5/67.6/66.7/67.6; A U/51.0/74.8/75.2/78.6/78.1.
 
-Historical broad reference: each cell is **index / weighted USD per index-task / derived inference minutes per index-task**. This is not the individual component's cost, observed task latency, current API pricing or Codex-plan usage.
-- L: n 9/.0714/1.7; l 10/.0051/.6; m 18/.0422/3.1; h 21/.0729/4.9; x 23/.10/6.4; max 28/.15/10.6.
-- T: n 30/.23/2.4; l 29/.0713/1.1; m 38/.17/2.7; h 43/.26/4.2; x 45/.40/6.4; max 51/.96/14.0.
-- S: n —; l 41/.18/1.6; m 52/.41/3.5; h 55/.56/5.2; x 56/.65/6.2; max 57/1.01/10.0.
-- A: n —; l 46/.66/2.0; m 57/1.62/4.6; h 60/2.07/6.2; x 62/2.52/8.1; max 62/4.00/14.2.
+Dated broad reference (same refresh): each cell is **index / weighted USD per index-task / derived inference minutes per index-task**. This is not the individual component's cost, observed task latency, current API pricing or Codex-plan usage.
+- L: n 9/.0714/1.7; l 10/.0051/.6; m 18/.0422/3.1; h 21/.0729/4.7; x 23/.10/6.3; max 28/.15/10.3.
+- T: n 30/.23/2.6; l 29/.0713/1.2; m 38/.17/2.9; h 43/.26/4.4; x 45/.40/6.8; max 51/.96/14.9.
+- S: n U; l 41/.18/1.7; m 52/.41/3.6; h 55/.56/5.5; x 56/.65/6.5; max 57/1.01/10.5.
+- A: n U; l 46/.66/2.1; m 57/1.62/4.9; h 60/2.07/6.6; x 62/2.52/8.4; max 62/4.00/15.2.
 
-The inference-time proxy depends on rolling speed measurements. No row-specific uncertainty or actual task cost is established here; rounded ties are not equivalence. Do not combine component quality with broad resources to exclude candidates, average unlike scores, extrapolate between efforts or assume monotonic gains. Different benchmark conditions and actual remaining work can reverse a comparison.
+The inference-time proxy depends on rolling speed measurements; prefer comparable observed end-to-end task latency when available. No row-specific uncertainty or actual task cost is established here; rounded ties are not equivalence. Do not combine component quality with broad resources to exclude candidates, average unlike scores, extrapolate between efforts or assume monotonic gains. Different benchmark conditions and actual remaining work can reverse a comparison.
 
-Matched observations can be more relevant:
+Standard short-context API rates (O, 2026-11-26), USD per million text tokens, input/cache-hit/30-minute cache-write/output: L .10/.01/.125/.50; T 1/.05/1.25/5; S 2/.10/2.50/10; A 8/.40/10/40. Above 272K input tokens, the documented long-context rates multiply input/cache by 2 and output by 1.5 for the full request. Other tiers, cache retention and tool fees may differ. Token prices are not total task cost or Codex-plan usage.
+
+Matched and specialized observations can be more relevant:
 - Cognition FrontierCode 2.0, max: S/A score 43.8/44.2%, both pass 48.2%; mean rollout USD 1.29/5.97; T unknown.
 - Official Terminal-Bench 4.1, max: S/A 61.5/62.1%, intervals overlap. Suite cost is not per-task cost.
 - Agent Arena coding, max: T/S/A intervals overlap; different sessions, not pass rates.
 - Firecrawl search, medium: S/A fact coverage 96.7/96.6; mean total USD/question .080/.224, median 13.2/16 s; paired difference interval includes zero.
 - Vals science: A/S 68.44/57.76%; model pages list max, component settings uncertain.
+- AA-AnalystAgent (spreadsheet/document analysis, 80 questions × 5): A h/x/max all-five-pass 61.3/62.5/62.5%; other settings not recovered here. Do not substitute single-attempt pass rates.
+- AA-3D v1.0 (55 interactive 3D briefs, blind human votes), max: L 1000 fixed Elo anchor, S 1259 (95% 1231–1288), A 1318 (1286–1349); T not recovered. Quality-only supplements, not general UI operation or matched cost/time comparisons.
 
 Use matching task conditions before broad proxies. No listed result establishes single-task adequacy, statistical superiority, conditional recovery or pair complementarity. Source conditions, intervals, protocol counts and unknown hardware/clock/batch remain in AgentMD's offline `research/benchmark-evidence.md`. Ordinary work requires neither loading that archive nor searching benchmarks.
 

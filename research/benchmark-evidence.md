@@ -1,6 +1,6 @@
 # AgentMD — Active evidence registry
 
-**Checked:** 2026-11-26 JST. This is an offline maintenance reference, not routine agent context. Earlier snapshots and superseded policies remain in Git history. No new model-performance experiment was run for the benchmark snapshot. The strategy audit on 2026-11-26 preserves the numeric snapshot, replaces the active proxy-frontier policy and records the limits of the logical baseline.
+**Checked:** 2026-11-26 JST. The [LUT quantitative refresh](#lut-quantitative-refresh--2026-11-26-jst) at the end supersedes the earlier AA numeric snapshot and adds provider/supplemental observations; historical tables and audits remain below. This is an offline maintenance reference, not routine agent context. Earlier snapshots and superseded policies remain in Git history. No new model-performance experiment was run for the benchmark snapshot. The strategy audit on 2026-11-26 preserves the numeric snapshot, replaces the active proxy-frontier policy and records the limits of the logical baseline.
 
 | Alias | Exact model ID |
 | --- | --- |
@@ -11,7 +11,7 @@
 
 **Evidence classes:** B = published benchmark observation; O = provider workload guidance; D = AgentMD design choice; UNKNOWN = not established by the checked sources. A published model name is not proof of availability in the user's Codex client.
 
-## A. AA — Broad comparison: Intelligence Index v5.0.2 (B)
+## A. AA — Earlier broad comparison: Intelligence Index v5.0.2 (B)
 
 [Provider table](https://artificialanalysis.ai/providers/openai/), checked above; Standard only. Cells: **index / weighted USD per evaluation task / estimated minutes per evaluation task**.
 
@@ -26,7 +26,7 @@ Time derives from output tokens and speed (rolling five days), not task wall-clo
 
 [Methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking): nine evaluations span knowledge work, coding, science and general knowledge. The suite is primarily text-based and English-language. The composite and its component benchmarks are dependent evidence, not independent confirmations. One index point is not a calibrated change in task success probability. Rounded ties do not establish equivalence.
 
-## A.1. Matched AA component observations (B), 2026-11-26
+## A.1. Earlier matched AA component observations (B), 2026-11-26
 
 Sources: [Astra vs Sol](https://artificialanalysis.ai/models/comparisons/gpt-6-2-astra-vs-gpt-6-2-sol), [Sol vs Terra](https://artificialanalysis.ai/models/comparisons/gpt-6-2-sol-vs-gpt-6-1-terra), [Terra vs Luna](https://artificialanalysis.ai/models/comparisons/gpt-6-1-terra-vs-gpt-6-luna), [AA methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking). All three display v5.0.2. Columns are sorted by index: remap by explicit model/effort headers. The 88 overlapping observations (five Sol and six Terra settings across eight metrics) agreed; duplicates are not independent trials.
 
@@ -419,3 +419,81 @@ Executed a dependency-free Python reference regression using isolated subprocess
 - **Minimal prompt retest.** A generic condition-to-evidence reminder alone still yielded the same held-out failure despite 8/8. A fresh Terra / medium run with the explicit boundary sentence (“a guarantee on inputs or final outputs need not hold during intermediate steps”) passed 8/8, independently tested that boundary, and passed the primary's held-out replay. This is one observed run per prompt variant, not a reliable causal estimate. The companion policy line forbids claiming overlap on dispatch alone. LUT, bindings, repository structure, routing options, recovery budget mechanism, and installer were not changed.
 
 **Release checks.** Python `tomllib` parsed four unchanged model-only bindings with a common worker contract; the LUT prefix is byte-identical; only the two AgentMD policy lines above changed, to 15,109 UTF-8 bytes. The unchanged README installer passed `sh -n` and was not installed. Separate commands reproduced original and generic-retune failures and verified both recovery and final retune outputs. These checks support the finite results above, not general superiority, universal prompt compliance, or native Codex runtime behavior.
+
+
+## LUT quantitative refresh — 2026-11-26 JST
+
+**Active snapshot.** Supersedes only the numeric snapshot and missing-setting notation in sections A/A.1, which are retained as historical data; their derived comparisons remain historical. This follows the Deep Research review and a same-day source recheck. No change to routing, Buddy, recovery, worker TOMLs, installer or model bindings. Source observations were transcribed from public search-indexed first-party page excerpts; direct page fetches returned cache misses. The excerpts exposed the selected rows of the three comparison tables. No benchmark rerun or Codex performance test.
+
+### Provider facts (O)
+
+Sources checked 2026-11-26: [gpt-6-luna](https://developers.openai.com/api/docs/models/gpt-6-luna), [gpt-6.1-terra](https://developers.openai.com/api/docs/models/gpt-6.1-terra), [gpt-6.2-sol](https://developers.openai.com/api/docs/models/gpt-6.2-sol), [gpt-6.2-astra](https://developers.openai.com/api/docs/models/gpt-6.2-astra). [Deployment checklist](https://developers.openai.com/api/docs/guides/deployment-checklist) and [reasoning guide](https://developers.openai.com/api/docs/guides/reasoning) confirm L/T support all six efforts, S/A reject none. U denotes unsupported by the documented standard API; — denotes missing observations. Client-specific support still needs verification.
+
+| Model | Input | Cache hit | 30-min cache write | Output |
+| --- | --- | --- | --- | --- |
+| L | .10 | .01 | .125 | .50 |
+| T | 1 | .05 | 1.25 | 5 |
+| S | 2 | .10 | 2.50 | 10 |
+| A | 8 | .40 | 10 | 40 |
+
+Units: Standard API USD per million text tokens, short context. For requests above 272K input tokens, the documented input/cache and output multipliers are 2 and 1.5, respectively, for the full request. Cache retention, processing tier and tools can add/change charges. Do not equate token prices, weighted benchmark cost, task cost and Codex-plan usage. Luna's exact provider cache-write price is .125, not AA's rounded .13 display.
+
+### AA v5.0.2 capability and resource snapshot (B)
+
+Sources checked 2026-11-26: [Terra vs Luna](https://artificialanalysis.ai/models/comparisons/gpt-6-1-terra-vs-gpt-6-luna), [Sol vs Terra](https://artificialanalysis.ai/models/comparisons/gpt-6-2-sol-vs-gpt-6-1-terra), [Astra vs Sol](https://artificialanalysis.ai/models/comparisons/gpt-6-2-astra-vs-gpt-6-2-sol). Remapped by explicit model/effort column headers, not index order. Eight component rows cover the same 22 supported configurations. AA-Omniscience remains unfilled, so this is eight of nine components, not a complete reproduction of the index. Each vector is n/l/m/h/x/max. Briefcase is Elo; others are displayed percentages.
+
+| Metric | L | T | S | A |
+| --- | --- | --- | --- | --- |
+| Briefcase | 905/742/1096/1184/1234/1335 | 1224/1033/1190/1266/1330/1399 | U/1229/1494/1541/1579/1612 | U/1039/1406/1569/1593/1642 |
+| Automation | 9.1/12.0/40.5/47.8/47.8/53.2 | 51.0/56.2/57.8/58.5/59.9/60.2 | U/63.2/70.3/69.9/70.6/71.3 | U/68.6/72.8/76.0/76.1/77.2 |
+| Terminal | 1.5/0.0/2.5/5.1/8.1/12.6 | 26.3/15.2/31.8/42.9/46.5/56.6 | U/37.9/53.5/58.1/55.1/60.1 | U/51.0/59.1/62.1/66.2/64.6 |
+| FrontierCode | 1.6/2.2/12.8/18.6/18.4/25.2 | 33.4/24.5/34.5/37.5/36.9/42.1 | U/31.4/41.4/40.2/42.8/44.4 | U/32.7/46.6/47.1/49.0/45.4 |
+| GDP | 5.8/9.0/13.8/18.2/18.6/22.8 | 23.2/25.6/28.4/28.0/26.6/28.6 | U/28.6/29.2/28.8/28.4/30.0 | U/28.0/28.4/28.6/28.0/29.8 |
+| HLE | 6.3/10.2/15.1/15.6/18.9/22.2 | 14.5/24.9/31.3/35.4/42.3/47.3 | U/34.5/50.7/58.3/61.8/64.0 | U/47.7/56.0/65.9/67.3/72.2 |
+| CritPt | 5.0/9.5/27.5/31.0/37.0/42.5 | 33.5/50.5/56.5/61.5/60.5/68.0 | U/58.0/64.0/61.5/62.5/62.5 | U/61.0/67.5/71.5/70.5/71.5 |
+| Science | 1.0/1.0/1.4/2.9/5.2/8.6 | 24.3/7.6/24.8/33.3/41.9/57.6 | U/37.1/60.5/67.6/66.7/67.6 | U/51.0/74.8/75.2/78.6/78.1 |
+
+All 176 numeric component values were checked against the earlier snapshot. Only three changed: A.m 1407 → 1406; A.h 1570 → 1569; A.max 1643 → 1642 (Briefcase Elo). Treat them as a dated display refresh, not demonstrated errors in the prior transcription. The 88 overlapping component cells agreed across comparison pages; duplicates are not independent runs. The 22 index/cost pairs were unchanged.
+
+| Model | n | l | m | h | x | max |
+| --- | --- | --- | --- | --- | --- | --- |
+| L | 9/.0714/1.7 | 10/.0051/.6 | 18/.0422/3.1 | 21/.0729/4.7 | 23/.10/6.3 | 28/.15/10.3 |
+| T | 30/.23/2.6 | 29/.0713/1.2 | 38/.17/2.9 | 43/.26/4.4 | 45/.40/6.8 | 51/.96/14.9 |
+| S | U | 41/.18/1.7 | 52/.41/3.6 | 55/.56/5.5 | 56/.65/6.5 | 57/1.01/10.5 |
+| A | U | 46/.66/2.1 | 57/1.62/4.9 | 60/2.07/6.6 | 62/2.52/8.4 | 62/4.00/15.2 |
+
+Cell units: index / weighted USD per Intelligence Index task / derived inference minutes per Intelligence Index task. The broad cost population is the full index, not an individual component. All 22 measured minute estimates were taken from the same recheck; 19 differ from the prior saved snapshot. The values also differ slightly from the earlier Deep Research retrieval because the speed proxy rolls. AA calculates time from output tokens and output speed averaged over recent endpoint measurements, not observed agent task duration. Compare task-specific evidence before these proxies. Per-setting uncertainty and hardware/clock/batch are not exposed in the checked table excerpts. Original protocol counts remain in A.1.
+
+For offline reference only, single-request AA API performance (seconds, not agent completion time):
+
+| Metric/model | n | l | m | h | x | max |
+| --- | --- | --- | --- | --- | --- | --- |
+| TTFA L | 1.28 | 2.22 | 5.96 | 10.67 | 17.69 | 69.25 |
+| TTFA T | 2.27 | 2.80 | 5.70 | 13.87 | 37.75 | 196.77 |
+| TTFA S | U | 1.97 | 4.33 | 19.55 | 52.09 | 116.99 |
+| TTFA A | U | 2.98 | 3.42 | 27.73 | 57.16 | 170.18 |
+| SingleE2E L | 26.84 | 22.74 | 31.46 | 39.79 | 53.54 | 152.47 |
+| SingleE2E T | 36.48 | 24.89 | 32.67 | 58.30 | 125.91 | 425.23 |
+| SingleE2E S | U | 51.61 | 56.82 | 102.38 | 159.59 | 277.74 |
+| SingleE2E A | U | 75.64 | 80.69 | 140.98 | 190.99 | 439.11 |
+
+TTFA = time to first answer token; SingleE2E = mean end-to-end duration for AA's single-request workloads. Endpoint speed/latency uses rolling five-day measurements. Do not treat the mean as a deadline bound. All 143 duplicate cells across the 13 extracted fields (8 capability, index, cost, derived time, TTFA, single-request E2E) agreed.
+
+### Supplemental quality observations (B)
+
+[AA-AnalystAgent](https://artificialanalysis.ai/evaluations/aa-analyst-agent), [launch/methodology](https://artificialanalysis.ai/articles/aa-analyst-agent), checked 2026-11-26. Private 80-question, 14-domain quantitative spreadsheet/document evaluation; five independent attempts per question in Stirrup. All-five-pass (pass^5): A.high 61.3%, A.xhigh 62.5%, A.max 62.5%. Other comparable pass^5 rows and matched cost/time cells were not recovered. Rounded ties do not establish equivalence. L.max pass@5 85.0% is a separate at-least-once metric, not comparable to these pass^5 values. The publisher's inference-time chart is a token/speed proxy, not task wall-clock.
+
+[AA-3D v1.0](https://artificialanalysis.ai/evaluations/aa-3d), checked 2026-11-26. 55 briefs for interactive three.js scenes across seven domains, Stirrup offline isolated sandboxes, 250-turn or three-hour limit, blind human pairwise preference votes.
+
+| Setting | Elo | Published 95% interval |
+| --- | --- | --- |
+| L.max | 1000 | Fixed anchor |
+| S.max | 1259 ± 28 | 1231–1288 |
+| A.max | 1318 ± 31 | 1286–1349 |
+| T | — | — |
+
+The anchor is not an absolute quality measure or a confidence interval. The displayed S/A intervals overlap; rank alone does not prove superiority. L.max $0.20/task is the reported benchmark-specific cost; matched S/A costs were not recovered, so no cross-model cost comparison is added. This tests interactive 3D artifact creation, not general UI operation. For both supplemental benchmarks, exact run hardware, clock, batch, per-run verification and all relevant pairwise outcome uncertainties are unavailable. Keep them separate from the full eight-component vectors.
+
+### Held-out evidence
+
+[MKA](https://artificialanalysis.ai/evaluations/mka), [AA-LCR v1.1](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning), general desktop/UI work, and joint model error/conditional rescue remain gaps: the Deep Research review did not retrieve complete comparable target-model/effort evidence. Do not infer missing quality from resource-only observations or use an older model as an exact substitute. The existing FrontierCode, official Terminal-Bench, Agent Arena, Firecrawl and Vals matched/qualified observations remain in the active LUT. No conditional rescue, pair complementarity, actual cost or performance gain is established by this refresh.
