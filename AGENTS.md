@@ -18,11 +18,13 @@ Establish the deliverable, acceptance conditions, material unknowns and applicab
 L = `gpt-6-luna` (`agentmd_luna`); T = `gpt-6.1-terra` (`agentmd_terra`); S = `gpt-6.2-sol` (`agentmd_sol`); A = `gpt-6.2-astra` (`agentmd_astra`).
 Effort n/l/m/h/x/max = none/low/medium/high/xhigh/max. `U` = unsupported by the documented standard API; `—` = not measured/retrieved, never zero. L/T support all six; S/A reject none (O, 2026-11-26). Filter by actual model, effort, tool and context support. Request settings explicitly; the four custom files bind model only. Verify resolved settings when exposed; never claim unavailable telemetry.
 
-Provider examples (O; provisional starting points, not exclusive roles or measured optima):
-- L.l: small edits/field extraction with a clear result. L.x: finding updates across apps, prioritization and clearly constrained problems.
-- T.m: desktop navigation, record updates and focused verifiable fixes. S.m: existing-codebase bugs/features or drafts for review. S.x: multistep testing and revision.
-- A.l: polished work from a clear brief. A.m: complex projects with changing information. A.x: open problems requiring tradeoffs and assumption checks.
-These examples never require switching away from satisfactory current work.
+### Lookup contract (D)
+
+Match remaining requirements, acceptance checks, modality/language, context length, tools and constraints. Prefer relevant actual-task evidence, then protocol-matched benchmarks. Preserve each row's source/version/date, workload, harness, exact setting and metric/resource denominator. Model-only, composite and proxy evidence stays qualified. Compare quality/cost/time separately using the user's priorities, not invented weights. Missing coverage is not inferiority. This policy does not set personal style or domain preferences.
+
+Provider examples (O; provisional, not measured optima or fixed jobs): L.l small edits/extraction; L.x constrained prioritization/app updates; T.m navigation/record updates/focused fixes; S.m code/drafts; S.x multistep testing; A.l polished clear briefs; A.m complex changing information; A.x open tradeoffs. Never override satisfactory current work on this basis.
+
+### AA setting vectors and resource references
 
 AA v5.0.2 snapshot, component values rechecked 2026-11-28 JST (B; unchanged from 2026-11-26). Each vector is in **n/l/m/h/x/max** order. All 22 measured configurations remain represented. Values are displayed percentages except Briefcase Elo and the broad index. Consult the relevant row, not every row; this is evidence, not an execution order.
 
@@ -60,14 +62,11 @@ Matched and specialized observations can be more relevant:
 - Official Terminal-Bench 4.1, max: S/A 61.5/62.1%, intervals overlap. Suite cost is not per-task cost.
 - Agent Arena coding, max: T/S/A intervals overlap; different sessions, not pass rates.
 - Firecrawl search, medium: S/A fact coverage 96.7/96.6; mean total USD/question .080/.224, median 13.2/16 s; paired difference interval includes zero.
-- Vals science: A/S 68.44/57.76%; model pages list max, component settings uncertain.
-- AA-Omniscience release report (2026-11-17): S.max/A.max hallucination rate 55/59% (lower is better; conditional guessing on questions not answered correctly, not the overall incorrect-answer rate). L/T and other efforts not established on this matched report; this is not the missing full Omniscience accuracy row.
-- AA-AnalystAgent (spreadsheet/document analysis, 80 questions × 5): A h/x/max all-five-pass 61.3/62.5/62.5%; other settings not recovered here. Do not substitute single-attempt pass rates.
 - AA-3D v1.0 (55 interactive 3D briefs, blind human votes), max: L 1000 fixed Elo anchor, S 1259 (95% 1231–1288), A 1318 (1286–1349); T not recovered. Quality-only supplements, not general UI operation or matched cost/time comparisons.
 
 ### Task-matched quality, cost and duration (B; checked 2026-11-28 JST)
 
-Vals AI: each cell is published score (%) / USD per test / reported duration per test (source display precision). Same benchmark and harness within each row, not across rows. *Model profiles report max effort, but the effort of each leaderboard observation is not independently verified: these are qualified model-level references, not exact max-setting measurements. — means not retrieved, not zero or failure. Scores include rubric credit; do not interpret all as pass probabilities. Use matched task-level resource references before broad index proxies when applicable; these are historical benchmark workloads, not current task predictions or hard limits. Composite rows reuse component evidence; never count them as independent or treat their resources as component costs.
+Vals AI cells: score (%) / USD per test / reported duration per test, retaining source precision. Same named benchmark/harness within a row; exact run settings remain unverified. *Profiles list max, but these are model-level references, not confirmed effort cells. Scores can include rubric credit. Historical resources are not current-task predictions or hard limits. Composite rows reuse components; do not count them independently or transfer their resource averages to components. Prefer applicable matched references to broad proxies.
 
 | Vals benchmark | L* | T* | S* | A* |
 | --- | --- | --- | --- | --- |
@@ -85,6 +84,62 @@ Vals AI: each cell is published score (%) / USD per test / reported duration per
 
 EMB: financial spreadsheets; Finance Agent: financial research; Legal Research: US law; Vibe Code: application implementation; Terminal-Bench-Science (Vals): mini-swe-agent harness, distinct from AA; BioMystery: biological data; ProofBench: archived formal verification; SWE-bench Multimodal: visual JS software issues. See registry for provenance and scope. No missing effort/cost/duration is interpolated.
 
+### ALE v1.1: long professional workflows (B)
+
+[ALE](https://agents-last-exam.org/leaderboard), results 2026-11-18 UTC; API rates 2026-11-17; checked 2026-11-28 JST. Codex, 122 tasks/runs per setting (86 Linux, 36 Windows); effort explicitly reported. Score is partial credit, full-pass is perfect credit. Cost is the suite API estimate; runtime sums task execution durations, excluding setup/evaluation, not suite elapsed time. Tool fees excluded; missing usage can understate cost. Hours derived from source seconds, rounded to 0.01; percentages to 0.1. L has no retrieved row; S/A.n remain U. Never substitute an older model.
+
+| Setting | Score % | Full-pass % | Suite API USD | Sum runtime h |
+| --- | --- | --- | --- | --- |
+| T.n | 64.2 | 36.9 | 38.91 | 62.70 |
+| T.l | 66.4 | 40.2 | 18.08 | 44.14 |
+| T.m | 64.9 | 34.4 | 28.59 | 64.45 |
+| T.h | 64.6 | 36.1 | 35.13 | 79.89 |
+| T.x | 70.4 | 41.0 | 59.95 | 96.30 |
+| T.max | 69.8 | 41.8 | 106.80 | 124.60 |
+| S.l | 66.7 | 35.2 | 34.84 | 17.40 |
+| S.m | 70.3 | 38.5 | 74.30 | 19.87 |
+| S.h | 72.0 | 40.2 | 89.41 | 26.80 |
+| S.x | 72.5 | 41.8 | 111.32 | 31.67 |
+| S.max | 73.0 | 40.2 | 169.46 | 46.09 |
+| A.l | 65.8 | 37.7 | 63.56 | 13.71 |
+| A.m | 72.1 | 41.0 | 139.43 | 18.36 |
+| A.h | 76.0 | 45.9 | 265.07 | 23.48 |
+| A.x | 78.3 | 47.5 | 372.01 | 29.11 |
+| A.max | 77.6 | 46.7 | 571.17 | 43.22 |
+
+Validity caveat: a verifier review flagged 22 of 50 inspected tasks; the publisher disputes practical exploit prevalence. Qualified workflow evidence, not an isolated GUI test or sole reason to switch. Other run metadata/uncertainty are unknown; the reference revision may postdate runs.
+
+### LiveBench 2.0: suite-matched quality and inference cost (B + D arithmetic)
+
+[LiveBench](https://livebench.ai/), data label 20261106, checked 2026-11-28 JST. All four entries explicitly report max. Cells: mean score (0–100) / model-inference USD per source task/question, derived from suite cost/count and rounded to four decimals. Count is the workload denominator, not repetitions. One recorded run; an unmeasurable item gets one rerun, then zero. This scoring rule never changes AgentMD's — marker.
+
+| LiveBench suite | Count | L.max | T.max | S.max | A.max |
+| --- | --- | --- | --- | --- | --- |
+| Agentic | 18 | 24.7/0.6669 | 55.3/6.1459 | 63.6/4.0741 | 70.8/17.0234 |
+| Design | 25 | 76.1/0.0306 | 79.7/0.2702 | 80.0/0.4866 | 82.8/1.9926 |
+| Coding | 24 | 70.8/0.1356 | 89.2/1.2981 | 83.7/1.1299 | 91.9/5.1222 |
+| Browser Use | 25 | 70.3/0.1932 | 93.1/1.9496 | 88.2/0.6568 | 93.0/2.5049 |
+| Data Analysis | 150 | 73.4/0.0166 | 82.3/0.0628 | 81.1/0.0985 | 84.1/0.3547 |
+| Research | 22 | 48.5/0.4261 | 79.1/1.4620 | 90.1/2.0750 | 91.5/6.6314 |
+| Reasoning | 202 | 81.8/0.0214 | 88.7/0.0403 | 90.6/0.0312 | 91.6/0.1323 |
+
+Cost includes cached model calls, excludes fixed starting state and harness helpers; not all-in cost. Data Analysis/Reasoning are short no-tool questions; do not pool costs with agentic work. Design/Research allow rubric credit; Browser tests web apps, not desktop OS. CIs, task time and other run metadata remain unknown. Overall/cost-per-success has conflicting source weights; hidden timing has unresolved denominators. Both are excluded.
+
+### AA max-only coverage extensions (B; checked 2026-11-28 JST)
+
+Chart records explicitly label max. Rounded to 0.1 point; — means absent on this surface. Other efforts and matched cost/time remain unknown.
+
+| AA max-only metric | L.max | T.max | S.max | A.max |
+| --- | --- | --- | --- | --- |
+| Omniscience net points (higher better) | -8.3 | 29.6 | 40.4 | 50.0 |
+| Omniscience accuracy % | 39.6 | 47.6 | 61.6 | 68.6 |
+| Omniscience conditional hallucination % (lower better) | 79.3 | 34.5 | 55.4 | 59.1 |
+| AA-LCR v1.1 accuracy % (legacy) | 83.3 | 82.7 | — | — |
+| AA-AnalystAgent all-five-pass % | 43.8 | — | 53.8 | 62.5 |
+| MMMU-Pro accuracy % (AA setup) | 79.7 | 84.7 | — | 89.5 |
+
+Omniscience v1.1: 3,000 questions, tools off; net points reward correct, penalize incorrect, abstentions neutral. Conditional hallucination divides incorrect by all non-correct responses. LCR: 100 questions, about 10k–100k tokens, legacy. AnalystAgent: 80 questions × 5, Stirrup; all-five-pass differs from at-least-once pass. A.h/x 61.3/62.5% remain separate observations. MMMU-Pro: AA's 1,730-question implementation, not GUI control. Beyond reported protocols, repeat/run metadata and CIs remain unverified.
+
 ### Additional specialized capability observations (B/O)
 
 - Epoch FrontierMath Tier 4 v2 (advanced mathematics): T.max 92.7% ±4.1 pp; A.max 100.0%; L/S —. A's displayed perfect score is not a universal guarantee.
@@ -93,9 +148,26 @@ EMB: financial spreadsheets; Finance Agent: financial research; Legal Research: 
 - Epoch Furniture Assembly (manual-guided spatial reasoning): rounded best model scores L 44%, T 79%, A 89%, S —; benchmark protocol uses highest supported API effort, individual run configuration not verified.
 - OpenAI Terra internal difficult factual prompts: T.low 16.7%, T.max 4.3% error rate (lower is better); other settings/models —. Do not compare directly with SimpleQA or AA guessing-conditioned hallucination.
 
-These specialist scores do not supply matched resource measurements unless explicitly listed. Use for capability demand only; do not turn model-level observations into measured effort vectors or mix unmatched scores and costs to claim dominance. Exact joint failures, long-context effort curves, direct GUI/instruction-following and creative-writing coverage remain incomplete.
+These specialist scores have no matched resources unless explicitly stated. Do not map model-only observations to effort curves or claim dominance from unmatched costs.
 
-At a transition, map the next concrete work to the relevant evidence: repository implementation/debugging → FrontierCode/Terminal; empirical research and derivation → Science/CritPt/HLE as relevant; document synthesis → GDP/Briefcase; business application execution → Automation/Strategy & Ops; finance/legal/medical analysis → the corresponding professional index plus relevant direct measures; quantitative spreadsheet tasks → AnalystAgent; interactive 3D → AA-3D; evidence retrieval → Firecrawl. These are illustrative mappings from measured scope, not fixed model jobs or a task taxonomy that must be run on every request. Prefer a directly matched protocol when one exists; for mixed work identify the material requirement rather than averaging unrelated rows. Unknown or weak coverage calls for a bounded task-grounded check, not invented scores or automatic escalation.
+DesignArena text-to-HTML (2026-11-28 01:19 JST snapshot): S/A ratings 1463/1448, 1,715/2,190 battles. Effort unspecified, L/T ratings unretrieved. Human preferences across differing prompts/opponents, not functional correctness, creative-prose performance or this user's taste. Reported MoE/time semantics are unresolved; no pairwise superiority or resource comparison is inferred.
+
+### Task-to-evidence index (D)
+
+| Need | Evidence | Match/check |
+| --- | --- | --- |
+| Code / applications | FrontierCode, Terminal, Vibe Code, LiveBench Coding | Harness, scope, regressions |
+| Long workflows | LiveBench Agentic; qualified ALE | Mixed workflows, not isolated GUI |
+| Web / business tools | LiveBench Browser, Automation | Actual state; not desktop OS |
+| Reports / design | Briefcase, GDP, LiveBench Research/Design, DesignArena | Truth/function vs rubric/preference |
+| Spreadsheets / data | AnalystAgent, EMB, LiveBench Data Analysis | Complex documents vs short tables |
+| Science / math | Science, CritPt, HLE, Epoch, Vals Science | Subject, derivation, tools |
+| Finance / law / medicine | Direct tests, then domain indexes | Jurisdiction; dependent composites |
+| Facts / long text / images | Omniscience, SimpleQA / LCR / MMMU-Pro, Furniture | Distinct risks; partial settings |
+| Search / 3D | Firecrawl / AA-3D | Specialist scope |
+| Instructions / desktop / prose / Japanese | Target evidence incomplete | Actual-work checks; no invented rank |
+
+These keys select evidence, not model jobs. For mixed work use the material requirement, not averaged unrelated scores. Joint rescue, user-specific fit and full 22-setting matched resources remain unknown. Use bounded actual-work checks for gaps; the existing transition rule decides whether a trial is worthwhile.
 
 Use matching task conditions before broad proxies. No listed result establishes single-task adequacy, statistical superiority, conditional recovery or pair complementarity. Source conditions, intervals, protocol counts and unknown hardware/clock/batch remain in AgentMD's offline `research/benchmark-evidence.md`. Ordinary work requires neither loading that archive nor searching benchmarks.
 
