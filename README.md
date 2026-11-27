@@ -143,6 +143,10 @@ Start with a model available to your account, for example `codex --model gpt-6-l
 
 Markdown does not grant tools, enforce budgets or change the parent model by itself. CLI users can choose an active model and supported effort with [`/model`, then inspect `/status`](https://learn.chatgpt.com/docs/developer-commands?surface=cli). Delegate when useful and supported; otherwise complete the best feasible work directly. Separate agent context does not guarantee separate writable files. Workers inherit the parent's permissions, so changing agents cannot bypass a blocker.
 
+## Task-matched resource references
+
+The LUT also contains 35 published Vals AI quality/cost/duration triples across eight direct benchmarks and three composite indexes, plus partial Epoch mathematics, science, factuality and spatial-reasoning observations and OpenAI Terra factual-error observations. Vals profiles list max effort, but leaderboard-run effort is not independently verified; these are model-level references, not new exact model/effort cells. Use a matched benchmark before broad resource proxies; neither historical costs nor durations are runtime guarantees. Missing cells stay missing. See the [matched task-resource extension](research/benchmark-evidence.md#matched-task-resource-and-specialist-lut-extension--2026-11-28-jst). No change to the task-transition/Buddy decision rules.
+
 ## Evidence and validation status
 
 Evidence classes are published observations (B), provider guidance (O), design choices (D), and unknowns. The [registry](research/benchmark-evidence.md) preserves source versions, dates, settings, units, published protocols and missing run metadata. AA resource values are historical weighted costs and derived inference times, not live prices or task-specific cost/latency. Normal work does not trigger benchmark collection.
