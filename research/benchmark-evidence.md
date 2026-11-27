@@ -1,6 +1,6 @@
 # AgentMD — Active evidence registry
 
-**Checked:** 2026-11-28 JST. The [matched task-resource and specialist LUT extension](#matched-task-resource-and-specialist-lut-extension--2026-11-28-jst) adds task-matched cost/duration references and specialist capability observations. The [task-transition and domain LUT extension](#task-transition-and-domain-lut-extension--2026-11-28-jst) adds professional capability indexes and refreshes resource references without changing the 176 original component scores. The [2026-11-26 component snapshot](#lut-quantitative-refresh--2026-11-26-jst) supersedes the earlier AA component snapshot and records provider/supplemental observations; the 2026-11-28 extension supersedes its rolling resource references. Historical tables and audits are preserved below. This is an offline maintenance reference, not routine agent context. Earlier snapshots and superseded policies remain in Git history. No new model-performance experiment was run for the benchmark snapshot. The strategy audit on 2026-11-26 preserves the numeric snapshot, replaces the active proxy-frontier policy and records the limits of the logical baseline.
+**Checked:** 2026-11-28 JST. The [general-purpose routing LUT](#general-purpose-routing-lut--2026-11-28-jst) adds reproducibly extracted ALE effort rows, LiveBench suite quality/cost, AA max-only coverage and an explicit task-to-evidence index. The [matched task-resource and specialist LUT extension](#matched-task-resource-and-specialist-lut-extension--2026-11-28-jst) adds task-matched cost/duration references and specialist capability observations. The [task-transition and domain LUT extension](#task-transition-and-domain-lut-extension--2026-11-28-jst) adds professional capability indexes and refreshes resource references without changing the 176 original component scores. The [2026-11-26 component snapshot](#lut-quantitative-refresh--2026-11-26-jst) supersedes the earlier AA component snapshot and records provider/supplemental observations; the 2026-11-28 extension supersedes its rolling resource references. Historical tables and audits are preserved below. This is an offline maintenance reference, not routine agent context. Earlier snapshots and superseded policies remain in Git history. No new model-performance experiment was run for the benchmark snapshot. The strategy audit on 2026-11-26 preserves the numeric snapshot, replaces the active proxy-frontier policy and records the limits of the logical baseline.
 
 | Alias | Exact model ID |
 | --- | --- |
@@ -579,3 +579,168 @@ EMB v1.1 uses a shared financial workbook evaluation with equal weighting of sev
 Sources: [FrontierMath Tier 4 v2](https://epoch.ai/benchmarks/frontiermath-tier-4-v2?tab=leaderboard&view=table), [GPQA Diamond](https://epoch.ai/benchmarks/gpqa-diamond), [SimpleQA Verified](https://epoch.ai/benchmarks/simple-qa-verified), [Furniture Assembly methodology](https://epoch.ai/benchmarks/furniture-assembly), [L model card](https://epoch.ai/models/gpt-6-luna), [T model card](https://epoch.ai/models/gpt-6-1-terra), [A model card](https://epoch.ai/models/gpt-6-2-astra), and [OpenAI Terra release](https://openai.com/index/introducing-gpt-6-1-terra/), checked 2026-11-28 JST. The Epoch ± values are displayed uncertainty margins in percentage points; no missing uncertainty margin was inferred. SimpleQA Verified uses 1,000 factual questions and an answer-required prompt, so is not a test of natural abstention. Furniture Assembly uses 60 assembly photographs, manuals and a bounded tool-use protocol; best scores are rounded model-profile values rather than exact effort-specific estimates. Terra internal error-rate observations are provider-reported and do not establish cross-model ranking. Resource values were not retrieved for these specialist scores, and no unsupported mapping to the four-model effort grid was made.
 
 **Scope of static check (D).** The extension records 35 complete score/cost/duration triples (24 direct benchmark observations and 11 composite observations); two Science Index scores already occurred in the previous LUT. Five explicitly effort-labeled Epoch scores, three rounded spatial scores and two provider error-rate values are additional references. The FrontierCode wording is clarified to individual pass rates of 48.2% each, not a joint pass rate (see existing individual rows). All existing component and resource vectors are retained, no existing Buddy/decision/recovery rules change. Remaining gaps include full 22-setting matched task resources, long context, direct desktop operation, instruction following, creative writing, and joint failure/recovery data. AA component-specific resource graphs were not reliably extractable as numeric tables; values were not guessed. Static transcription/structure validation only; no measured AgentMD/Codex runtime, speedup, cost saving or performance improvement is claimed.
+
+
+## General-purpose routing LUT — 2026-11-28 JST
+
+### Purpose, classification and provenance
+
+This maintenance update constructs an expanded general-purpose evidence lookup, not a universal optimum or a personality policy. B denotes publisher observations; D denotes transparent arithmetic or routing design. Actual runtime settings and task outcomes still require runtime evidence. Existing 22-setting vectors, Vals triples and historical snapshots remain distinct populations. No model-performance experiment was run.
+
+| Field | Definition / admissibility | Unit / type |
+| --- | --- | --- |
+| Workload key | Task family, modality/language, input length, tools, harness, version and snapshot; missing fields stay unknown | Categorical record |
+| Configuration | Exact model and reported effort; model-only evidence cannot populate an effort cell | Categorical pair |
+| Quality | Preserve rubric/accuracy/full-pass/all-five-pass/preference definitions; no calibrated current-task probability | Dimensionless score, %, or rating points as labeled |
+| Cost | Source total or transparently derived mean with matching workload denominator; exclusions retained | USD (non-SI currency), nonnegative scalar |
+| Runtime | Source sum of execution durations, observed latency or inference proxy must remain distinct | SI seconds; active ALE display in hours, 3,600 s per hour |
+| Count | Source tasks/questions, runs, attempts and votes are different populations | 1, nonnegative integer |
+| Unknown | Missing does not mean zero, failure or unsupported; U remains documented unsupported | Marker |
+
+Evidence fit is not established by a high score alone. Do not mix providers' harnesses, benchmark revisions, effort levels, resource denominators or source time windows to construct dominance. Prefer directly relevant observations without suppressing useful complementary evidence. No arbitrary task weights, hard pass threshold or fixed best-model map is added.
+
+### ALE source snapshot and exact records (B)
+
+Primary [leaderboard](https://agents-last-exam.org/leaderboard) and its linked [public JSON](https://agents-last-exam.org/api/demo/leaderboard/v1.1), retrieved 2026-11-28 JST. The endpoint was discovered in the page's linked static JavaScript and read as data; no site code was executed. Snapshot JSON SHA256: `eb256326e54beca1d90341cacc6d00927cb239dd06b00c67064545ae319d11b0`.
+
+`resultsUpdatedAt` = `2026-11-18T01:01:54.886914Z`; `costRatesAsOf` = `2026-11-17`. Benchmark reference [commit 2e91edd](https://github.com/rdi-berkeley/agents-last-exam/commit/2e91edd3cd26baa35a38127c90c8e5241dfbe62f), 2026-10-27. The page warns runs can predate the reference; do not claim this exact revision was used by every run. All admitted records have `harness=codex`, `split=v1.1`, `runs=tasks=splitTasks=122`; efforts are directly in `harnessVariant=reasoning-*`, not inferred from a model profile. There are 86 Linux and 36 Windows tasks; these are dependent subsets and not pure GUI/CLI classes. Target Luna is absent from all 41 snapshot rows; no old Luna substitution. Display defaults are T.max, S.xhigh, A.xhigh, not uniformly max.
+
+Raw fractions and seconds below retain source precision; missing input-token totals are null, never zero. `costSource=list` for every target record. No hidden assumption about which cost components are omitted is inferred from null token aggregates.
+
+| Setting | avgScore fraction | passRate fraction | Perfect runs | totalDurationS | totalCostUsd |
+| --- | --- | --- | --- | --- | --- |
+| T.n | 0.6421414878786305 | 0.36885245901639346 | 45 | 225730 | 38.91 |
+| T.l | 0.6639686667831649 | 0.4016393442622951 | 49 | 158910 | 18.08 |
+| T.m | 0.6492203268418958 | 0.3442622950819672 | 42 | 232035.518 | 28.59 |
+| T.h | 0.6455196236140132 | 0.36065573770491804 | 44 | 287594.926 | 35.13 |
+| T.x | 0.70368886837223 | 0.4098360655737705 | 50 | 346667 | 59.95 |
+| T.max | 0.6978073386766798 | 0.4180327868852459 | 51 | 448551.26 | 106.80 |
+| S.l | 0.666509910606572 | 0.3524590163934426 | 43 | 62650.439 | 34.84 |
+| S.m | 0.7025776982820281 | 0.38524590163934425 | 47 | 71544.679 | 74.30 |
+| S.h | 0.7203595245098597 | 0.4016393442622951 | 49 | 96497.997 | 89.41 |
+| S.x | 0.7248200922037955 | 0.4180327868852459 | 51 | 114017.169 | 111.32 |
+| S.max | 0.7304398616455706 | 0.4016393442622951 | 49 | 165914.747 | 169.46 |
+| A.l | 0.6576912195967535 | 0.3770491803278688 | 46 | 49366.525 | 63.56 |
+| A.m | 0.7206460188560668 | 0.4098360655737705 | 50 | 66106.722 | 139.43 |
+| A.h | 0.7596382128009247 | 0.45901639344262296 | 56 | 84514.722 | 265.07 |
+| A.x | 0.7833238426868974 | 0.47540983606557374 | 58 | 104791.47 | 372.01 |
+| A.max | 0.7760714844257192 | 0.4672131147540984 | 57 | 155586.833 | 571.17 |
+
+Score is mean partial credit; full-pass is the share of perfect runs. Missing scores count zero; failed/timed-out runs retain their graded credit. Runtime sums per-task average agent execution times over completed/timed-out runs, excluding setup/evaluation. It is not suite elapsed wall-clock time. Cost sums per-task mean model API estimates using recorded usage and dated list rates, with cache and long-context treatment where recorded. Tool fees are excluded; missing usage can understate cost. Individual Codex build, prompts beyond effort, hardware/clock, batch/concurrency, paired outcomes and uncertainty were not recovered. Documentation example concurrency/timeouts/retries do not establish these runs' settings.
+
+Active formatting rounds score/full-pass to 0.1 percentage point and divides seconds by 3,600 for hours rounded to 0.01; monetary source totals retain cents. Dimensional check: converting seconds to hours changes display units, not runtime scope; no USD is added to time. Exact passes divided by 122 reproduce every source pass fraction. Hours and percentages are derived displays, not new measurements.
+
+Validity limitation: [Epoch's review](https://epoch.ai/benchmarks/agents-last-exam/review) flags 22 of 50 inspected tasks as admitting full credit without intended work. The [publisher's response](https://agents-last-exam.org/blogs/verifier-check) disputes practical exploitation frequency and acknowledges two network restrictions were only in task cards invisible to agents. Do not infer that later enforcement retroactively fixes this snapshot. Active evidence carries this caveat and cannot solely decide a switch or establish isolated GUI/instruction-following skill. See also [release docs](https://agents-last-exam.org/docs/ale/pages/configure.html) and [harness docs](https://agents-last-exam.org/docs/ale/pages/agents.html).
+
+### LiveBench 2.0 suite snapshot (B) and cost normalization (D)
+
+Primary [site](https://livebench.ai/) / [methodology](https://livebench.ai/#/methodology), release-data label `20261106`, retrieved 2026-11-28 JST. The linked static [UI data loader](https://livebench.ai/static/js/main.099aad9b.js) identifies these public source files and explicitly declares effort `max` for all four exact target model IDs; run notes say highest supported effort unless the name specifies another setting. This is publisher-reported benchmark configuration, not AgentMD-observed telemetry. A hardcoded November 11 page-update label is not an individual run date, including for later-added models.
+
+| Primary data URL | Observed SHA256 |
+| --- | --- |
+| [ table.csv ](https://livebench.ai/data/20261106/table.csv) | cd68d30168e61337b3285e9020e6242746cc18a3892d855580b51ec72d266a0a |
+| [ cost.csv ](https://livebench.ai/data/20261106/cost.csv) | 95a68251660318b70eff30c75bd87b7508e946af0fd2fab9fef024e2e4f17ed3 |
+| [ categories.json ](https://livebench.ai/data/20261106/categories.json) | b5366a69719445fa91e970de6f248c666115bbc5d8b8d134f33bb5fcc399a7ce |
+| [ breakdown.json ](https://livebench.ai/data/20261106/breakdown.json) | e3816cfde6682ab1062c738d9b5758a47c308249b27ee4f1617e1d2bbe780500 |
+| [ notes.json ](https://livebench.ai/data/20261106/notes.json) | 812556975b3e6306ad413a5be8918bd7990a8b43291e6955ee737939c4cc3a10 |
+
+The source data are mutable; hashes identify this retrieved snapshot. Current direct files resolve stale search-cache variants (Terra Agentic 55.3, not 56.2). Store suite observations, not mixed cached aggregates.
+
+| LiveBench suite | Count | L.max | T.max | S.max | A.max |
+| --- | --- | --- | --- | --- | --- |
+| Agentic | 18 | 24.7/0.6669 | 55.3/6.1459 | 63.6/4.0741 | 70.8/17.0234 |
+| Design | 25 | 76.1/0.0306 | 79.7/0.2702 | 80.0/0.4866 | 82.8/1.9926 |
+| Coding | 24 | 70.8/0.1356 | 89.2/1.2981 | 83.7/1.1299 | 91.9/5.1222 |
+| Browser Use | 25 | 70.3/0.1932 | 93.1/1.9496 | 88.2/0.6568 | 93.0/2.5049 |
+| Data Analysis | 150 | 73.4/0.0166 | 82.3/0.0628 | 81.1/0.0985 | 84.1/0.3547 |
+| Research | 22 | 48.5/0.4261 | 79.1/1.4620 | 90.1/2.0750 | 91.5/6.6314 |
+| Reasoning | 202 | 81.8/0.0214 | 88.7/0.0403 | 90.6/0.0312 | 91.6/0.1323 |
+
+Cells are published suite score (0–100) / derived USD per source task or short question. The source totals below are divided by the matching `nq_*` column with Decimal arithmetic and rounded half-up to four decimal places. Four places preserve transcription and are not a claim about measurement uncertainty. Counts agree across all four models and the breakdown file. Each source question can include the publisher's possible rerun, so this denominator does not estimate cost of one API call or imply one physical solve attempt.
+
+| Suite | Source count | L total USD | T total USD | S total USD | A total USD |
+| --- | --- | --- | --- | --- | --- |
+| Agentic | 18 | 12.0049 | 110.6270 | 73.3343 | 306.4219 |
+| Design | 25 | 0.7642 | 6.7559 | 12.1646 | 49.8162 |
+| Coding | 24 | 3.2545 | 31.1532 | 27.1185 | 122.9317 |
+| Browser Use | 25 | 4.8303 | 48.7405 | 16.4201 | 62.6222 |
+| Data Analysis | 150 | 2.490824 | 9.427008 | 14.768816 | 53.204464 |
+| Research | 22 | 9.3740 | 32.1644 | 45.6505 | 145.8908 |
+| Reasoning | 202 | 4.323805 | 8.139872 | 6.302824 | 26.715417 |
+
+Unit check: reported suite USD divided by the dimensionless count gives USD per defined source question. For example Sol Browser Use totals 16.4201 USD across 25 questions, yielding 0.6568 USD/question after rounding. This is not all-in operational cost. The methodology prices model calls at list rates including cached input, excluding fixed starting state and harness helper calls. Infrastructure, tool fees, handoff and integration costs remain outside the established scope. No conversion from overall cost-per-success is used.
+
+One recorded run per suite/model; unmeasurable items receive one rerun and then zero if still unmeasurable. This scoring rule is source behavior, not permission to fill AgentMD missing cells with zero. Agentic covers changing applications, long operations, systems and optimization. Design covers visual/structural DOCX/PDF/presentation checks; Research uses written-report rubrics. Coding uses merged-PR bugs in frozen code and penalizes regressions. Browser Use tests screenshot-driven web application tasks, not desktop OS control. Data Analysis and Reasoning are short no-tool questions, with equal subcategory aggregation; do not pool their prices with agentic workloads. Scores are not universally binary success rates. Exact per-row harness build, dates, HW/clock/batch, repeated-run uncertainty and paired outcomes remain unknown.
+
+Excluded aggregates: `notes.json` says equal suite weights, while `categories.json` and rendering code weight Agentic 2, Coding/Design 1.5, others 1. Runtime therefore omits Overall and overall cost-per-success. The hidden `llm_time.csv` is intentionally omitted: UI sets `hasTime=false`, and its Data Analysis/Reasoning denominators differ from quality/cost counts. No conversion to wall-clock time is warranted.
+
+### AA exact max-only record extension (B)
+
+Primary [Omniscience page](https://artificialanalysis.ai/evaluations/omniscience), retrieved 2026-11-28 JST, exposes public serialized chart model records. JSON was parsed without executing scripts or estimating graph coordinates. Each of these four records explicitly labels `effort.slug=max`; missing fields are null on this retrieved surface. Other efforts are not imputed. Exact source UUIDs:
+
+| Alias | Release slug | Source UUID |
+| --- | --- | --- |
+| L | gpt-6-luna | 6fb13851-40ce-4bda-ad3f-6b38e0c5daa7 |
+| T | gpt-6-1-terra | b0c462cf-f2d0-4126-9434-28db9502219f |
+| S | gpt-6-2-sol | a1a84b18-e8c9-48fb-8e04-6003bd9f6ff4 |
+| A | gpt-6-2-astra | 75c1b0b8-9db3-4c7e-95be-d74e59defee4 |
+
+The following keys are relative to the source model record; raw fractions are not percentages, except `omniscience` which is already net points. Preserve original numeric precision as serialization, not statistical precision.
+
+| Source key | L.max | T.max | S.max | A.max |
+| --- | --- | --- | --- | --- |
+| omniscience | -8.26666666666667 | 29.5666666666667 | 40.3666666666667 | 50 |
+| omniscienceBreakdown.accuracy | 0.3963333333333333 | 0.47633333333333333 | 0.6163333333333333 | 0.6856666666666666 |
+| omniscienceBreakdown.hallucinationRate | 0.7934842628382109 | 0.3450031826861871 | 0.5543006081668115 | 0.5906680805938495 |
+| lcr | 0.833333333333333 | 0.826666666666667 | null | null |
+| analystAgent | 0.4375 | null | 0.5375 | 0.625 |
+| mmmuPro | 0.796531791907514 | 0.846820809248555 | null | 0.894797687861272 |
+
+| AA max-only metric | L.max | T.max | S.max | A.max |
+| --- | --- | --- | --- | --- |
+| Omniscience net points (higher better) | -8.3 | 29.6 | 40.4 | 50.0 |
+| Omniscience accuracy % | 39.6 | 47.6 | 61.6 | 68.6 |
+| Omniscience conditional hallucination % (lower better) | 79.3 | 34.5 | 55.4 | 59.1 |
+| AA-LCR v1.1 accuracy % (legacy) | 83.3 | 82.7 | — | — |
+| AA-AnalystAgent all-five-pass % | 43.8 | — | 53.8 | 62.5 |
+| MMMU-Pro accuracy % (AA setup) | 79.7 | 84.7 | — | 89.5 |
+
+Active percentages multiply source fractions by 100 and round half-up to 0.1 point; net points only round. All units are dimensionless; net points are on -100 to 100. Net score gives positive credit for correct answers, negative credit for incorrect answers and neutral credit for abstention. Conditional hallucination divides incorrect answers by all non-correct responses, including partial answers/abstentions in the denominator; it is not the overall incorrect fraction. Omniscience v1.1 has 3,000 questions and one repeat with tools off. The [original paper](https://arxiv.org/abs/2511.13029) concerns v1's 6,000 questions and does not establish these v1.1 scores.
+
+[AA-LCR v1.1](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning) is a legacy 100-question long-document pass@1 benchmark, about 10k–100k tokens using cl100k_base, removed from Intelligence Index v5.0. [AA-AnalystAgent](https://artificialanalysis.ai/evaluations/aa-analyst-agent) has 80 questions across 14 domains, five attempts each, Stirrup, 100-turn cap; `analystAgent` is all-five-pass, not `analystAgentPassAtK`. A.max 62.5% already existed in the active LUT; A.high/xhigh 61.3/62.5% remain. [MMMU-Pro](https://artificialanalysis.ai/evaluations/mmmu-pro) uses AA's 1,730-question, ten-option, regex-scored implementation. Its background description of the full 3,460-question benchmark is not this implementation denominator. L/T/A fractional scores correspond to 1,378/1,465/1,548 correct answers out of 1,730; consistency is not proof of every run condition. See [AA implementation methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking).
+
+There are 20 nonmissing numeric cells across six metrics, with dependencies and prior observations (including A.max AnalystAgent and previously rounded S/A hallucination). They are not 20 independent trials. Full 22-setting curves, matched cost/time, CIs and exact run HW/clock/batch are absent. Do not synthesize costs from available token counts without resolving caching, prices, populations and repeats.
+
+### Design preferences and explicit coverage gaps
+
+[DesignArena text-to-HTML](https://www.designarena.ai/leaderboard/code), timestamp 2026-11-27 16:19 UTC (2026-11-28 01:19 JST): Sol rating 1463 / 1,715 battles; Astra 1448 / 2,190. [Method](https://www.designarena.ai/about): anonymous human choices and Bradley–Terry ratings. These labels do not establish effort. Luna/Terra appear in controls but their numerical rows were not retrieved. Different prompts/opponents/vote populations prevent treating this as a matched correctness trial. Personal aesthetics, functional correctness, accessibility and creative prose are not established. Percentage MoE cells versus Elo-confidence wording and reported time aggregation are unresolved; the active LUT excludes intervals/time rather than inventing meanings.
+
+| Coverage need | Primary benchmark or source | Admission status |
+| --- | --- | --- |
+| Direct desktop operation | [OSWorld 2.0](https://osworld-v2.xlang.ai/) | Benchmark exists; exact target-model rows unretrieved. Browser and ALE mixtures are not substitutes. |
+| Verifiable instruction constraints | [IFEval paper](https://arxiv.org/abs/2311.07911), [AA IFBench](https://artificialanalysis.ai/evaluations/ifbench) | No matched target values admitted; raw max IFBench fields null. |
+| Creative prose | [Arena creative writing](https://arena.ai/leaderboard/chat/text/creative-writing) | Category exists; exact target ratings unretrieved. |
+| Japanese / multilingual work | [Global-MMLU-Lite](https://artificialanalysis.ai/evaluations/global-mmlu-lite) | Target max fields null; Japanese-specific long-document fit remains unestablished. This is not a claim no relevant benchmark exists. |
+| Engineering / economics aggregates | [Engineering](https://artificialanalysis.ai/indexes/engineering), [Economics](https://artificialanalysis.ai/indexes/economics) | Index methods exist, exact target values unretrieved; do not synthesize composite scores. |
+| Conditional rescue / joint failure | Individual marginal scores are insufficient | No candidate-pair benefit or Buddy gain is inferred. |
+
+### Routing design and source corrections (D)
+
+The active task-to-evidence index selects relevant evidence rather than assigning a model a permanent occupation. It keys on remaining capability, inputs, tools and acceptance conditions. Compatible actual task results take priority; benchmark observations nominate candidates without proving adequacy. Model-only, proxy and composite evidence stays qualified. Unresolved quality/cost/time tradeoffs use the user's expressed priorities; no generic style, aesthetics, personality or jurisdiction preference is installed. Existing transition/Buddy/recovery rules remain unchanged. A bounded actual-work check is appropriate for a material unknown; routine work must not fetch benchmarks or load this archive.
+
+Date correction: the previous matched-resource section's blanket November 19 leaderboard date was too broad. On this retrieval, [Vibe Code v1.1.1](https://www.vals.ai/benchmarks/vibe-code-v1-1-1) displays November 21, 2026; the other ten referenced Vals pages display November 19. Historical numeric triples remain preserved; these dates must not be represented as individual run dates. This update does not claim a new complete numeric Vals refresh.
+
+### Scoped validation record
+
+Performed on the completed local revision, 2026-11-28 JST:
+
+- PASS: parsed the four TOMLs with Python tomllib; exact model IDs, identical worker contract and no fixed effort; all four byte-identical to the base. The eight-file layout and local Markdown links/anchors passed.
+- PASS: all original eight component vectors, four domain vectors, broad references, endpoint observations, token rates, 35 Vals triples and specialist rows retained. Earlier duplicate references were consolidated without losing measurements; dated source history remains available.
+- PASS: all 16 ALE rows / 64 numeric cells reproduce the primary JSON, including integer pass counts and the stated seconds-to-hours display conversion. All 28 LiveBench score/cost pairs reproduce the primary CSVs with matching denominators, and all 20 AA nonmissing cells reproduce explicit max records. Missing values remain missing. DesignArena's two rating/vote records were checked against the primary rendered table.
+- PASS: installer POSIX syntax and an isolated installation; six existing-file blockers and a dangling symlink prevented overwrite. Only the target-directory assignment was redirected to a task-specific temporary directory. No real user profile or CODEX_HOME/HOME value was changed. The original installer snippet is byte-identical to the base.
+- PASS: decision baseline and all Buddy/recovery text outside the LUT are byte-identical to the base. A separate scoped review checked the lookup index, source comparability and ALE data. Compression briefly broadened an unknown-metadata statement to imply confirmed effort might be unknown; this was corrected to other/unreported metadata and the affected clauses checked.
+- Runtime AGENTS.md: 28,523 UTF-8 bytes (27.85 KiB); LUT from its level-two heading to before Buddy: 16,755 bytes (16.36 KiB). Remaining space to the documented 32,768-byte combined guidance default: 4,245 bytes (4.15 KiB). Existing project guidance may consume that remainder; this is not a measurement of instructions loaded in any client.
+
+Acceptance hypothesis for this maintenance task: active data can be regenerated from identified source fields with zero transcription/denominator mismatches, unsupported and missing settings stay distinct, required static checks pass, and the runtime stays within the chosen 28 KiB maintenance budget. Counterexamples include a wrong effort label, converting suite time into elapsed latency, mixing source populations, or a known setting hidden by an overbroad unknown label. The checks above address these finite conditions; they do not prove general model behavior.
+
+Uncertainty remains in benchmark validity, task transfer, snapshot freshness, sampling, missing run metadata and user-specific tradeoffs. No combined performance uncertainty or coverage factor can be computed from these incomplete and heterogeneous records. No model/Codex run, comparative task success, measured cost saving or latency improvement was established. Further numeric refreshes require their own source snapshot; this scoped audit is complete.
