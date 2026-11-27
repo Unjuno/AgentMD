@@ -56,7 +56,7 @@ AA endpoint responsiveness, checked 2026-11-28 JST (B; seconds; n/l/m/h/x/max). 
 Standard short-context API rates (O, 2026-11-26), USD per million text tokens, input/cache-hit/30-minute cache-write/output: L .10/.01/.125/.50; T 1/.05/1.25/5; S 2/.10/2.50/10; A 8/.40/10/40. Above 272K input tokens, the documented long-context rates multiply input/cache by 2 and output by 1.5 for the full request. Other tiers, cache retention and tool fees may differ. Token prices are not total task cost or Codex-plan usage.
 
 Matched and specialized observations can be more relevant:
-- Cognition FrontierCode 2.0, max: S/A score 43.8/44.2%, both pass 48.2%; mean rollout USD 1.29/5.97; T unknown.
+- Cognition FrontierCode 2.0, max: S/A score 43.8/44.2%, individual pass rates 48.2% each; mean rollout USD 1.29/5.97; T unknown.
 - Official Terminal-Bench 4.1, max: S/A 61.5/62.1%, intervals overlap. Suite cost is not per-task cost.
 - Agent Arena coding, max: T/S/A intervals overlap; different sessions, not pass rates.
 - Firecrawl search, medium: S/A fact coverage 96.7/96.6; mean total USD/question .080/.224, median 13.2/16 s; paired difference interval includes zero.
@@ -64,6 +64,36 @@ Matched and specialized observations can be more relevant:
 - AA-Omniscience release report (2026-11-17): S.max/A.max hallucination rate 55/59% (lower is better; conditional guessing on questions not answered correctly, not the overall incorrect-answer rate). L/T and other efforts not established on this matched report; this is not the missing full Omniscience accuracy row.
 - AA-AnalystAgent (spreadsheet/document analysis, 80 questions × 5): A h/x/max all-five-pass 61.3/62.5/62.5%; other settings not recovered here. Do not substitute single-attempt pass rates.
 - AA-3D v1.0 (55 interactive 3D briefs, blind human votes), max: L 1000 fixed Elo anchor, S 1259 (95% 1231–1288), A 1318 (1286–1349); T not recovered. Quality-only supplements, not general UI operation or matched cost/time comparisons.
+
+### Task-matched quality, cost and duration (B; checked 2026-11-28 JST)
+
+Vals AI: each cell is published score (%) / USD per test / reported duration per test (source display precision). Same benchmark and harness within each row, not across rows. *Model profiles report max effort, but the effort of each leaderboard observation is not independently verified: these are qualified model-level references, not exact max-setting measurements. — means not retrieved, not zero or failure. Scores include rubric credit; do not interpret all as pass probabilities. Use matched task-level resource references before broad index proxies when applicable; these are historical benchmark workloads, not current task predictions or hard limits. Composite rows reuse component evidence; never count them as independent or treat their resources as component costs.
+
+| Vals benchmark | L* | T* | S* | A* |
+| --- | --- | --- | --- | --- |
+| EMB v1.1 | 69.95/.14/17m21s | 73.33/.56/12m37s | 74.29/.84/14m47s | 76.03/2.80/21m26s |
+| Finance Agent v2.1 | 56.84/.12/15m27s | 55.96/1.92/29m47s | 58.91/2.06/21m58s | 60.75/7.98/37m38s |
+| Legal Research Bench | 30.29/.44/42m28s | 25.96/3.22/1h10m | 37.02/3.77/1h09m | 42.79/12.84/1h19m |
+| Vibe Code v1.1.1 | 65.31/1.35/37m00s | 75.52/6.00/37m30s | 79.48/3.23/47m51s | 78.57/7.92/44m12s |
+| Terminal-Bench-Science (Vals) | 4.29/.24/1h16m | — | 58.57/2.53/39m03s | 71.43/11.08/47m41s |
+| BioMysteryBench | 61.48/.05/8m44s | — | 77.78/.34/7m02s | 80.74/1.49/8m30s |
+| ProofBench v1.1 (archived) | 64.00/.04/7m31s | — | — | — |
+| SWE-bench Multimodal | 37.50/.03/5m16s | — | — | — |
+| Vals Finance Index (composite) | 53.05/.15/22m01s | 53.32/1.55/29m25s | 56.66/1.77/26m47s | 57.31/6.23/40m12s |
+| Vals Legal Index (composite) | 62.20/.31/32m30s | 58.76/2.29/43m12s | 66.67/2.80/46m31s | 69.68/9.35/1h04m |
+| Vals Science Index (composite) | 28.38/.11/30m15s | — | 57.76/1.12/19m00s | 68.44/4.76/22m15s |
+
+EMB: financial spreadsheets; Finance Agent: financial research; Legal Research: US law; Vibe Code: application implementation; Terminal-Bench-Science (Vals): mini-swe-agent harness, distinct from AA; BioMystery: biological data; ProofBench: archived formal verification; SWE-bench Multimodal: visual JS software issues. See registry for provenance and scope. No missing effort/cost/duration is interpolated.
+
+### Additional specialized capability observations (B/O)
+
+- Epoch FrontierMath Tier 4 v2 (advanced mathematics): T.max 92.7% ±4.1 pp; A.max 100.0%; L/S —. A's displayed perfect score is not a universal guarantee.
+- Epoch GPQA Diamond (graduate science questions): T.max 94.3% ±1.5 pp; A.max 96.8% ±1.2 pp; L/S —.
+- Epoch SimpleQA Verified (short factual questions, answer-required protocol): A.max 78.5% ±1.3 pp; L/T/S —. Accuracy is not a hallucination or abstention rate.
+- Epoch Furniture Assembly (manual-guided spatial reasoning): rounded best model scores L 44%, T 79%, A 89%, S —; benchmark protocol uses highest supported API effort, individual run configuration not verified.
+- OpenAI Terra internal difficult factual prompts: T.low 16.7%, T.max 4.3% error rate (lower is better); other settings/models —. Do not compare directly with SimpleQA or AA guessing-conditioned hallucination.
+
+These specialist scores do not supply matched resource measurements unless explicitly listed. Use for capability demand only; do not turn model-level observations into measured effort vectors or mix unmatched scores and costs to claim dominance. Exact joint failures, long-context effort curves, direct GUI/instruction-following and creative-writing coverage remain incomplete.
 
 At a transition, map the next concrete work to the relevant evidence: repository implementation/debugging → FrontierCode/Terminal; empirical research and derivation → Science/CritPt/HLE as relevant; document synthesis → GDP/Briefcase; business application execution → Automation/Strategy & Ops; finance/legal/medical analysis → the corresponding professional index plus relevant direct measures; quantitative spreadsheet tasks → AnalystAgent; interactive 3D → AA-3D; evidence retrieval → Firecrawl. These are illustrative mappings from measured scope, not fixed model jobs or a task taxonomy that must be run on every request. Prefer a directly matched protocol when one exists; for mixed work identify the material requirement rather than averaging unrelated rows. Unknown or weak coverage calls for a bounded task-grounded check, not invented scores or automatic escalation.
 
