@@ -1,6 +1,6 @@
 # AgentMD — Active evidence registry
 
-**Checked:** 2026-11-26 JST. The [LUT quantitative refresh](#lut-quantitative-refresh--2026-11-26-jst) at the end supersedes the earlier AA numeric snapshot and adds provider/supplemental observations; historical tables and audits remain below. This is an offline maintenance reference, not routine agent context. Earlier snapshots and superseded policies remain in Git history. No new model-performance experiment was run for the benchmark snapshot. The strategy audit on 2026-11-26 preserves the numeric snapshot, replaces the active proxy-frontier policy and records the limits of the logical baseline.
+**Checked:** 2026-11-28 JST. The [task-transition and domain LUT extension](#task-transition-and-domain-lut-extension--2026-11-28-jst) adds professional capability indexes and refreshes resource references without changing the 176 original component scores. The [LUT quantitative refresh](#lut-quantitative-refresh--2026-11-26-jst) at the end supersedes the earlier AA numeric snapshot and adds provider/supplemental observations; historical tables and audits remain below. This is an offline maintenance reference, not routine agent context. Earlier snapshots and superseded policies remain in Git history. No new model-performance experiment was run for the benchmark snapshot. The strategy audit on 2026-11-26 preserves the numeric snapshot, replaces the active proxy-frontier policy and records the limits of the logical baseline.
 
 | Alias | Exact model ID |
 | --- | --- |
@@ -497,3 +497,52 @@ The anchor is not an absolute quality measure or a confidence interval. The disp
 ### Held-out evidence
 
 [MKA](https://artificialanalysis.ai/evaluations/mka), [AA-LCR v1.1](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning), general desktop/UI work, and joint model error/conditional rescue remain gaps: the Deep Research review did not retrieve complete comparable target-model/effort evidence. Do not infer missing quality from resource-only observations or use an older model as an exact substitute. The existing FrontierCode, official Terminal-Bench, Agent Arena, Firecrawl and Vals matched/qualified observations remain in the active LUT. No conditional rescue, pair complementarity, actual cost or performance gain is established by this refresh.
+
+## Task transition and domain LUT extension — 2026-11-28 JST
+
+### Evidence (B)
+
+Sources checked 2026-11-28 JST: [Astra/Sol](https://artificialanalysis.ai/models/comparisons/gpt-6-2-astra-vs-gpt-6-2-sol), [Sol/Terra](https://artificialanalysis.ai/models/comparisons/gpt-6-2-sol-vs-gpt-6-1-terra), [Terra/Luna](https://artificialanalysis.ai/models/comparisons/gpt-6-1-terra-vs-gpt-6-luna), [capability methodology](https://artificialanalysis.ai/methodology/capability-indexes), [intelligence methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking). The eight component rows from the 2026-11-26 snapshot and 22 broad index/cost pairs remain unchanged in the checked comparisons. Remap by exact model/effort column labels. New domain indexes are published weighted composites, not independent tasks or calibrated success probabilities. Four domains cover 83 numeric cells of 88 supported settings (five healthcare/Terra observations not retrieved); eight unsupported Sol/Astra none cells are U. All vectors use n/l/m/h/x/max. No missing value is imputed.
+
+| Domain index (index points) | L | T | S | A |
+| --- | --- | --- | --- | --- |
+| Finance & Accounting | 19/17/26/29/31/34 | 34/38/42/44/48/49 | U/42/52/55/55/57 | U/45/55/59/60/61 |
+| Strategy & Ops | 17/17/34/38/39/43 | 40/42/45/47/49/50 | U/48/56/58/58/59 | U/49/57/62/62/63 |
+| Legal | 17/16/24/27/28/32 | 28/37/40/42/44/46 | U/40/49/51/53/55 | U/46/53/56/57/59 |
+| Healthcare & Medical | 16/16/27/29/30/35 | —/—/—/—/—/45 | U/41/48/51/52/53 | U/42/50/54/55/57 |
+
+The publisher's domain weights reflect occupational activity mixes, not a particular user's acceptance criteria. Finance uses Briefcase 30%, Omniscience business knowledge 25%, HLE 15%, Omniscience non-hallucination 15%, Automation 10%, GDP 5%. Strategy/Ops: Automation 35%, Briefcase 30%, Omniscience business knowledge 25%, GDP 5%, Omniscience non-hallucination 5%. Legal: Omniscience legal knowledge 30%, Briefcase 25%, HLE 15%, Omniscience non-hallucination 15%, GDP 10%, Automation 5%. Healthcare: Omniscience medical knowledge 25%, Briefcase 25%, MLCR 15%, Automation 15%, Omniscience non-hallucination 10%, HLE 10%. These share component data, so do not average them with components or treat them as independent confirmations. No independent domain task counts or domain-specific costs/times are established. See original component protocol counts in A.1; Omniscience/MLCR complete comparable scores, Engineering/Economics indexes, hardware/clock/batch and setting-specific uncertainty were not recovered here.
+
+### Resource refresh (B)
+
+All 22 derived minutes are refreshed together. Index / weighted USD per index-task / derived minutes per index-task. These are benchmark-population references, not per-component costs, wall-clock agent completion, or Codex charges.
+
+| Model | n | l | m | h | x | max |
+| --- | --- | --- | --- | --- | --- | --- |
+| L | 9/.0714/1.6 | 10/.0051/0.5 | 18/.0422/2.9 | 21/.0729/4.4 | 23/.10/6.0 | 28/.15/9.7 |
+| T | 30/.23/2.7 | 29/.0713/1.3 | 38/.17/3.1 | 43/.26/4.6 | 45/.40/7.2 | 51/.96/15.8 |
+| S | U | 41/.18/1.8 | 52/.41/4.0 | 55/.56/5.9 | 56/.65/7.1 | 57/1.01/11.4 |
+| A | U | 46/.66/2.2 | 57/1.62/5.2 | 60/2.07/6.8 | 62/2.52/8.9 | 62/4.00/16.2 |
+
+Single-request endpoint reference (seconds, not agent task duration):
+
+| Metric/model | n | l | m | h | x | max |
+| --- | --- | --- | --- | --- | --- | --- |
+| TTFA L | 1.30 | 2.03 | 5.10 | 9.07 | 15.19 | 63.81 |
+| TTFA T | 2.54 | 2.95 | 5.89 | 13.89 | 37.09 | 194.88 |
+| TTFA S | U | 2.15 | 4.17 | 19.51 | 51.55 | 121.26 |
+| TTFA A | U | 3.08 | 3.44 | 26.49 | 55.90 | 170.14 |
+| SingleE2E L | 26.53 | 22.24 | 29.75 | 36.93 | 49.17 | 144.11 |
+| SingleE2E T | 38.00 | 26.69 | 34.55 | 59.25 | 124.77 | 420.78 |
+| SingleE2E S | U | 56.08 | 61.78 | 105.68 | 162.12 | 288.03 |
+| SingleE2E A | U | 80.25 | 83.02 | 141.59 | 188.97 | 440.44 |
+
+TTFA = first answer token; SingleE2E = mean endpoint end-to-end time across AA's single-request workloads. Rolling measurements, not guaranteed latencies. For the 7 newly extracted fields (four domain rows, minutes, TTFA, SingleE2E), 77 overlapping cells agreed, including missing markers. Repeated values are not new trials. Missing per-setting uncertainty, hardware, clock, batch and full workload metadata limit inference.
+
+[AA release report, 2026-11-17](https://artificialanalysis.ai/articles/openai-has-the-2-model-in-the-intelligence-index-with-the-release-of-gpt-6-2-astra-and-gpt-6-2-sol/): S.max 55%, A.max 59% AA-Omniscience hallucination rate, a conditional guessing metric, not overall error frequency. [Terra release report, 2026-10-26](https://artificialanalysis.ai/articles/gpt-6-1-terra-pushes-the-cost-efficiency-frontier) states 38% but does not explicitly identify effort for this value in the retrieved text; retain as historical context, not an active exact-configuration cell. The full Omniscience accuracy and hallucination vectors remain incomplete. Do not assume lower guessing implies better factual accuracy or general trustworthiness.
+
+### Policy change and scoped static audit (D)
+
+A task transition point is a material change in the remaining work's requirements, phase, capability demand, evidence, risk, resources or a diagnosed blocker. A successful phase may lead to such a point; routine subtask/tool boundaries need not. It is a decision opportunity, not a mandate to spawn. Use the common LUT to nominate a materially justified candidate, then, if warranted, overlap both leads on the actual user task, exchange and integrate their tested results, and select a continuing lead based on task evidence. No mandatory failure first, periodic Buddy, synthetic routing trial, fixed model roles or required model-pair table. Existing recovery allowances, ownership, runtime fallbacks and final acceptance remain in effect.
+
+Static regression cases: normal progress or cosmetic boundary → continue without Buddy; material transition with no justified alternative → continue; successful research-to-implementation transition with justified candidate and safe budgeted overlap → compare actual implementation work; candidate not better → retain adequate incumbent; candidate better or combined approach supported → transfer to the suitable lead; failed check with known local cause → correct rather than blindly switch; unavailable overlap or conflicting writes → use safe disclosed fallback. These are policy walkthroughs, not observed Codex traces or performance evidence.
