@@ -1,6 +1,6 @@
 # AgentMD
 
-One shared `AGENTS.md` for OpenAI Codex: **task-aware escalation using model × reasoning effort, with Buddy overlap at justified model transitions**. Public benchmarks supply bounded evidence; the current task, acceptance checks and incremental resources determine the next action. All four models remain general-purpose.
+One shared `AGENTS.md` for OpenAI Codex: **task-aware routing using model × reasoning effort, with Buddy overlap only at justified task transition points**. Public benchmarks supply bounded evidence; the current task, acceptance checks and incremental resources determine the next action. All four models remain general-purpose.
 
 ## Strategy and logical baseline
 
@@ -20,7 +20,7 @@ Choose using explicit quality requirements, permissions, budget, deadline and us
 
 ## What the evidence can establish
 
-The shared textual LUT now preserves **all 176 AA component values across all 22 measured model/effort configurations**, with separate dated broad resource references. The refresh distinguishes unsupported API settings (U) from missing observations (—), adds standard API token rates and keeps AA-AnalystAgent/AA-3D as separate partial-coverage evidence. See the [active numeric snapshot](research/benchmark-evidence.md#lut-quantitative-refresh--2026-11-26-jst). It does not prefilter configurations using mixed-scope Pareto membership. Every candidate remains subject to actual runtime support, task fit and constraints.
+The shared textual LUT preserves **176 AA component values across 22 measured model/effort configurations**, and adds 83 professional-domain index values (finance, strategy/operations, legal, healthcare), refreshed broad resource references and 44 endpoint responsiveness observations. The domain indexes reuse benchmark components; they are not independent tests. The 2026-11-28 extension also records a partial matched hallucination observation. The refresh distinguishes unsupported API settings (U) from missing observations (—), adds standard API token rates and keeps AA-AnalystAgent/AA-3D as separate partial-coverage evidence. See the [component snapshot](research/benchmark-evidence.md#lut-quantitative-refresh--2026-11-26-jst) and [2026-11-28 extension](research/benchmark-evidence.md#task-transition-and-domain-lut-extension--2026-11-28-jst). It does not prefilter configurations using mixed-scope Pareto membership. Every candidate remains subject to actual runtime support, task fit and constraints.
 
 A score is an observation under an evaluation's conditions. It is not a probability that the model will solve the current task, rescue a previous failure or detect its own error. Provider workload examples are starting guidance, not permanent occupations. Effort and model selection must be considered together; there is no mandatory family cycle or effort ladder.
 
@@ -43,7 +43,8 @@ The same limitation applies to resources: an aggregate cost from one task popula
 | A known correctable cause | Correct that cause; do not upgrade merely because a check failed |
 | Unknown cause or missing facts | Diagnose or retrieve relevant evidence; do not blindly repeat a solve |
 | Missing model, tool, input or authorization | Use an authorized feasible remedy; a model change cannot create permission |
-| Capability gap or valuable additional contribution | Compare current execution, effort, model and Buddy using the same LUT |
+| Material task transition (including a successful phase change, capability gap, or changed risk/constraints) | Reassess remaining work against the same LUT; continue if no better configuration is justified |
+| Routine boundary or unchanged requirements | Continue without a routing ritual or mandatory Buddy |
 | A change of work lead is justified and safe overlap is worthwhile | Run the incumbent and LUT-selected candidate on the same problem; compare their tested results |
 | Parallel overlap or reciprocal exchange is unavailable or unsafe | Work directly or transfer sequentially; disclose the limitation |
 | Results agree but an essential condition is unverified | Preserve uncertainty; agreement is not acceptance |
@@ -52,7 +53,7 @@ The same limitation applies to resources: an aggregate cost from one task popula
 
 ### Buddy: overlap, compare, transfer
 
-Buddy is the transition between model/effort configurations, not a rule to subdivide every task. Continue with one work lead while it is adequate. When escalation is justified, use the same LUT to select a candidate; temporarily run both the incumbent and candidate on the same unresolved problem at a bounded checkpoint.
+Buddy is temporary overlap at a material task transition point, not a rule to subdivide every task. Continue with one work lead during normal progress. Recognize consequential changes to the remaining work's requirements, capability demands, evidence, phase, risk, constraints or diagnosed blockers; success in the previous phase is compatible with a transition. A transition alone does not activate Buddy. Use the common quantitative LUT to nominate a justified alternative, then overlap only if safe and worthwhile. Both leads actually perform the user's task, or the relevant part of it, at a bounded checkpoint. The LUT is a prior, not a final winner; no separate benchmark task is necessary.
 
 Both work, test their hypotheses or gather evidence, then exchange the actual results and examine each other's assumptions and checks. Relay the exchange through the primary when needed. Select or combine the approach supported by the evidence; the participant suited to continue it takes the work lead. If the incumbent remains adequate without a demonstrated material improvement, keep it. If neither is adequate, correct the cause within the remaining allowance or report the unresolved condition. No requirement to declare a winner, repeat the entire task, or conduct another review after sufficient results.
 
