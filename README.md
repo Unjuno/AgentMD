@@ -1,6 +1,6 @@
 # AgentMD
 
-One shared `AGENTS.md` for OpenAI Codex: **task-aware routing using model × reasoning effort, with Buddy overlap only at justified task transition points**. Public benchmarks supply bounded evidence; the current task, acceptance checks and incremental resources determine the next action. All four models remain general-purpose.
+One shared `AGENTS.md` for OpenAI Codex: **task-aware routing using model × reasoning effort, with Buddy overlap only at justified task transition points**. Public benchmarks supply bounded evidence; the current task, acceptance checks and incremental resources determine the next action. All four models remain general-purpose. This policy sets routing and resource decisions; personal style, domain choices and aesthetic preferences remain with the user and applicable project guidance.
 
 ## Strategy and logical baseline
 
@@ -146,6 +146,25 @@ Markdown does not grant tools, enforce budgets or change the parent model by its
 ## Task-matched resource references
 
 The LUT also contains 35 published Vals AI quality/cost/duration triples across eight direct benchmarks and three composite indexes, plus partial Epoch mathematics, science, factuality and spatial-reasoning observations and OpenAI Terra factual-error observations. Vals profiles list max effort, but leaderboard-run effort is not independently verified; these are model-level references, not new exact model/effort cells. Use a matched benchmark before broad resource proxies; neither historical costs nor durations are runtime guarantees. Missing cells stay missing. See the [matched task-resource extension](research/benchmark-evidence.md#matched-task-resource-and-specialist-lut-extension--2026-11-28-jst). No change to the task-transition/Buddy decision rules.
+
+## General-purpose lookup construction
+
+The [current extension](research/benchmark-evidence.md#general-purpose-routing-lut--2026-11-28-jst) adds:
+
+| Evidence block | Retrieved coverage | What it contributes |
+| --- | --- | --- |
+| ALE v1.1 | 16 exact model/effort rows; Luna missing | Partial credit, full-pass, estimated suite API cost and summed execution time; explicit verifier caveat |
+| LiveBench 2.0 | Seven suites × four publisher-labeled max models | 28 matched score/inference-cost pairs for long workflows, design, code, web apps, short data questions, research and reasoning |
+| AA max-only extension | 20 nonmissing cells across six metrics | Omniscience net/accuracy/conditional hallucination, legacy long-context reasoning, spreadsheet consistency, visual reasoning; partial and dependent evidence |
+| DesignArena text-to-HTML | Two model-level rating/vote records | Human design preferences with effort unknown; no correctness or personal-taste guarantee |
+
+The runtime now contains a **task-to-evidence index**. Match remaining requirements, modality/language, context length, tools/harness, exact setting and resource denominators before comparing candidates. A benchmark name without target measurements is a coverage gap. Explicit gaps remain for precise instruction constraints, desktop OS operation, creative prose, Japanese-specific work, complete matched effort/resource curves and joint failure/rescue. No fixed job-to-model map or global weighted score is introduced. Existing transition, Buddy and recovery semantics are preserved.
+
+Public machine-readable records generate the new tables; the registry preserves exact fields, counts, source hashes, raw cost totals, arithmetic and limitations. Historical snapshots are not silently merged. LiveBench's inconsistent overall weighting description and ambiguous hidden timing data are excluded; its suite rows are used directly. ALE's runtime sum is not elapsed completion time, and its API estimates exclude tool charges. Neither source supplies all-in current-task cost.
+
+The goal is better-supported choices, not a claim of proven optimality. Actual task checks establish adequacy. If cost, latency and quality conflict, the user's priorities decide; a satisfactory current lead continues when no material improvement justifies a change. General-purpose behavior includes preserving user preferences instead of assuming benchmark voters' taste is the user's preference.
+
+At this revision the runtime is 28,523 UTF-8 bytes (27.85 KiB), including a 16,755-byte LUT (16.36 KiB). That leaves 4,245 bytes (4.15 KiB) under the documented 32 KiB combined-guidance default; project guidance also uses that budget. Static source/arithmetic, TOML, link and isolated installer checks passed. This does not establish which instructions a particular client actually loaded or any measured routing gain.
 
 ## Evidence and validation status
 
